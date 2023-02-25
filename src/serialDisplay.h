@@ -15,7 +15,7 @@ class serialDisplay
 private:
   struct Capture
   {
-    char capture[MAX_ARG_CAPTURE][50];
+    char capture[MAX_ARG_CAPTURE][30];
     byte index[MAX_ARG_CAPTURE];
     byte argIndex;
     byte maxCapture;
