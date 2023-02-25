@@ -8,6 +8,7 @@
 // #include <TFT_eSPI.h>  // Hardware-specific library
 #define MAX_TEXT_CAPTURE 50
 #define MAX_ARG_CAPTURE 6
+#define COLOR_BLACK 0xFFFF
 
 class serialDisplay
 {
@@ -39,6 +40,8 @@ private:
   Capture capture2Arg;
   Capture capture3Arg;
   uint16_t currentColor = 0xFFFF;
+  int displayWidth;
+  int displayHeight;
 
   void decodeInput(char input);
   void executeCommand(void);
@@ -59,6 +62,13 @@ serialDisplay::serialDisplay(DISP *d)
 {
   currentMode = UNDEFINED;
   display = d;
+  #if defined(_ADAFRUIT_TFTLCD_H_)
+  
+  displayWidth = d->width();
+  displayHeight = d->height();
+  
+  #endif // 
+  
   initCapture(&captureText, MAX_TEXT_CAPTURE, 1);
   initCapture(&captureColor, 4, 1);
   initCapture(&capture2Arg, 6, 2);
@@ -228,26 +238,26 @@ void serialDisplay::executeCommand(void)
     break;
   case TEXT_CENTER_HORIZONTAL:
     closeCapture(&captureText);
-    y = display->getCursorY();
-    w = display->textWidth(captureText.capture[0]);
-    display->setCursor((TFT_HEIGHT / 2) - (w / 2), y);
-    display->print(captureText.capture[0]);
+    // y = display->getCursorY();
+    // w = display->textWidth(captureText.capture[0]);
+    // display->setCursor((displayWidth / 2) - (w / 2), y);
+    // display->print(captureText.capture[0]);
 
     Serial.print("TEXT_CENTER_HORIZONTAL: ");
     Serial.println(captureText.capture[0]);
     break;
   case TEXT_CENTER_VERTICAL:
     closeCapture(&captureText);
-    x = display->getCursorX();
-    w = display->fontHeight();
-    display->setCursor(x, (TFT_WIDTH / 2) - (w / 2));
-    display->print(captureText.capture[0]);
+    // x = display->getCursorX();
+    // w = display->fontHeight();
+    // display->setCursor(x, (displayWidth / 2) - (w / 2));
+    // display->print(captureText.capture[0]);
 
     Serial.print("TEXT_CENTER_VERTICAL: ");
     Serial.println(captureText.capture[0]);
     break;
   case CLEAR_SCREEN:
-    display->fillScreen(TFT_BLACK);
+    display->fillScreen(COLOR_BLACK);
     Serial.println("CLEAR_SCREEN");
     break;
   case SET_CURSOR:

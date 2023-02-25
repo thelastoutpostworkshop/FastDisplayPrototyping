@@ -29,7 +29,7 @@ void setup() {
   Serial.begin(115200);
 
   // Initialise the TFT screen
-  tft.init();
+  tft.begin();
 
   // Set the rotation before we calibrate
   tft.setRotation(1);
