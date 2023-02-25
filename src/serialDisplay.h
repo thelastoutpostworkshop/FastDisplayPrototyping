@@ -1,5 +1,11 @@
 
-#include <TFT_eSPI.h>  // Hardware-specific library
+#if defined(_ADAFRUIT_TFTLCD_H_)
+
+
+
+#endif // _ADAFRUIT_TFTLCD_H_
+
+// #include <TFT_eSPI.h>  // Hardware-specific library
 #define MAX_TEXT_CAPTURE 50
 #define MAX_ARG_CAPTURE 6
 
