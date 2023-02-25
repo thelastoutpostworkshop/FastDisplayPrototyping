@@ -8,7 +8,7 @@
 // #include <TFT_eSPI.h>  // Hardware-specific library
 #define MAX_TEXT_CAPTURE 50
 #define MAX_ARG_CAPTURE 6
-#define COLOR_BLACK 0xFFFF
+#define COLOR_BLACK 0x0000
 
 class serialDisplay
 {

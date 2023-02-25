@@ -26,7 +26,7 @@ serialDisplay sDisplay(&tft);
 
 void setup() {
   // Use serial port
-  Serial.begin(115200);
+  Serial.begin(9600);
 
   // Initialise the TFT screen
   tft.begin();
@@ -36,7 +36,7 @@ void setup() {
 
   // tft.setFreeFont(LABEL2_FONT);
 
-  sDisplay.runCommands("c;#867d;s100,100;hthis is a test");
+  sDisplay.runCommands("c;#FFFF;s100,100;tthis is a test");
   // // Clear the screen
   // tft.fillScreen(TFT_BLACK);
 
