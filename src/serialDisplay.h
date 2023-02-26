@@ -9,6 +9,7 @@
 #define MAX_TEXT_CAPTURE 20
 #define MAX_ARG_CAPTURE 6
 #define COLOR_BLACK 0x0000
+#define DEBOUNCE_READ_SERIAL 300
 
 class serialDisplay
 {
@@ -42,6 +43,7 @@ private:
   uint16_t currentColor = 0xFFFF;
   int displayWidth;
   int displayHeight;
+  unsigned long lastSerialRead;
 
   void decodeInput(char input);
   void executeCommand(void);
@@ -73,6 +75,7 @@ serialDisplay::serialDisplay(DISP *d)
   initCapture(&captureColor, 4, 1);
   initCapture(&capture2Arg, 6, 2);
   initCapture(&capture3Arg, 6, 3);
+  lastSerialRead = millis();
 }
 
 serialDisplay::~serialDisplay()
@@ -204,6 +207,14 @@ void serialDisplay::readCommandsFromSerial(void)
   {
     input = Serial.read();
     decodeInput(input);
+  }
+  else
+  {
+    if (currentColor != UNDEFINED && millis() - lastSerialRead > DEBOUNCE_READ_SERIAL)
+    {
+      executeCommand();
+      lastSerialRead = millis();
+    }
   }
 }
 
