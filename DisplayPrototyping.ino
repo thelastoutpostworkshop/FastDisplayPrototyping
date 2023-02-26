@@ -36,7 +36,7 @@ void setup() {
 
   // tft.setFreeFont(LABEL2_FONT);
 
-  sDisplay.runCommands("c;#FFFF;s100,100;tthis is a test");
+  // sDisplay.runCommands("c;#FFFF;s100,100;tthis is a test");
   // // Clear the screen
   // tft.fillScreen(TFT_BLACK);
 

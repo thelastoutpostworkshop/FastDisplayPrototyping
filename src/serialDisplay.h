@@ -62,13 +62,13 @@ serialDisplay::serialDisplay(DISP *d)
 {
   currentMode = UNDEFINED;
   display = d;
-  #if defined(_ADAFRUIT_TFTLCD_H_)
-  
+#if defined(_ADAFRUIT_TFTLCD_H_)
+
   displayWidth = d->width();
   displayHeight = d->height();
-  
-  #endif // 
-  
+
+#endif //
+
   initCapture(&captureText, MAX_TEXT_CAPTURE, 1);
   initCapture(&captureColor, 4, 1);
   initCapture(&capture2Arg, 6, 2);
@@ -134,6 +134,7 @@ void serialDisplay::decodeInput(char input)
     executeCommand();
     return;
   }
+  // Serial.println(currentMode);
   switch (currentMode)
   {
   case UNDEFINED:
@@ -161,6 +162,7 @@ void serialDisplay::decodeInput(char input)
     case 't':
       openCapture(&captureText);
       currentMode = TEXT;
+      Serial.println(currentMode);
       break;
     case 'S':
     case 's':
@@ -198,18 +200,10 @@ void serialDisplay::decodeInput(char input)
 void serialDisplay::readCommandsFromSerial(void)
 {
   char input;
-
   if (Serial.available())
   {
     input = Serial.read();
     decodeInput(input);
-  }
-  else
-  {
-    if (currentMode != UNDEFINED)
-    {
-      executeCommand();
-    }
   }
 }
 
