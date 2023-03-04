@@ -266,19 +266,19 @@ void serialDisplay::executeCommand(void)
 #if defined(_ADAFRUIT_TFTLCD_H_)
     y = display->getCursorY();
     display->getTextBounds(captureText.capture[0], &x, &y, &x1, &y1, &w, &h);
-    display->setCursor((displayWidth-w)/2,y);
+    display->setCursor((displayWidth - w) / 2, y);
 #endif // _ADAFRUIT_TFTLCD_H_
     display->print(captureText.capture[0]);
     break;
   case TEXT_CENTER_VERTICAL:
     closeCapture(&captureText);
-    // x = display->getCursorX();
-    // w = display->fontHeight();
-    // display->setCursor(x, (displayWidth / 2) - (w / 2));
-    // display->print(captureText.capture[0]);
+#if defined(_ADAFRUIT_TFTLCD_H_)
+    x = display->getCursorX();
+    display->getTextBounds(captureText.capture[0], &x, &y, &x1, &y1, &w, &h);
+    display->setCursor(x, (displayHeight - h) / 2);
+#endif // _ADAFRUIT_TFTLCD_H_
+    display->print(captureText.capture[0]);
 
-    Serial.print("TEXT_CENTER_VERTICAL: ");
-    Serial.println(captureText.capture[0]);
     break;
   case CLEAR_SCREEN:
     display->fillScreen(COLOR_BLACK);
