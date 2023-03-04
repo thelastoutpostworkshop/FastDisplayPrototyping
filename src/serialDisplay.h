@@ -30,6 +30,7 @@ private:
     TEXT_CENTER_HORIZONTAL,
     TEXT_CENTER_VERTICAL,
     TEXT_SIZE,
+    CIRCLE_HOLLOW,
     DISPLAY_COLOR,
     CLEAR_SCREEN,
     SET_CURSOR,
@@ -186,7 +187,7 @@ void serialDisplay::decodeInput(char input)
       currentMode = DISPLAY_COLOR;
       openCapture(&captureColor);
       break;
-    case 'c':
+    case 'x':
       currentMode = CLEAR_SCREEN;
       break;
     case 't':
