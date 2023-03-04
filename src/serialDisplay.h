@@ -25,6 +25,7 @@ private:
   enum MODE
   {
     UNDEFINED,
+    COMMAND,
     TEXT,
     TEXT_CENTER_HORIZONTAL,
     TEXT_CENTER_VERTICAL,
@@ -148,30 +149,34 @@ void serialDisplay::decodeInput(char input)
       openCapture(&captureColor);
       break;
     case 'c':
-    case 'C':
       currentMode = CLEAR_SCREEN;
       break;
     case 'h':
-    case 'H':
       openCapture(&captureText);
       currentMode = TEXT_CENTER_HORIZONTAL;
       break;
     case 'v':
-    case 'V':
       openCapture(&captureText);
       currentMode = TEXT_CENTER_VERTICAL;
       break;
-    case 'T':
     case 't':
       openCapture(&captureText);
-      currentMode = TEXT;
-      Serial.println(currentMode);
+      captureInput(&captureText, input);
+      currentMode = COMMAND;
       break;
-    case 'S':
     case 's':
       currentMode = SET_CURSOR;
       openCapture(&capture2Arg);
       break;
+    }
+    break;
+  case COMMAND:
+    captureInput(&captureText, input);
+    closeCapture(&captureText);
+    if (strcmp(captureText.capture[0], "tt") == 0)
+    {
+      openCapture(&captureText);
+      currentMode = TEXT;
     }
     break;
   case TEXT_CENTER_VERTICAL:
