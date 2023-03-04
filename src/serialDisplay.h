@@ -134,32 +134,32 @@ void serialDisplay::nextArgCapture(Capture *capture)
 
 void serialDisplay::captureCommand(char input)
 {
-    captureInput(&captureText, input);
-    closeCapture(&captureText);
-    if (strcmp(captureText.capture[0], "tt") == 0)
-    {
-      openCapture(&captureText);
-      currentMode = TEXT;
-      return;
-    }
-    if (strcmp(captureText.capture[0], "tv") == 0)
-    {
-      openCapture(&captureText);
-      currentMode = TEXT_CENTER_VERTICAL;
-      return;
-    }
-    if (strcmp(captureText.capture[0], "th") == 0)
-    {
-      openCapture(&captureText);
-      currentMode = TEXT_CENTER_HORIZONTAL;
-      return;
-    }
-    if (strcmp(captureText.capture[0], "sc") == 0)
-    {
-      openCapture(&capture2Arg);
-      currentMode = SET_CURSOR;
-      return;
-    }
+  captureInput(&captureText, input);
+  closeCapture(&captureText);
+  if (strcmp(captureText.capture[0], "tt") == 0)
+  {
+    openCapture(&captureText);
+    currentMode = TEXT;
+    return;
+  }
+  if (strcmp(captureText.capture[0], "tv") == 0)
+  {
+    openCapture(&captureText);
+    currentMode = TEXT_CENTER_VERTICAL;
+    return;
+  }
+  if (strcmp(captureText.capture[0], "th") == 0)
+  {
+    openCapture(&captureText);
+    currentMode = TEXT_CENTER_HORIZONTAL;
+    return;
+  }
+  if (strcmp(captureText.capture[0], "sc") == 0)
+  {
+    openCapture(&capture2Arg);
+    currentMode = SET_CURSOR;
+    return;
+  }
 }
 
 void serialDisplay::decodeInput(char input)
@@ -239,7 +239,8 @@ void serialDisplay::readCommandsFromSerial(void)
 
 void serialDisplay::executeCommand(void)
 {
-  int16_t x, y, w;
+  int16_t x, y, x1, y1;
+  uint16_t w, h;
   uint16_t color;
 
   switch (currentMode)
@@ -262,10 +263,18 @@ void serialDisplay::executeCommand(void)
     break;
   case TEXT_CENTER_HORIZONTAL:
     closeCapture(&captureText);
+#if defined(_ADAFRUIT_TFTLCD_H_)
+    display->getTextBounds(captureText.capture[0], &x, &y, &x1, &y1, &w, &h);
+    Serial.println(x);
+    Serial.println(y);
+    Serial.println(w);
+    display->setCursor(x-w/2,y);
+
+#endif // _ADAFRUIT_TFTLCD_H_
     // y = display->getCursorY();
     // w = display->textWidth(captureText.capture[0]);
     // display->setCursor((displayWidth / 2) - (w / 2), y);
-    // display->print(captureText.capture[0]);
+    display->print(captureText.capture[0]);
 
     Serial.print("TEXT_CENTER_HORIZONTAL: ");
     Serial.println(captureText.capture[0]);
