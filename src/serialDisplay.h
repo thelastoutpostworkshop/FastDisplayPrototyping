@@ -243,7 +243,7 @@ void serialDisplay::readCommandsFromSerial(void)
   }
   else
   {
-    if (currentColor != UNDEFINED && millis() - lastSerialRead > DEBOUNCE_READ_SERIAL)
+    if (currentMode != UNDEFINED && millis() - lastSerialRead > DEBOUNCE_READ_SERIAL)
     {
       executeCommand();
       lastSerialRead = millis();
