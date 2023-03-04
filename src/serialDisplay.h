@@ -140,6 +140,25 @@ void serialDisplay::captureCommand(char input)
     {
       openCapture(&captureText);
       currentMode = TEXT;
+      return;
+    }
+    if (strcmp(captureText.capture[0], "tv") == 0)
+    {
+      openCapture(&captureText);
+      currentMode = TEXT_CENTER_VERTICAL;
+      return;
+    }
+    if (strcmp(captureText.capture[0], "th") == 0)
+    {
+      openCapture(&captureText);
+      currentMode = TEXT_CENTER_HORIZONTAL;
+      return;
+    }
+    if (strcmp(captureText.capture[0], "sc") == 0)
+    {
+      openCapture(&capture2Arg);
+      currentMode = SET_CURSOR;
+      return;
     }
 }
 
@@ -163,22 +182,11 @@ void serialDisplay::decodeInput(char input)
     case 'c':
       currentMode = CLEAR_SCREEN;
       break;
-    case 'h':
-      openCapture(&captureText);
-      currentMode = TEXT_CENTER_HORIZONTAL;
-      break;
-    case 'v':
-      openCapture(&captureText);
-      currentMode = TEXT_CENTER_VERTICAL;
-      break;
     case 't':
+    case 's':
       openCapture(&captureText);
       captureInput(&captureText, input);
       currentMode = COMMAND;
-      break;
-    case 's':
-      currentMode = SET_CURSOR;
-      openCapture(&capture2Arg);
       break;
     }
     break;
