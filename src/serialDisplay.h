@@ -162,6 +162,12 @@ void serialDisplay::captureCommand(char input)
     currentMode = TEXT_SIZE;
     return;
   }
+  if (strcmp(captureText.capture[0], "ch") == 0)
+  {
+    openCapture(&capture3Arg);
+    currentMode = CIRCLE_HOLLOW;
+    return;
+  }
   if (strcmp(captureText.capture[0], "sc") == 0)
   {
     openCapture(&capture2Arg);
@@ -190,6 +196,7 @@ void serialDisplay::decodeInput(char input)
     case 'x':
       currentMode = CLEAR_SCREEN;
       break;
+    case 'c':
     case 't':
     case 's':
       openCapture(&captureText);
@@ -216,6 +223,19 @@ void serialDisplay::decodeInput(char input)
       if (input >= '0' && input <= '9')
       {
         captureInput(&capture2Arg, input);
+      }
+    }
+    break;
+  case CIRCLE_HOLLOW:
+    if (input == ',')
+    {
+      nextArgCapture(&capture3Arg);
+    }
+    else
+    {
+      if (input >= '0' && input <= '9')
+      {
+        captureInput(&capture3Arg, input);
       }
     }
     break;
@@ -254,7 +274,7 @@ void serialDisplay::readCommandsFromSerial(void)
 
 void serialDisplay::executeCommand(void)
 {
-  int16_t x, y, x1, y1;
+  int16_t x, y, x1, y1, r;
   uint16_t w, h;
   uint16_t color;
   int size;
@@ -311,10 +331,13 @@ void serialDisplay::executeCommand(void)
     x = atol(capture2Arg.capture[0]);
     y = atol(capture2Arg.capture[1]);
     display->setCursor(x, y);
-    Serial.print("SET_CURSOR: ");
-    Serial.print(x);
-    Serial.print(",");
-    Serial.println(y);
+    break;
+  case CIRCLE_HOLLOW:
+    closeCapture(&capture3Arg);
+    x = atol(capture2Arg.capture[0]);
+    y = atol(capture2Arg.capture[1]);
+    r = atol(capture2Arg.capture[2]);
+    display->drawCircle(x, y, r, currentColor);
     break;
   }
   currentMode = UNDEFINED;
