@@ -170,6 +170,7 @@ void serialDisplay::captureCommand(char input)
   }
   if (strcmp(captureText.capture[0], "sc") == 0)
   {
+    Serial.println("SET_CURSOR");
     openCapture(&capture2Arg);
     currentMode = SET_CURSOR;
     return;
@@ -294,7 +295,6 @@ void serialDisplay::executeCommand(void)
   case TEXT_SIZE:
     closeCapture(&captureText);
     size = atoi(captureText.capture[0]);
-    currentColor = color;
     display->setTextSize(size);
     break;
   case TEXT:
@@ -324,19 +324,23 @@ void serialDisplay::executeCommand(void)
     break;
   case CLEAR_SCREEN:
     display->fillScreen(COLOR_BLACK);
-    Serial.println("CLEAR_SCREEN");
     break;
   case SET_CURSOR:
+    Serial.println(F("SET_CURSOR"));
     closeCapture(&capture2Arg);
     x = atol(capture2Arg.capture[0]);
     y = atol(capture2Arg.capture[1]);
     display->setCursor(x, y);
     break;
   case CIRCLE_HOLLOW:
+    Serial.println(F("CIRCLE_HOLLOW"));
     closeCapture(&capture3Arg);
     x = atol(capture2Arg.capture[0]);
     y = atol(capture2Arg.capture[1]);
     r = atol(capture2Arg.capture[2]);
+    Serial.println(x);
+    Serial.println(y);
+    Serial.println(r);
     display->drawCircle(x, y, r, currentColor);
     break;
   }
