@@ -53,6 +53,7 @@ private:
   void closeCapture(Capture *);
   void initCapture(Capture *, byte, byte);
   void nextArgCapture(Capture *);
+  void captureCommand(char);
 
 public:
   serialDisplay(DISP *d);
@@ -131,6 +132,17 @@ void serialDisplay::nextArgCapture(Capture *capture)
   }
 }
 
+void serialDisplay::captureCommand(char input)
+{
+    captureInput(&captureText, input);
+    closeCapture(&captureText);
+    if (strcmp(captureText.capture[0], "tt") == 0)
+    {
+      openCapture(&captureText);
+      currentMode = TEXT;
+    }
+}
+
 void serialDisplay::decodeInput(char input)
 {
   if (input == ';')
@@ -171,13 +183,7 @@ void serialDisplay::decodeInput(char input)
     }
     break;
   case COMMAND:
-    captureInput(&captureText, input);
-    closeCapture(&captureText);
-    if (strcmp(captureText.capture[0], "tt") == 0)
-    {
-      openCapture(&captureText);
-      currentMode = TEXT;
-    }
+    captureCommand(input);
     break;
   case TEXT_CENTER_VERTICAL:
   case TEXT_CENTER_HORIZONTAL:
