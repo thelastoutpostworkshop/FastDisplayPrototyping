@@ -29,6 +29,7 @@ private:
     TEXT,
     TEXT_CENTER_HORIZONTAL,
     TEXT_CENTER_VERTICAL,
+    TEXT_SIZE,
     DISPLAY_COLOR,
     CLEAR_SCREEN,
     SET_CURSOR,
@@ -154,6 +155,12 @@ void serialDisplay::captureCommand(char input)
     currentMode = TEXT_CENTER_HORIZONTAL;
     return;
   }
+  if (strcmp(captureText.capture[0], "ts") == 0)
+  {
+    openCapture(&captureText);
+    currentMode = TEXT_SIZE;
+    return;
+  }
   if (strcmp(captureText.capture[0], "sc") == 0)
   {
     openCapture(&capture2Arg);
@@ -217,8 +224,15 @@ void serialDisplay::decodeInput(char input)
       captureInput(&captureColor, input);
     }
     break;
+  case TEXT_SIZE:
+    if ((input >= '0' && input <= '9'))
+    {
+      captureInput(&captureText, input);
+    }
+    break;
   }
 }
+
 void serialDisplay::readCommandsFromSerial(void)
 {
   char input;
@@ -242,6 +256,7 @@ void serialDisplay::executeCommand(void)
   int16_t x, y, x1, y1;
   uint16_t w, h;
   uint16_t color;
+  int size;
 
   switch (currentMode)
   {
@@ -254,6 +269,12 @@ void serialDisplay::executeCommand(void)
     display->setTextColor(currentColor);
     Serial.print("DISPLAY_COLOR: ");
     Serial.println(captureColor.capture[0]);
+    break;
+  case TEXT_SIZE:
+    closeCapture(&captureText);
+    size = atoi(captureText.capture[0]);
+    currentColor = color;
+    display->setTextSize(size);
     break;
   case TEXT:
     closeCapture(&captureText);
