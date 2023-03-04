@@ -98,7 +98,7 @@ void serialDisplay::captureInput(Capture *capture, char input)
 {
   capture->capture[capture->argIndex][capture->index[capture->argIndex]] = input;
   capture->index[capture->argIndex]++;
-  if (capture->index[capture->argIndex] > capture->maxCapture)
+  if (capture->index[capture->argIndex] >= capture->maxCapture)
   {
     capture->index[capture->argIndex] = 0;
   }
@@ -128,7 +128,7 @@ void serialDisplay::initCapture(Capture *capture, byte maxCapture, byte maxArg)
 void serialDisplay::nextArgCapture(Capture *capture)
 {
   capture->argIndex++;
-  if (capture->argIndex > capture->maxArg)
+  if (capture->argIndex >= capture->maxArg)
   {
     capture->argIndex = 0;
   }
