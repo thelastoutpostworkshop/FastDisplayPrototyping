@@ -262,14 +262,11 @@ void serialDisplay::executeCommand(void)
     Serial.println(captureText.capture[0]);
     break;
   case TEXT_CENTER_HORIZONTAL:
-    Serial.print("TEXT_CENTER_HORIZONTAL: ");
+    Serial.println("TEXT_CENTER_HORIZONTAL: ");
     closeCapture(&captureText);
 #if defined(_ADAFRUIT_TFTLCD_H_)
     display->getTextBounds(captureText.capture[0], &x, &y, &x1, &y1, &w, &h);
-    Serial.println(x);
-    Serial.println(y);
-    Serial.println(w);
-    display->setCursor(x-w/2,y);
+    display->setCursor((displayWidth-w)/2,y);
 
 #endif // _ADAFRUIT_TFTLCD_H_
     // y = display->getCursorY();

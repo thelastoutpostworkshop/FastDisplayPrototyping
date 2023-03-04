@@ -32,7 +32,7 @@ void setup() {
   tft.begin();
 
   // Set the rotation before we calibrate
-  tft.setRotation(1);
+  tft.setRotation(0);
 
   // tft.setFreeFont(LABEL2_FONT);
 
