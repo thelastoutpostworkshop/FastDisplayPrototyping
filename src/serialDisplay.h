@@ -200,7 +200,6 @@ void serialDisplay::decodeInput(char input)
     case 'c':
     case 't':
     case 's':
-      Serial.println(F("Capture Command"));
       openCapture(&captureText);
       captureInput(&captureText, input);
       currentMode = COMMAND;
@@ -286,25 +285,25 @@ void serialDisplay::executeCommand(void)
   case UNDEFINED:
     break;
   case DISPLAY_COLOR:
+    Serial.println(F("DISPLAY_COLOR"));
     closeCapture(&captureColor);
     color = strtol(captureColor.capture[0], NULL, 16);
     currentColor = color;
     display->setTextColor(currentColor);
-    Serial.print("DISPLAY_COLOR: ");
-    Serial.println(captureColor.capture[0]);
     break;
   case TEXT_SIZE:
+    Serial.println(F("TEXT_SIZE"));
     closeCapture(&captureText);
     size = atoi(captureText.capture[0]);
     display->setTextSize(size);
     break;
   case TEXT:
+    Serial.println(F("DISPLAY_COLOR"));
     closeCapture(&captureText);
     display->print(captureText.capture[0]);
-    Serial.print("TEXT: ");
-    Serial.println(captureText.capture[0]);
     break;
   case TEXT_CENTER_HORIZONTAL:
+    Serial.println(F("TEXT_CENTER_HORIZONTAL"));
     closeCapture(&captureText);
 #if defined(_ADAFRUIT_TFTLCD_H_)
     y = display->getCursorY();
@@ -314,6 +313,7 @@ void serialDisplay::executeCommand(void)
     display->print(captureText.capture[0]);
     break;
   case TEXT_CENTER_VERTICAL:
+    Serial.println(F("TEXT_CENTER_VERTICAL"));
     closeCapture(&captureText);
 #if defined(_ADAFRUIT_TFTLCD_H_)
     x = display->getCursorX();
@@ -324,6 +324,7 @@ void serialDisplay::executeCommand(void)
 
     break;
   case CLEAR_SCREEN:
+    Serial.println(F("CLEAR_SCREEN"));
     display->fillScreen(COLOR_BLACK);
     break;
   case SET_CURSOR:
