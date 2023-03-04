@@ -164,13 +164,13 @@ void serialDisplay::captureCommand(char input)
   }
   if (strcmp(captureText.capture[0], "ch") == 0)
   {
+    Serial.println(F("CIRCLE_HOLLOW"));
     openCapture(&capture3Arg);
     currentMode = CIRCLE_HOLLOW;
     return;
   }
   if (strcmp(captureText.capture[0], "sc") == 0)
   {
-    Serial.println("SET_CURSOR");
     openCapture(&capture2Arg);
     currentMode = SET_CURSOR;
     return;
@@ -200,6 +200,7 @@ void serialDisplay::decodeInput(char input)
     case 'c':
     case 't':
     case 's':
+      Serial.println(F("Capture Command"));
       openCapture(&captureText);
       captureInput(&captureText, input);
       currentMode = COMMAND;
@@ -335,9 +336,9 @@ void serialDisplay::executeCommand(void)
   case CIRCLE_HOLLOW:
     Serial.println(F("CIRCLE_HOLLOW"));
     closeCapture(&capture3Arg);
-    x = atol(capture2Arg.capture[0]);
-    y = atol(capture2Arg.capture[1]);
-    r = atol(capture2Arg.capture[2]);
+    x = atol(capture3Arg.capture[0]);
+    y = atol(capture3Arg.capture[1]);
+    r = atol(capture3Arg.capture[2]);
     Serial.println(x);
     Serial.println(y);
     Serial.println(r);
