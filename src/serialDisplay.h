@@ -34,6 +34,7 @@ private:
     TRIANGLE_HOLLOW,
     TRIANGLE_FILL,
     RECTANGLE_HOLLOW,
+    RECTANGLE_FILL,
     DISPLAY_COLOR,
     CLEAR_SCREEN,
     SET_CURSOR,
@@ -201,6 +202,12 @@ void serialDisplay::captureCommand(char input)
     currentMode = RECTANGLE_HOLLOW;
     return;
   }
+  if (isCommand("rf"))
+  {
+    openCapture(&captureData, 4);
+    currentMode = RECTANGLE_FILL;
+    return;
+  }
   if (isCommand("sc"))
   {
     openCapture(&captureData, 2);
@@ -269,6 +276,7 @@ void serialDisplay::decodeInput(char input)
       }
     }
     break;
+  case RECTANGLE_FILL:
   case RECTANGLE_HOLLOW:
   case TRIANGLE_FILL:
   case TRIANGLE_HOLLOW:
@@ -339,7 +347,8 @@ void serialDisplay::executeCommand(void)
   switch (currentMode)
   {
   case DISPLAY_COLOR:
-    currentColor = strtol(captureData.capture[0], NULL, 16);;
+    currentColor = strtol(captureData.capture[0], NULL, 16);
+    ;
     display->setTextColor(currentColor);
     break;
   case TEXT_SIZE:
@@ -390,8 +399,12 @@ void serialDisplay::executeCommand(void)
     display->fillTriangle(arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], currentColor);
     break;
   case RECTANGLE_HOLLOW:
-    arg = getIntFromCapture(&captureData, 6);
+    arg = getIntFromCapture(&captureData, 4);
     display->drawRect(arg[0], arg[1], arg[2], arg[3], currentColor);
+    break;
+  case RECTANGLE_FILL:
+    arg = getIntFromCapture(&captureData, 4);
+    display->fillRect(arg[0], arg[1], arg[2], arg[3], currentColor);
     break;
   default:
     Serial.println(F("Unknown Command"));
