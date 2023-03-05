@@ -40,7 +40,7 @@ private:
 
   DISP *display;
   MODE currentMode;
-  Capture captureText;
+  Capture captureData;
   Capture captureColor;
   Capture capture2Arg;
   Capture capture3Arg;
@@ -77,7 +77,7 @@ serialDisplay::serialDisplay(DISP *d)
 
 #endif //
 
-  initCapture(&captureText, MAX_TEXT_CAPTURE, 1);
+  initCapture(&captureData, MAX_TEXT_CAPTURE, 1);
   initCapture(&captureColor, 4, 1);
   initCapture(&capture2Arg, 6, 2);
   initCapture(&capture3Arg, 6, 3);
@@ -144,29 +144,29 @@ void serialDisplay::nextArgCapture(Capture *capture)
 
 void serialDisplay::captureCommand(char input)
 {
-  captureInput(&captureText, input);
-  closeCapture(&captureText);
+  captureInput(&captureData, input);
+  closeCapture(&captureData);
   if (isCommand("tt"))
   {
-    openCapture(&captureText,1);
+    openCapture(&captureData,1);
     currentMode = TEXT;
     return;
   }
   if (isCommand("tv"))
   {
-    openCapture(&captureText,1);
+    openCapture(&captureData,1);
     currentMode = TEXT_CENTER_VERTICAL;
     return;
   }
   if (isCommand("th"))
   {
-    openCapture(&captureText,1);
+    openCapture(&captureData,1);
     currentMode = TEXT_CENTER_HORIZONTAL;
     return;
   }
   if (isCommand("ts"))
   {
-    openCapture(&captureText,1);
+    openCapture(&captureData,1);
     currentMode = TEXT_SIZE;
     return;
   }
@@ -191,7 +191,7 @@ void serialDisplay::captureCommand(char input)
 }
 boolean serialDisplay::isCommand(char *command)
 {
-  return strcmp(captureText.capture[0], command) == 0;
+  return strcmp(captureData.capture[0], command) == 0;
 }
 
 void serialDisplay::decodeInput(char input)
@@ -218,8 +218,8 @@ void serialDisplay::decodeInput(char input)
     case 't':
     case 's':
       currentMode = COMMAND;
-      openCapture(&captureText,1);
-      captureInput(&captureText, input);
+      openCapture(&captureData,1);
+      captureInput(&captureData, input);
       break;
     default:
       Serial.print(F("Unknown input="));
@@ -233,7 +233,7 @@ void serialDisplay::decodeInput(char input)
   case TEXT_CENTER_VERTICAL:
   case TEXT_CENTER_HORIZONTAL:
   case TEXT:
-    captureInput(&captureText, input);
+    captureInput(&captureData, input);
     break;
   case SET_CURSOR:
     if (input == ',')
@@ -271,7 +271,7 @@ void serialDisplay::decodeInput(char input)
   case TEXT_SIZE:
     if ((input >= '0' && input <= '9'))
     {
-      captureInput(&captureText, input);
+      captureInput(&captureData, input);
     }
     break;
   default:
@@ -320,34 +320,34 @@ void serialDisplay::executeCommand(void)
     break;
   case TEXT_SIZE:
     // Serial.println(F("TEXT_SIZE"));
-    closeCapture(&captureText);
-    size = atoi(captureText.capture[0]);
+    closeCapture(&captureData);
+    size = atoi(captureData.capture[0]);
     display->setTextSize(size);
     break;
   case TEXT:
     // Serial.println(F("TEXT"));
-    closeCapture(&captureText);
-    display->print(captureText.capture[0]);
+    closeCapture(&captureData);
+    display->print(captureData.capture[0]);
     break;
   case TEXT_CENTER_HORIZONTAL:
     // Serial.println(F("TEXT_CENTER_HORIZONTAL"));
-    closeCapture(&captureText);
+    closeCapture(&captureData);
 #if defined(_ADAFRUIT_TFTLCD_H_)
     y = display->getCursorY();
-    display->getTextBounds(captureText.capture[0], &x, &y, &x1, &y1, &w, &h);
+    display->getTextBounds(captureData.capture[0], &x, &y, &x1, &y1, &w, &h);
     display->setCursor((displayWidth - w) / 2, y);
 #endif // _ADAFRUIT_TFTLCD_H_
-    display->print(captureText.capture[0]);
+    display->print(captureData.capture[0]);
     break;
   case TEXT_CENTER_VERTICAL:
     // Serial.println(F("TEXT_CENTER_VERTICAL"));
-    closeCapture(&captureText);
+    closeCapture(&captureData);
 #if defined(_ADAFRUIT_TFTLCD_H_)
     x = display->getCursorX();
-    display->getTextBounds(captureText.capture[0], &x, &y, &x1, &y1, &w, &h);
+    display->getTextBounds(captureData.capture[0], &x, &y, &x1, &y1, &w, &h);
     display->setCursor(x, (displayHeight - h) / 2);
 #endif // _ADAFRUIT_TFTLCD_H_
-    display->print(captureText.capture[0]);
+    display->print(captureData.capture[0]);
 
     break;
   case CLEAR_SCREEN:
