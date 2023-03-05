@@ -361,43 +361,43 @@ void serialDisplay::executeCommand(void)
   case SET_CURSOR:
     // Serial.println(F("SET_CURSOR"));
     closeCapture(&captureData);
-    x = atol(captureData.capture[0]);
-    y = atol(captureData.capture[1]);
+    x = atoi(captureData.capture[0]);
+    y = atoi(captureData.capture[1]);
     display->setCursor(x, y);
     break;
   case CIRCLE_HOLLOW:
     // Serial.println(F("CIRCLE_HOLLOW"));
     closeCapture(&captureData);
-    x = atol(captureData.capture[0]);
-    y = atol(captureData.capture[1]);
-    r = atol(captureData.capture[2]);
+    x = atoi(captureData.capture[0]);
+    y = atoi(captureData.capture[1]);
+    r = atoi(captureData.capture[2]);
     display->drawCircle(x, y, r, currentColor);
     break;
   case CIRCLE_FILL:
     closeCapture(&captureData);
-    x = atol(captureData.capture[0]);
-    y = atol(captureData.capture[1]);
-    r = atol(captureData.capture[2]);
+    x = atoi(captureData.capture[0]);
+    y = atoi(captureData.capture[1]);
+    r = atoi(captureData.capture[2]);
     display->fillCircle(x, y, r, currentColor);
     break;
   case TRIANGLE_HOLLOW:
     closeCapture(&captureData);
-    x = atol(captureData.capture[0]);
-    y = atol(captureData.capture[1]);
-    x1 = atol(captureData.capture[2]);
-    y1 = atol(captureData.capture[3]);
-    x2 = atol(captureData.capture[4]);
-    y2 = atol(captureData.capture[5]);
+    x = atoi(captureData.capture[0]);
+    y = atoi(captureData.capture[1]);
+    x1 = atoi(captureData.capture[2]);
+    y1 = atoi(captureData.capture[3]);
+    x2 = atoi(captureData.capture[4]);
+    y2 = atoi(captureData.capture[5]);
     display->drawTriangle(x, y, x1, y1, x2, y2, currentColor);
     break;
   case TRIANGLE_FILL:
     closeCapture(&captureData);
-    x = atol(captureData.capture[0]);
-    y = atol(captureData.capture[1]);
-    x1 = atol(captureData.capture[2]);
-    y1 = atol(captureData.capture[3]);
-    x2 = atol(captureData.capture[4]);
-    y2 = atol(captureData.capture[5]);
+    x = atoi(captureData.capture[0]);
+    y = atoi(captureData.capture[1]);
+    x1 = atoi(captureData.capture[2]);
+    y1 = atoi(captureData.capture[3]);
+    x2 = atoi(captureData.capture[4]);
+    y2 = atoi(captureData.capture[5]);
     display->fillTriangle(x, y, x1, y1, x2, y2, currentColor);
     break;
   default:
