@@ -33,7 +33,7 @@ void setup() {
   // tft.setFreeFont(LABEL2_FONT);
 
   //Buffer Limit from the Serial Monitor is 64 bytes
-  sDisplay.runCommands("x;ts2;sc10,10;thDisplay Prototyping;");
+  sDisplay.runCommands("x;ts2;sc10,10;#17e0;thDisplay Prototyping;");
   sDisplay.runCommands("sc10,30;ts1;thLibrary v1.0;");
   sDisplay.runCommands("sc10,10;tvVertical Center;");
   // // Clear the screen

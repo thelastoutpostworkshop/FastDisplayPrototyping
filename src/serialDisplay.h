@@ -97,13 +97,13 @@ void serialDisplay::runCommands(char *commands)
 
 void serialDisplay::captureInput(Capture *capture, char input)
 {
-  capture->capture[capture->argIndex][capture->index[capture->argIndex]] = input;
-  capture->index[capture->argIndex]++;
-  if (capture->index[capture->argIndex] >= capture->maxCapture)
+  if (capture->index[capture->argIndex] == capture->maxCapture)
   {
     Serial.println(F("Capture Max Reached"));
     capture->index[capture->argIndex] = 0;
   }
+  capture->capture[capture->argIndex][capture->index[capture->argIndex]] = input;
+  capture->index[capture->argIndex]++;
 }
 
 void serialDisplay::closeCapture(Capture *capture)
@@ -129,11 +129,14 @@ void serialDisplay::initCapture(Capture *capture, byte maxCapture, byte maxArg)
 }
 void serialDisplay::nextArgCapture(Capture *capture)
 {
-  capture->argIndex++;
   if (capture->argIndex >= capture->maxArg)
   {
     Serial.println(F("Capture Max Arg Reached"));
     capture->argIndex = 0;
+  }
+  else
+  {
+    capture->argIndex++;
   }
 }
 
