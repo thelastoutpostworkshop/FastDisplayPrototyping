@@ -56,6 +56,7 @@ private:
   void initCapture(Capture *, byte, byte);
   void nextArgCapture(Capture *);
   void captureCommand(char);
+  boolean isCommand(char*);
 
 public:
   serialDisplay(DISP *d);
@@ -138,43 +139,46 @@ void serialDisplay::captureCommand(char input)
 {
   captureInput(&captureText, input);
   closeCapture(&captureText);
-  if (strcmp(captureText.capture[0], "tt") == 0)
+  if (isCommand("tt"))
   {
     openCapture(&captureText);
     currentMode = TEXT;
     return;
   }
-  if (strcmp(captureText.capture[0], "tv") == 0)
+  if (isCommand("tv"))
   {
     openCapture(&captureText);
     currentMode = TEXT_CENTER_VERTICAL;
     return;
   }
-  if (strcmp(captureText.capture[0], "th") == 0)
+  if (isCommand("th"))
   {
     openCapture(&captureText);
     currentMode = TEXT_CENTER_HORIZONTAL;
     return;
   }
-  if (strcmp(captureText.capture[0], "ts") == 0)
+  if (isCommand("ts"))
   {
     openCapture(&captureText);
     currentMode = TEXT_SIZE;
     return;
   }
-  if (strcmp(captureText.capture[0], "ch") == 0)
+  if (isCommand("ch"))
   {
     Serial.println(F("CIRCLE_HOLLOW"));
     openCapture(&capture3Arg);
     currentMode = CIRCLE_HOLLOW;
     return;
   }
-  if (strcmp(captureText.capture[0], "sc") == 0)
+  if (isCommand("sc"))
   {
     openCapture(&capture2Arg);
     currentMode = SET_CURSOR;
     return;
   }
+}
+boolean serialDisplay::isCommand(char *command){
+  return strcmp(captureText.capture[0], command) == 0;
 }
 
 void serialDisplay::decodeInput(char input)
