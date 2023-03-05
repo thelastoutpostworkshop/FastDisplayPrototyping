@@ -6,7 +6,7 @@
 #endif // _ADAFRUIT_TFTLCD_H_
 
 // #include <TFT_eSPI.h>  // Hardware-specific library
-#define MAX_TEXT_CAPTURE 20
+#define MAX_TEXT_CAPTURE 50
 #define MAX_ARG_CAPTURE 6
 #define COLOR_BLACK 0x0000
 #define DEBOUNCE_READ_SERIAL 300
