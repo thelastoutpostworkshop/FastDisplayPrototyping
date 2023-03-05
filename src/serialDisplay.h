@@ -320,7 +320,7 @@ void serialDisplay::executeCommand(void)
   int16_t x, y, x1, y1, x2, y2, r;
   uint16_t w, h;
   uint16_t color;
-  int size,*arg;
+  int size, *arg;
 
   switch (currentMode)
   {
@@ -378,37 +378,23 @@ void serialDisplay::executeCommand(void)
   case CIRCLE_HOLLOW:
     // Serial.println(F("CIRCLE_HOLLOW"));
     closeCapture(&captureData);
-    x = atoi(captureData.capture[0]);
-    y = atoi(captureData.capture[1]);
-    r = atoi(captureData.capture[2]);
-    display->drawCircle(x, y, r, currentColor);
+    arg = getIntFromCapture(&captureData, 3);
+    display->drawCircle(arg[0], arg[1], arg[2], currentColor);
     break;
   case CIRCLE_FILL:
     closeCapture(&captureData);
-    x = atoi(captureData.capture[0]);
-    y = atoi(captureData.capture[1]);
-    r = atoi(captureData.capture[2]);
-    display->fillCircle(x, y, r, currentColor);
+    arg = getIntFromCapture(&captureData, 3);
+    display->fillCircle(arg[0], arg[1], arg[2], currentColor);
     break;
   case TRIANGLE_HOLLOW:
     closeCapture(&captureData);
-    x = atoi(captureData.capture[0]);
-    y = atoi(captureData.capture[1]);
-    x1 = atoi(captureData.capture[2]);
-    y1 = atoi(captureData.capture[3]);
-    x2 = atoi(captureData.capture[4]);
-    y2 = atoi(captureData.capture[5]);
-    display->drawTriangle(x, y, x1, y1, x2, y2, currentColor);
+    arg = getIntFromCapture(&captureData, 6);
+    display->drawTriangle(arg[0], arg[1], arg[2],arg[3],arg[4],arg[5], currentColor);
     break;
   case TRIANGLE_FILL:
     closeCapture(&captureData);
-    x = atoi(captureData.capture[0]);
-    y = atoi(captureData.capture[1]);
-    x1 = atoi(captureData.capture[2]);
-    y1 = atoi(captureData.capture[3]);
-    x2 = atoi(captureData.capture[4]);
-    y2 = atoi(captureData.capture[5]);
-    display->fillTriangle(x, y, x1, y1, x2, y2, currentColor);
+    arg = getIntFromCapture(&captureData, 6);
+    display->fillTriangle(arg[0], arg[1], arg[2],arg[3],arg[4],arg[5], currentColor);
     break;
   default:
     Serial.println(F("Unknown Command"));
