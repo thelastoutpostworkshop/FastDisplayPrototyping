@@ -53,6 +53,7 @@ private:
   void openCapture(Capture *, int);
   void closeCapture(Capture *);
   void nextArgCapture(Capture *);
+  int *getIntFromCapture(Capture *, int);
   void captureCommand(char);
   boolean isCommand(char *);
 
@@ -87,6 +88,16 @@ void serialDisplay::runCommands(char *commands)
   {
     decodeInput(*(commands + i));
   }
+}
+
+int *serialDisplay::getIntFromCapture(Capture *capture, int count)
+{
+  static int res[MAX_ARG_CAPTURE];
+  for (int i = 0; i < count && i < MAX_ARG_CAPTURE; i++)
+  {
+    res[i] = atoi(capture->capture[i]);
+  }
+  return res;
 }
 
 void serialDisplay::captureInput(Capture *capture, char input)
@@ -309,7 +320,7 @@ void serialDisplay::executeCommand(void)
   int16_t x, y, x1, y1, x2, y2, r;
   uint16_t w, h;
   uint16_t color;
-  int size;
+  int size,*arg;
 
   switch (currentMode)
   {
@@ -361,9 +372,8 @@ void serialDisplay::executeCommand(void)
   case SET_CURSOR:
     // Serial.println(F("SET_CURSOR"));
     closeCapture(&captureData);
-    x = atoi(captureData.capture[0]);
-    y = atoi(captureData.capture[1]);
-    display->setCursor(x, y);
+    arg = getIntFromCapture(&captureData, 2);
+    display->setCursor(arg[0], arg[1]);
     break;
   case CIRCLE_HOLLOW:
     // Serial.println(F("CIRCLE_HOLLOW"));
