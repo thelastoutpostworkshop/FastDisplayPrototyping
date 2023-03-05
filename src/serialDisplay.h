@@ -41,7 +41,6 @@ private:
   DISP *display;
   MODE currentMode;
   Capture captureData;
-  Capture capture2Arg;
   Capture capture3Arg;
   uint16_t currentColor = 0xFFFF;
   int displayWidth;
@@ -77,7 +76,6 @@ serialDisplay::serialDisplay(DISP *d)
 #endif //
 
   initCapture(&captureData, MAX_TEXT_CAPTURE, 1);
-  initCapture(&capture2Arg, 6, 2);
   initCapture(&capture3Arg, 6, 3);
   lastSerialRead = millis();
 }
@@ -182,7 +180,7 @@ void serialDisplay::captureCommand(char input)
   }
   if (isCommand("sc"))
   {
-    openCapture(&capture2Arg,2);
+    openCapture(&captureData,2);
     currentMode = SET_CURSOR;
     return;
   }
@@ -236,13 +234,13 @@ void serialDisplay::decodeInput(char input)
   case SET_CURSOR:
     if (input == ',')
     {
-      nextArgCapture(&capture2Arg);
+      nextArgCapture(&captureData);
     }
     else
     {
       if (input >= '0' && input <= '9')
       {
-        captureInput(&capture2Arg, input);
+        captureInput(&captureData, input);
       }
     }
     break;
@@ -354,9 +352,9 @@ void serialDisplay::executeCommand(void)
     break;
   case SET_CURSOR:
     // Serial.println(F("SET_CURSOR"));
-    closeCapture(&capture2Arg);
-    x = atol(capture2Arg.capture[0]);
-    y = atol(capture2Arg.capture[1]);
+    closeCapture(&captureData);
+    x = atol(captureData.capture[0]);
+    y = atol(captureData.capture[1]);
     display->setCursor(x, y);
     break;
   case CIRCLE_HOLLOW:
