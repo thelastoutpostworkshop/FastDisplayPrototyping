@@ -38,7 +38,7 @@ void setup() {
   sDisplay.runCommands("sc10,10;tvVertical Center;sc10,80;ttNormal text;");
   sDisplay.runCommands("#f804;ch20,60,10;#ffe0;cf50,60,10;");
   sDisplay.runCommands("#05ff;gh70,50,90,60,70,70;#ffff;gf100,50,120,60,100,70;");
-  sDisplay.runCommands("#fc7c;rh130,50,20,20;#263c;rf160,50,20,20;");
+  sDisplay.runCommands("#fc7c;rh130,50,20,20;#263c;rf160,50,20,20;#efe0;ri10,100,40,40,10;");
   // // Clear the screen
   // tft.fillScreen(TFT_BLACK);
 
