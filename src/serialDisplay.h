@@ -204,6 +204,10 @@ void serialDisplay::decodeInput(char input)
       captureInput(&captureText, input);
       currentMode = COMMAND;
       break;
+    default:
+      Serial.print(F("Unknown input="));
+      Serial.println(input);
+      break;
     }
     break;
   case COMMAND:
@@ -251,6 +255,9 @@ void serialDisplay::decodeInput(char input)
     {
       captureInput(&captureText, input);
     }
+    break;
+  default:
+    Serial.println(F("Unknown current mode"));
     break;
   }
 }

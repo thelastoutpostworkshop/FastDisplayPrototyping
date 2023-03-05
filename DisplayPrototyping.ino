@@ -36,7 +36,7 @@ void setup() {
 
   // tft.setFreeFont(LABEL2_FONT);
 
-  sDisplay.runCommands("x;sc100,100;ts2;ththis is a test;ch100,100,100;");
+  sDisplay.runCommands("x;sc100,100;ts2;ththis is a test;ch100,100,25;sc1,170;thHoriontal;sc10,100;tvVertical;");
   // // Clear the screen
   // tft.fillScreen(TFT_BLACK);
 
@@ -53,5 +53,5 @@ void setup() {
 
 void loop(void) {
 
-  // sDisplay.readCommandsFromSerial();
+  sDisplay.readCommandsFromSerial();
 }
