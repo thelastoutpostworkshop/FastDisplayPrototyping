@@ -6,7 +6,7 @@
 #endif // _ADAFRUIT_TFTLCD_H_
 
 // #include <TFT_eSPI.h>  // Hardware-specific library
-#define MAX_TEXT_CAPTURE 50
+#define MAX_DATA_CAPTURE 50
 #define MAX_ARG_CAPTURE 6
 #define COLOR_BLACK 0x0000
 #define DEBOUNCE_READ_SERIAL 300
@@ -16,7 +16,7 @@ class serialDisplay
 private:
   struct Capture
   {
-    char capture[MAX_ARG_CAPTURE][MAX_TEXT_CAPTURE];
+    char capture[MAX_ARG_CAPTURE][MAX_DATA_CAPTURE];
     byte index[MAX_ARG_CAPTURE];
     byte argIndex;
     byte maxCapture;
@@ -74,7 +74,7 @@ serialDisplay::serialDisplay(DISP *d)
 
 #endif //
 
-  initCapture(&captureData, MAX_TEXT_CAPTURE, 1);
+  initCapture(&captureData, MAX_DATA_CAPTURE, 1);
   lastSerialRead = millis();
 }
 
