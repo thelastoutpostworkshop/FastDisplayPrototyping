@@ -36,7 +36,8 @@ void setup() {
 
   // tft.setFreeFont(LABEL2_FONT);
 
-  sDisplay.runCommands("x;sc100,100;ts2;ththis is a test;ch100,100,25;sc1,170;thHoriontal;sc10,100;tvVertical;");
+  sDisplay.runCommands("x;ts2;sc10,10;thDisplay Prototyping;sc10,30;ts1;thLibrary v1.0;");
+  sDisplay.runCommands("sc10,10;tvVertical Center;");
   // // Clear the screen
   // tft.fillScreen(TFT_BLACK);
 

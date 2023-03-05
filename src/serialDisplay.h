@@ -56,7 +56,7 @@ private:
   void initCapture(Capture *, byte, byte);
   void nextArgCapture(Capture *);
   void captureCommand(char);
-  boolean isCommand(char*);
+  boolean isCommand(char *);
 
 public:
   serialDisplay(DISP *d);
@@ -101,6 +101,7 @@ void serialDisplay::captureInput(Capture *capture, char input)
   capture->index[capture->argIndex]++;
   if (capture->index[capture->argIndex] >= capture->maxCapture)
   {
+    Serial.println(F("Capture Max Reached"));
     capture->index[capture->argIndex] = 0;
   }
 }
@@ -131,6 +132,7 @@ void serialDisplay::nextArgCapture(Capture *capture)
   capture->argIndex++;
   if (capture->argIndex >= capture->maxArg)
   {
+    Serial.println(F("Capture Max Arg Reached"));
     capture->argIndex = 0;
   }
 }
@@ -165,7 +167,6 @@ void serialDisplay::captureCommand(char input)
   }
   if (isCommand("ch"))
   {
-    Serial.println(F("CIRCLE_HOLLOW"));
     openCapture(&capture3Arg);
     currentMode = CIRCLE_HOLLOW;
     return;
@@ -177,7 +178,8 @@ void serialDisplay::captureCommand(char input)
     return;
   }
 }
-boolean serialDisplay::isCommand(char *command){
+boolean serialDisplay::isCommand(char *command)
+{
   return strcmp(captureText.capture[0], command) == 0;
 }
 
@@ -297,25 +299,25 @@ void serialDisplay::executeCommand(void)
   case UNDEFINED:
     break;
   case DISPLAY_COLOR:
-    Serial.println(F("DISPLAY_COLOR"));
+    // Serial.println(F("DISPLAY_COLOR"));
     closeCapture(&captureColor);
     color = strtol(captureColor.capture[0], NULL, 16);
     currentColor = color;
     display->setTextColor(currentColor);
     break;
   case TEXT_SIZE:
-    Serial.println(F("TEXT_SIZE"));
+    // Serial.println(F("TEXT_SIZE"));
     closeCapture(&captureText);
     size = atoi(captureText.capture[0]);
     display->setTextSize(size);
     break;
   case TEXT:
-    Serial.println(F("TEXT"));
+    // Serial.println(F("TEXT"));
     closeCapture(&captureText);
     display->print(captureText.capture[0]);
     break;
   case TEXT_CENTER_HORIZONTAL:
-    Serial.println(F("TEXT_CENTER_HORIZONTAL"));
+    // Serial.println(F("TEXT_CENTER_HORIZONTAL"));
     closeCapture(&captureText);
 #if defined(_ADAFRUIT_TFTLCD_H_)
     y = display->getCursorY();
@@ -325,7 +327,7 @@ void serialDisplay::executeCommand(void)
     display->print(captureText.capture[0]);
     break;
   case TEXT_CENTER_VERTICAL:
-    Serial.println(F("TEXT_CENTER_VERTICAL"));
+    // Serial.println(F("TEXT_CENTER_VERTICAL"));
     closeCapture(&captureText);
 #if defined(_ADAFRUIT_TFTLCD_H_)
     x = display->getCursorX();
@@ -336,18 +338,18 @@ void serialDisplay::executeCommand(void)
 
     break;
   case CLEAR_SCREEN:
-    Serial.println(F("CLEAR_SCREEN"));
+    // Serial.println(F("CLEAR_SCREEN"));
     display->fillScreen(COLOR_BLACK);
     break;
   case SET_CURSOR:
-    Serial.println(F("SET_CURSOR"));
+    // Serial.println(F("SET_CURSOR"));
     closeCapture(&capture2Arg);
     x = atol(capture2Arg.capture[0]);
     y = atol(capture2Arg.capture[1]);
     display->setCursor(x, y);
     break;
   case CIRCLE_HOLLOW:
-    Serial.println(F("CIRCLE_HOLLOW"));
+    // Serial.println(F("CIRCLE_HOLLOW"));
     closeCapture(&capture3Arg);
     x = atol(capture3Arg.capture[0]);
     y = atol(capture3Arg.capture[1]);
