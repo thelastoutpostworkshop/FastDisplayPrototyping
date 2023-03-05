@@ -41,7 +41,6 @@ private:
   DISP *display;
   MODE currentMode;
   Capture captureData;
-  Capture captureColor;
   Capture capture2Arg;
   Capture capture3Arg;
   uint16_t currentColor = 0xFFFF;
@@ -78,7 +77,6 @@ serialDisplay::serialDisplay(DISP *d)
 #endif //
 
   initCapture(&captureData, MAX_TEXT_CAPTURE, 1);
-  initCapture(&captureColor, 4, 1);
   initCapture(&capture2Arg, 6, 2);
   initCapture(&capture3Arg, 6, 3);
   lastSerialRead = millis();
@@ -209,7 +207,7 @@ void serialDisplay::decodeInput(char input)
     {
     case '#':
       currentMode = DISPLAY_COLOR;
-      openCapture(&captureColor,1);
+      openCapture(&captureData,1);
       break;
     case 'x':
       currentMode = CLEAR_SCREEN;
@@ -265,7 +263,7 @@ void serialDisplay::decodeInput(char input)
   case DISPLAY_COLOR:
     if ((input >= '0' && input <= '9') || (input >= 'a' && input <= 'f') || (input >= 'A' && input <= 'F'))
     {
-      captureInput(&captureColor, input);
+      captureInput(&captureData, input);
     }
     break;
   case TEXT_SIZE:
@@ -313,8 +311,8 @@ void serialDisplay::executeCommand(void)
     break;
   case DISPLAY_COLOR:
     // Serial.println(F("DISPLAY_COLOR"));
-    closeCapture(&captureColor);
-    color = strtol(captureColor.capture[0], NULL, 16);
+    closeCapture(&captureData);
+    color = strtol(captureData.capture[0], NULL, 16);
     currentColor = color;
     display->setTextColor(currentColor);
     break;
