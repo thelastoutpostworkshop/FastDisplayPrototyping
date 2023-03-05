@@ -31,6 +31,7 @@ private:
     TEXT_CENTER_VERTICAL,
     TEXT_SIZE,
     CIRCLE_HOLLOW,
+    CIRCLE_FILL,
     DISPLAY_COLOR,
     CLEAR_SCREEN,
     SET_CURSOR,
@@ -174,6 +175,12 @@ void serialDisplay::captureCommand(char input)
     currentMode = CIRCLE_HOLLOW;
     return;
   }
+  if (isCommand("cf"))
+  {
+    openCapture(&capture3Arg);
+    currentMode = CIRCLE_FILL;
+    return;
+  }
   if (isCommand("sc"))
   {
     openCapture(&capture2Arg);
@@ -240,6 +247,7 @@ void serialDisplay::decodeInput(char input)
       }
     }
     break;
+  case CIRCLE_FILL:
   case CIRCLE_HOLLOW:
     if (input == ',')
     {
@@ -359,6 +367,13 @@ void serialDisplay::executeCommand(void)
     y = atol(capture3Arg.capture[1]);
     r = atol(capture3Arg.capture[2]);
     display->drawCircle(x, y, r, currentColor);
+    break;
+  case CIRCLE_FILL:
+    closeCapture(&capture3Arg);
+    x = atol(capture3Arg.capture[0]);
+    y = atol(capture3Arg.capture[1]);
+    r = atol(capture3Arg.capture[2]);
+    display->fillCircle(x, y, r, currentColor);
     break;
   default:
     Serial.println(F("Unknown Command"));

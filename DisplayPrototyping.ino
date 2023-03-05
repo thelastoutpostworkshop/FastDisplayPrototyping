@@ -36,7 +36,7 @@ void setup() {
   sDisplay.runCommands("x;ts2;sc10,10;#17e0;thDisplay Prototyping;");
   sDisplay.runCommands("sc10,30;ts1;thLibrary v1.0;");
   sDisplay.runCommands("sc10,10;tvVertical Center;sc10,80;ttNormal text;");
-  sDisplay.runCommands("#f804;ch20,60,10;");
+  sDisplay.runCommands("#f804;ch20,60,10;#ffe0;cf50,60,10;");
   // // Clear the screen
   // tft.fillScreen(TFT_BLACK);
 
