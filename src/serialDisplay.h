@@ -285,6 +285,7 @@ void serialDisplay::readCommandsFromSerial(void)
       lastSerialRead = millis();
     }
   }
+  delay(10);
 }
 
 void serialDisplay::executeCommand(void)

@@ -25,17 +25,14 @@ serialDisplay sDisplay(&tft);
 //------------------------------------------------------------------------------------------
 
 void setup() {
-  // Use serial port
   Serial.begin(9600);
 
-  // Initialise the TFT screen
   tft.begin();
-
-  // Set the rotation before we calibrate
   tft.setRotation(0);
 
   // tft.setFreeFont(LABEL2_FONT);
 
+  //Buffer Limit from the Serial Monitor is 64 bytes
   sDisplay.runCommands("x;ts2;sc10,10;thDisplay Prototyping;sc10,30;ts1;thLibrary v1.0;");
   sDisplay.runCommands("sc10,10;tvVertical Center;");
   // // Clear the screen
