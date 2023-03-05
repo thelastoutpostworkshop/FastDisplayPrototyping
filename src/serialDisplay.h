@@ -31,6 +31,7 @@ private:
     TEXT_SIZE,
     CIRCLE_HOLLOW,
     CIRCLE_FILL,
+    TRIANGLE_HOLLOW,
     DISPLAY_COLOR,
     CLEAR_SCREEN,
     SET_CURSOR,
@@ -48,7 +49,7 @@ private:
   void decodeInput(char input);
   void executeCommand(void);
   void captureInput(Capture *, char);
-  void openCapture(Capture *,int);
+  void openCapture(Capture *, int);
   void closeCapture(Capture *);
   void nextArgCapture(Capture *);
   void captureCommand(char);
@@ -106,7 +107,7 @@ void serialDisplay::closeCapture(Capture *capture)
     capture->capture[i][capture->index[i]] = 0;
   }
 }
-void serialDisplay::openCapture(Capture *capture,int maxArg)
+void serialDisplay::openCapture(Capture *capture, int maxArg)
 {
   capture->argIndex = 0;
   capture->maxArg = maxArg;
@@ -135,43 +136,49 @@ void serialDisplay::captureCommand(char input)
   closeCapture(&captureData);
   if (isCommand("tt"))
   {
-    openCapture(&captureData,1);
+    openCapture(&captureData, 1);
     currentMode = TEXT;
     return;
   }
   if (isCommand("tv"))
   {
-    openCapture(&captureData,1);
+    openCapture(&captureData, 1);
     currentMode = TEXT_CENTER_VERTICAL;
     return;
   }
   if (isCommand("th"))
   {
-    openCapture(&captureData,1);
+    openCapture(&captureData, 1);
     currentMode = TEXT_CENTER_HORIZONTAL;
     return;
   }
   if (isCommand("ts"))
   {
-    openCapture(&captureData,1);
+    openCapture(&captureData, 1);
     currentMode = TEXT_SIZE;
     return;
   }
   if (isCommand("ch"))
   {
-    openCapture(&captureData,3);
+    openCapture(&captureData, 3);
     currentMode = CIRCLE_HOLLOW;
     return;
   }
   if (isCommand("cf"))
   {
-    openCapture(&captureData,3);
+    openCapture(&captureData, 3);
     currentMode = CIRCLE_FILL;
+    return;
+  }
+  if (isCommand("gh"))
+  {
+    openCapture(&captureData, 6);
+    currentMode = TRIANGLE_HOLLOW;
     return;
   }
   if (isCommand("sc"))
   {
-    openCapture(&captureData,2);
+    openCapture(&captureData, 2);
     currentMode = SET_CURSOR;
     return;
   }
@@ -196,16 +203,17 @@ void serialDisplay::decodeInput(char input)
     {
     case '#':
       currentMode = DISPLAY_COLOR;
-      openCapture(&captureData,1);
+      openCapture(&captureData, 1);
       break;
     case 'x':
       currentMode = CLEAR_SCREEN;
       break;
+    case 'g':
     case 'c':
     case 't':
     case 's':
       currentMode = COMMAND;
-      openCapture(&captureData,1);
+      openCapture(&captureData, 1);
       captureInput(&captureData, input);
       break;
     default:
@@ -235,6 +243,7 @@ void serialDisplay::decodeInput(char input)
       }
     }
     break;
+  case TRIANGLE_HOLLOW:
   case CIRCLE_FILL:
   case CIRCLE_HOLLOW:
     if (input == ',')
@@ -289,7 +298,7 @@ void serialDisplay::readCommandsFromSerial(void)
 
 void serialDisplay::executeCommand(void)
 {
-  int16_t x, y, x1, y1, r;
+  int16_t x, y, x1, y1, x2, y2, r;
   uint16_t w, h;
   uint16_t color;
   int size;
@@ -362,6 +371,16 @@ void serialDisplay::executeCommand(void)
     y = atol(captureData.capture[1]);
     r = atol(captureData.capture[2]);
     display->fillCircle(x, y, r, currentColor);
+    break;
+  case TRIANGLE_HOLLOW:
+    closeCapture(&captureData);
+    x = atol(captureData.capture[0]);
+    y = atol(captureData.capture[1]);
+    x1 = atol(captureData.capture[2]);
+    y1 = atol(captureData.capture[3]);
+    x2 = atol(captureData.capture[4]);
+    y2 = atol(captureData.capture[5]);
+    display->drawTriangle(x, y, x1, y1, x2, y2, currentColor);
     break;
   default:
     Serial.println(F("Unknown Command"));
