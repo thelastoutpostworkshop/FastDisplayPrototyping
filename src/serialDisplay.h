@@ -322,31 +322,31 @@ void serialDisplay::executeCommand(void)
   uint16_t color;
   int *arg;
 
+  if (currentColor == UNDEFINED)
+  {
+    return;
+  }
+
+  closeCapture(&captureData);
   switch (currentMode)
   {
-  case UNDEFINED:
-    break;
   case DISPLAY_COLOR:
     // Serial.println(F("DISPLAY_COLOR"));
-    closeCapture(&captureData);
     color = strtol(captureData.capture[0], NULL, 16);
     currentColor = color;
     display->setTextColor(currentColor);
     break;
   case TEXT_SIZE:
     // Serial.println(F("TEXT_SIZE"));
-    closeCapture(&captureData);
     arg = getIntFromCapture(&captureData, 1);
     display->setTextSize(arg[0]);
     break;
   case TEXT:
     // Serial.println(F("TEXT"));
-    closeCapture(&captureData);
     display->print(captureData.capture[0]);
     break;
   case TEXT_CENTER_HORIZONTAL:
     // Serial.println(F("TEXT_CENTER_HORIZONTAL"));
-    closeCapture(&captureData);
 #if defined(_ADAFRUIT_TFTLCD_H_)
     y = display->getCursorY();
     display->getTextBounds(captureData.capture[0], &x, &y, &x1, &y1, &w, &h);
@@ -356,7 +356,6 @@ void serialDisplay::executeCommand(void)
     break;
   case TEXT_CENTER_VERTICAL:
     // Serial.println(F("TEXT_CENTER_VERTICAL"));
-    closeCapture(&captureData);
 #if defined(_ADAFRUIT_TFTLCD_H_)
     x = display->getCursorX();
     display->getTextBounds(captureData.capture[0], &x, &y, &x1, &y1, &w, &h);
@@ -371,28 +370,23 @@ void serialDisplay::executeCommand(void)
     break;
   case SET_CURSOR:
     // Serial.println(F("SET_CURSOR"));
-    closeCapture(&captureData);
     arg = getIntFromCapture(&captureData, 2);
     display->setCursor(arg[0], arg[1]);
     break;
   case CIRCLE_HOLLOW:
     // Serial.println(F("CIRCLE_HOLLOW"));
-    closeCapture(&captureData);
     arg = getIntFromCapture(&captureData, 3);
     display->drawCircle(arg[0], arg[1], arg[2], currentColor);
     break;
   case CIRCLE_FILL:
-    closeCapture(&captureData);
     arg = getIntFromCapture(&captureData, 3);
     display->fillCircle(arg[0], arg[1], arg[2], currentColor);
     break;
   case TRIANGLE_HOLLOW:
-    closeCapture(&captureData);
     arg = getIntFromCapture(&captureData, 6);
     display->drawTriangle(arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], currentColor);
     break;
   case TRIANGLE_FILL:
-    closeCapture(&captureData);
     arg = getIntFromCapture(&captureData, 6);
     display->fillTriangle(arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], currentColor);
     break;
