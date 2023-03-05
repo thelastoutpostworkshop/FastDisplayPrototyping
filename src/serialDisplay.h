@@ -19,7 +19,6 @@ private:
     char capture[MAX_ARG_CAPTURE][MAX_DATA_CAPTURE];
     byte index[MAX_ARG_CAPTURE];
     byte argIndex;
-    byte maxCapture;
     byte maxArg;
   };
   enum MODE
@@ -51,7 +50,6 @@ private:
   void captureInput(Capture *, char);
   void openCapture(Capture *,int);
   void closeCapture(Capture *);
-  void initCapture(Capture *, byte, byte);
   void nextArgCapture(Capture *);
   void captureCommand(char);
   boolean isCommand(char *);
@@ -74,7 +72,6 @@ serialDisplay::serialDisplay(DISP *d)
 
 #endif //
 
-  initCapture(&captureData, MAX_DATA_CAPTURE, 1);
   lastSerialRead = millis();
 }
 
@@ -92,7 +89,7 @@ void serialDisplay::runCommands(char *commands)
 
 void serialDisplay::captureInput(Capture *capture, char input)
 {
-  if (capture->index[capture->argIndex] == capture->maxCapture)
+  if (capture->index[capture->argIndex] == MAX_DATA_CAPTURE)
   {
     Serial.println(F("Capture Max Reached"));
     capture->index[capture->argIndex] = 0;
@@ -118,11 +115,7 @@ void serialDisplay::openCapture(Capture *capture,int maxArg)
     capture->index[i] = 0;
   }
 }
-void serialDisplay::initCapture(Capture *capture, byte maxCapture, byte maxArg)
-{
-  capture->maxCapture = maxCapture;
-  capture->maxArg = maxArg;
-}
+
 void serialDisplay::nextArgCapture(Capture *capture)
 {
   if (capture->argIndex >= capture->maxArg)
