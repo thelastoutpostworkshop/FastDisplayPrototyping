@@ -41,7 +41,6 @@ private:
   DISP *display;
   MODE currentMode;
   Capture captureData;
-  Capture capture3Arg;
   uint16_t currentColor = 0xFFFF;
   int displayWidth;
   int displayHeight;
@@ -76,7 +75,6 @@ serialDisplay::serialDisplay(DISP *d)
 #endif //
 
   initCapture(&captureData, MAX_TEXT_CAPTURE, 1);
-  initCapture(&capture3Arg, 6, 3);
   lastSerialRead = millis();
 }
 
@@ -168,13 +166,13 @@ void serialDisplay::captureCommand(char input)
   }
   if (isCommand("ch"))
   {
-    openCapture(&capture3Arg,3);
+    openCapture(&captureData,3);
     currentMode = CIRCLE_HOLLOW;
     return;
   }
   if (isCommand("cf"))
   {
-    openCapture(&capture3Arg,3);
+    openCapture(&captureData,3);
     currentMode = CIRCLE_FILL;
     return;
   }
@@ -248,13 +246,13 @@ void serialDisplay::decodeInput(char input)
   case CIRCLE_HOLLOW:
     if (input == ',')
     {
-      nextArgCapture(&capture3Arg);
+      nextArgCapture(&captureData);
     }
     else
     {
       if (input >= '0' && input <= '9')
       {
-        captureInput(&capture3Arg, input);
+        captureInput(&captureData, input);
       }
     }
     break;
@@ -359,17 +357,17 @@ void serialDisplay::executeCommand(void)
     break;
   case CIRCLE_HOLLOW:
     // Serial.println(F("CIRCLE_HOLLOW"));
-    closeCapture(&capture3Arg);
-    x = atol(capture3Arg.capture[0]);
-    y = atol(capture3Arg.capture[1]);
-    r = atol(capture3Arg.capture[2]);
+    closeCapture(&captureData);
+    x = atol(captureData.capture[0]);
+    y = atol(captureData.capture[1]);
+    r = atol(captureData.capture[2]);
     display->drawCircle(x, y, r, currentColor);
     break;
   case CIRCLE_FILL:
-    closeCapture(&capture3Arg);
-    x = atol(capture3Arg.capture[0]);
-    y = atol(capture3Arg.capture[1]);
-    r = atol(capture3Arg.capture[2]);
+    closeCapture(&captureData);
+    x = atol(captureData.capture[0]);
+    y = atol(captureData.capture[1]);
+    r = atol(captureData.capture[2]);
     display->fillCircle(x, y, r, currentColor);
     break;
   default:
