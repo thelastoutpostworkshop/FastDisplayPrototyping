@@ -198,10 +198,8 @@ void serialDisplay::decodeInput(char input)
       currentMode = CLEAR_SCREEN;
       break;
     case 'c':
-      Serial.println(F("input=c"));
     case 't':
     case 's':
-      Serial.println(F("currentmod = COMMAND"));
       currentMode = COMMAND;
       openCapture(&captureText);
       captureInput(&captureText, input);
@@ -213,7 +211,6 @@ void serialDisplay::decodeInput(char input)
     }
     break;
   case COMMAND:
-    Serial.println(F("COMMAND mode"));
     captureCommand(input);
     break;
   case TEXT_CENTER_VERTICAL:
@@ -272,6 +269,7 @@ void serialDisplay::readCommandsFromSerial(void)
   {
     input = Serial.read();
     decodeInput(input);
+    lastSerialRead = millis();
   }
   else
   {
@@ -350,10 +348,10 @@ void serialDisplay::executeCommand(void)
     x = atol(capture3Arg.capture[0]);
     y = atol(capture3Arg.capture[1]);
     r = atol(capture3Arg.capture[2]);
-    Serial.println(x);
-    Serial.println(y);
-    Serial.println(r);
     display->drawCircle(x, y, r, currentColor);
+    break;
+  default:
+    Serial.println(F("Unknown Command"));
     break;
   }
   currentMode = UNDEFINED;
