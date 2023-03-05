@@ -310,7 +310,7 @@ void serialDisplay::executeCommand(void)
     display->setTextSize(size);
     break;
   case TEXT:
-    Serial.println(F("DISPLAY_COLOR"));
+    Serial.println(F("TEXT"));
     closeCapture(&captureText);
     display->print(captureText.capture[0]);
     break;
