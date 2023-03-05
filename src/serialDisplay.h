@@ -331,22 +331,17 @@ void serialDisplay::executeCommand(void)
   switch (currentMode)
   {
   case DISPLAY_COLOR:
-    // Serial.println(F("DISPLAY_COLOR"));
-    color = strtol(captureData.capture[0], NULL, 16);
-    currentColor = color;
+    currentColor = strtol(captureData.capture[0], NULL, 16);;
     display->setTextColor(currentColor);
     break;
   case TEXT_SIZE:
-    // Serial.println(F("TEXT_SIZE"));
     arg = getIntFromCapture(&captureData, 1);
     display->setTextSize(arg[0]);
     break;
   case TEXT:
-    // Serial.println(F("TEXT"));
     display->print(captureData.capture[0]);
     break;
   case TEXT_CENTER_HORIZONTAL:
-    // Serial.println(F("TEXT_CENTER_HORIZONTAL"));
 #if defined(_ADAFRUIT_TFTLCD_H_)
     y = display->getCursorY();
     display->getTextBounds(captureData.capture[0], &x, &y, &x1, &y1, &w, &h);
@@ -355,7 +350,6 @@ void serialDisplay::executeCommand(void)
     display->print(captureData.capture[0]);
     break;
   case TEXT_CENTER_VERTICAL:
-    // Serial.println(F("TEXT_CENTER_VERTICAL"));
 #if defined(_ADAFRUIT_TFTLCD_H_)
     x = display->getCursorX();
     display->getTextBounds(captureData.capture[0], &x, &y, &x1, &y1, &w, &h);
@@ -365,16 +359,13 @@ void serialDisplay::executeCommand(void)
 
     break;
   case CLEAR_SCREEN:
-    // Serial.println(F("CLEAR_SCREEN"));
     display->fillScreen(COLOR_BLACK);
     break;
   case SET_CURSOR:
-    // Serial.println(F("SET_CURSOR"));
     arg = getIntFromCapture(&captureData, 2);
     display->setCursor(arg[0], arg[1]);
     break;
   case CIRCLE_HOLLOW:
-    // Serial.println(F("CIRCLE_HOLLOW"));
     arg = getIntFromCapture(&captureData, 3);
     display->drawCircle(arg[0], arg[1], arg[2], currentColor);
     break;
