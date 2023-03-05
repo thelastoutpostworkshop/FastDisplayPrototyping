@@ -320,7 +320,7 @@ void serialDisplay::executeCommand(void)
   int16_t x, y, x1, y1, x2, y2, r;
   uint16_t w, h;
   uint16_t color;
-  int size, *arg;
+  int *arg;
 
   switch (currentMode)
   {
@@ -336,8 +336,8 @@ void serialDisplay::executeCommand(void)
   case TEXT_SIZE:
     // Serial.println(F("TEXT_SIZE"));
     closeCapture(&captureData);
-    size = atoi(captureData.capture[0]);
-    display->setTextSize(size);
+    arg = getIntFromCapture(&captureData, 1);
+    display->setTextSize(arg[0]);
     break;
   case TEXT:
     // Serial.println(F("TEXT"));
@@ -389,12 +389,12 @@ void serialDisplay::executeCommand(void)
   case TRIANGLE_HOLLOW:
     closeCapture(&captureData);
     arg = getIntFromCapture(&captureData, 6);
-    display->drawTriangle(arg[0], arg[1], arg[2],arg[3],arg[4],arg[5], currentColor);
+    display->drawTriangle(arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], currentColor);
     break;
   case TRIANGLE_FILL:
     closeCapture(&captureData);
     arg = getIntFromCapture(&captureData, 6);
-    display->fillTriangle(arg[0], arg[1], arg[2],arg[3],arg[4],arg[5], currentColor);
+    display->fillTriangle(arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], currentColor);
     break;
   default:
     Serial.println(F("Unknown Command"));
