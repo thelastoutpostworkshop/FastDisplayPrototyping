@@ -107,7 +107,7 @@ void serialDisplay::captureInput(Capture *capture, char input)
 void serialDisplay::closeCapture(Capture *capture)
 {
   capture->argIndex = 0;
-  for (int i = 0; i < MAX_ARG_CAPTURE; i++)
+  for (int i = 0; i < capture->maxArg; i++)
   {
     capture->capture[i][capture->index[i]] = 0;
   }
@@ -115,7 +115,7 @@ void serialDisplay::closeCapture(Capture *capture)
 void serialDisplay::openCapture(Capture *capture)
 {
   capture->argIndex = 0;
-  for (int i = 0; i < MAX_ARG_CAPTURE; i++)
+  for (int i = 0; i < capture->maxArg; i++)
   {
     capture->index[i] = 0;
   }
@@ -198,11 +198,13 @@ void serialDisplay::decodeInput(char input)
       currentMode = CLEAR_SCREEN;
       break;
     case 'c':
+      Serial.println(F("input=c"));
     case 't':
     case 's':
+      Serial.println(F("currentmod = COMMAND"));
+      currentMode = COMMAND;
       openCapture(&captureText);
       captureInput(&captureText, input);
-      currentMode = COMMAND;
       break;
     default:
       Serial.print(F("Unknown input="));
@@ -211,6 +213,7 @@ void serialDisplay::decodeInput(char input)
     }
     break;
   case COMMAND:
+    Serial.println(F("COMMAND mode"));
     captureCommand(input);
     break;
   case TEXT_CENTER_VERTICAL:
