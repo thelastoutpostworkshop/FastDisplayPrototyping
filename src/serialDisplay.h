@@ -52,7 +52,7 @@ private:
   void decodeInput(char input);
   void executeCommand(void);
   void captureInput(Capture *, char);
-  void openCapture(Capture *);
+  void openCapture(Capture *,int);
   void closeCapture(Capture *);
   void initCapture(Capture *, byte, byte);
   void nextArgCapture(Capture *);
@@ -115,9 +115,10 @@ void serialDisplay::closeCapture(Capture *capture)
     capture->capture[i][capture->index[i]] = 0;
   }
 }
-void serialDisplay::openCapture(Capture *capture)
+void serialDisplay::openCapture(Capture *capture,int maxArg)
 {
   capture->argIndex = 0;
+  capture->maxArg = maxArg;
   for (int i = 0; i < capture->maxArg; i++)
   {
     capture->index[i] = 0;
@@ -147,43 +148,43 @@ void serialDisplay::captureCommand(char input)
   closeCapture(&captureText);
   if (isCommand("tt"))
   {
-    openCapture(&captureText);
+    openCapture(&captureText,1);
     currentMode = TEXT;
     return;
   }
   if (isCommand("tv"))
   {
-    openCapture(&captureText);
+    openCapture(&captureText,1);
     currentMode = TEXT_CENTER_VERTICAL;
     return;
   }
   if (isCommand("th"))
   {
-    openCapture(&captureText);
+    openCapture(&captureText,1);
     currentMode = TEXT_CENTER_HORIZONTAL;
     return;
   }
   if (isCommand("ts"))
   {
-    openCapture(&captureText);
+    openCapture(&captureText,1);
     currentMode = TEXT_SIZE;
     return;
   }
   if (isCommand("ch"))
   {
-    openCapture(&capture3Arg);
+    openCapture(&capture3Arg,3);
     currentMode = CIRCLE_HOLLOW;
     return;
   }
   if (isCommand("cf"))
   {
-    openCapture(&capture3Arg);
+    openCapture(&capture3Arg,3);
     currentMode = CIRCLE_FILL;
     return;
   }
   if (isCommand("sc"))
   {
-    openCapture(&capture2Arg);
+    openCapture(&capture2Arg,2);
     currentMode = SET_CURSOR;
     return;
   }
@@ -208,7 +209,7 @@ void serialDisplay::decodeInput(char input)
     {
     case '#':
       currentMode = DISPLAY_COLOR;
-      openCapture(&captureColor);
+      openCapture(&captureColor,1);
       break;
     case 'x':
       currentMode = CLEAR_SCREEN;
@@ -217,7 +218,7 @@ void serialDisplay::decodeInput(char input)
     case 't':
     case 's':
       currentMode = COMMAND;
-      openCapture(&captureText);
+      openCapture(&captureText,1);
       captureInput(&captureText, input);
       break;
     default:
