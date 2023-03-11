@@ -39,7 +39,7 @@ void setup() {
   sDisplay.runCommands("#f804;ch20,60,10;#ffe0;cf50,60,10;");
   sDisplay.runCommands("#05ff;gh70,50,90,60,70,70;#ffff;gf100,50,120,60,100,70;");
   sDisplay.runCommands("#fc7c;rh130,50,20,20;#263c;rf160,50,20,20;#efe0;ri10,100,40,40,10;");
-  sDisplay.runCommands("#f9e0;rj60,100,40,40,13;#1f9d;lv2,45,280;");
+  sDisplay.runCommands("#f9e0;rj60,100,40,40,13;#1f9d;lv2,45,280;#07ff;lh2,170,240;");
   // // Clear the screen
   // tft.fillScreen(TFT_BLACK);
 
