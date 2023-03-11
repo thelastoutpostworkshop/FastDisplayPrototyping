@@ -39,6 +39,7 @@ private:
     RECTANGLE_ROUND_FILL,
     LINE_FAST_VERTICAL,
     LINE_FAST_HORIZONTAL,
+    FILL_SCREEN,
     DISPLAY_COLOR,
     CLEAR_SCREEN,
     SET_CURSOR,
@@ -268,6 +269,9 @@ void serialDisplay::decodeInput(char input)
     case 'x':
       currentMode = CLEAR_SCREEN;
       break;
+    case 'y':
+      currentMode = FILL_SCREEN;
+      break;
     case 'l':
     case 'r':
     case 'g':
@@ -410,6 +414,9 @@ void serialDisplay::executeCommand(void)
     break;
   case CLEAR_SCREEN:
     display->fillScreen(COLOR_BLACK);
+    break;
+  case FILL_SCREEN:
+    display->fillScreen(currentColor);
     break;
   case SET_CURSOR:
     arg = getIntFromCapture(&captureData, 2);
