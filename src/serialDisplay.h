@@ -37,6 +37,7 @@ private:
     RECTANGLE_FILL,
     RECTANGLE_ROUND_HOLLOW,
     RECTANGLE_ROUND_FILL,
+    LINE_FAST_VERTICAL,
     DISPLAY_COLOR,
     CLEAR_SCREEN,
     SET_CURSOR,
@@ -228,6 +229,12 @@ void serialDisplay::captureCommand(char input)
     currentMode = SET_CURSOR;
     return;
   }
+  if (isCommand("lv"))
+  {
+    openCapture(&captureData, 3);
+    currentMode = LINE_FAST_VERTICAL;
+    return;
+  }
 }
 boolean serialDisplay::isCommand(char *command)
 {
@@ -254,6 +261,7 @@ void serialDisplay::decodeInput(char input)
     case 'x':
       currentMode = CLEAR_SCREEN;
       break;
+    case 'l':
     case 'r':
     case 'g':
     case 'c':
@@ -290,6 +298,7 @@ void serialDisplay::decodeInput(char input)
       }
     }
     break;
+  case LINE_FAST_VERTICAL:
   case RECTANGLE_ROUND_FILL:
   case RECTANGLE_ROUND_HOLLOW:
   case RECTANGLE_FILL:
@@ -429,6 +438,10 @@ void serialDisplay::executeCommand(void)
   case RECTANGLE_ROUND_FILL:
     arg = getIntFromCapture(&captureData, 5);
     display->fillRoundRect(arg[0], arg[1], arg[2], arg[3], arg[4], currentColor);
+    break;
+  case LINE_FAST_VERTICAL:
+    arg = getIntFromCapture(&captureData, 3);
+    display->drawFastVLine(arg[0], arg[1], arg[2], currentColor);
     break;
   default:
     Serial.println(F("Unknown Command"));
