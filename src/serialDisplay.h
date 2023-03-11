@@ -39,6 +39,7 @@ private:
     RECTANGLE_ROUND_FILL,
     LINE_FAST_VERTICAL,
     LINE_FAST_HORIZONTAL,
+    LINE,
     FILL_SCREEN,
     DISPLAY_COLOR,
     CLEAR_SCREEN,
@@ -243,6 +244,12 @@ void serialDisplay::captureCommand(char input)
     currentMode = LINE_FAST_HORIZONTAL;
     return;
   }
+  if (isCommand("dl"))
+  {
+    openCapture(&captureData, 4);
+    currentMode = LINE;
+    return;
+  }
 }
 boolean serialDisplay::isCommand(char *command)
 {
@@ -272,6 +279,7 @@ void serialDisplay::decodeInput(char input)
     case 'y':
       currentMode = FILL_SCREEN;
       break;
+    case 'd':
     case 'l':
     case 'r':
     case 'g':
@@ -309,6 +317,7 @@ void serialDisplay::decodeInput(char input)
       }
     }
     break;
+  case LINE:
   case LINE_FAST_HORIZONTAL:
   case LINE_FAST_VERTICAL:
   case RECTANGLE_ROUND_FILL:
@@ -461,6 +470,10 @@ void serialDisplay::executeCommand(void)
   case LINE_FAST_HORIZONTAL:
     arg = getIntFromCapture(&captureData, 3);
     display->drawFastHLine(arg[0], arg[1], arg[2], currentColor);
+    break;
+  case LINE:
+    arg = getIntFromCapture(&captureData, 4);
+    display->drawLine(arg[0], arg[1], arg[2],arg[3], currentColor);
     break;
   default:
     Serial.println(F("Unknown Command"));

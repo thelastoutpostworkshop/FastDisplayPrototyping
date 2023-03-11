@@ -40,6 +40,7 @@ void setup() {
   sDisplay.runCommands("#05ff;gh70,50,90,60,70,70;#ffff;gf100,50,120,60,100,70;");
   sDisplay.runCommands("#fc7c;rh130,50,20,20;#263c;rf160,50,20,20;#efe0;ri10,100,40,40,10;");
   sDisplay.runCommands("#f9e0;rj60,100,40,40,13;#1f9d;lv2,45,280;#07ff;lh2,170,240;");
+  sDisplay.runCommands("#ded8;dl2,170,240,320;");
   // // Clear the screen
   // tft.fillScreen(TFT_BLACK);
 
