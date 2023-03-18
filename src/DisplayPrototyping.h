@@ -63,7 +63,7 @@ private:
   void nextArgCapture(Capture *);
   int *getIntFromCapture(Capture *, int);
   void captureCommand(char);
-  boolean isCommand(char *);
+  boolean isCommand(const char *);
 
 public:
   serialDisplay(DISP *d);
@@ -164,104 +164,87 @@ void serialDisplay::captureCommand(char input)
 {
   captureInput(&captureData, input);
   closeCapture(&captureData);
-  if (isCommand("tt"))
-  {
-    openCapture(&captureData, 1);
-    currentMode = TEXT;
-    return;
-  }
-  if (isCommand("tv"))
-  {
-    openCapture(&captureData, 1);
-    currentMode = TEXT_CENTER_VERTICAL;
-    return;
-  }
-  if (isCommand("th"))
-  {
-    openCapture(&captureData, 1);
-    currentMode = TEXT_CENTER_HORIZONTAL;
-    return;
-  }
-  if (isCommand("ts"))
-  {
-    openCapture(&captureData, 1);
-    currentMode = TEXT_SIZE;
-    return;
-  }
-  if (isCommand("ch"))
-  {
-    openCapture(&captureData, 3);
-    currentMode = CIRCLE_HOLLOW;
-    return;
-  }
-  if (isCommand("cf"))
-  {
-    openCapture(&captureData, 3);
-    currentMode = CIRCLE_FILL;
-    return;
-  }
-  if (isCommand("gh"))
-  {
-    openCapture(&captureData, 6);
-    currentMode = TRIANGLE_HOLLOW;
-    return;
-  }
-  if (isCommand("gf"))
-  {
-    openCapture(&captureData, 6);
-    currentMode = TRIANGLE_FILL;
-    return;
-  }
-  if (isCommand("rh"))
-  {
-    openCapture(&captureData, 4);
-    currentMode = RECTANGLE_HOLLOW;
-    return;
-  }
-  if (isCommand("rf"))
-  {
-    openCapture(&captureData, 4);
-    currentMode = RECTANGLE_FILL;
-    return;
-  }
-  if (isCommand("ri"))
-  {
-    openCapture(&captureData, 5);
-    currentMode = RECTANGLE_ROUND_HOLLOW;
-    return;
-  }
-  if (isCommand("rj"))
-  {
-    openCapture(&captureData, 5);
-    currentMode = RECTANGLE_ROUND_FILL;
-    return;
-  }
-  if (isCommand("sc"))
-  {
-    openCapture(&captureData, 2);
-    currentMode = SET_CURSOR;
-    return;
-  }
-  if (isCommand("lv"))
-  {
-    openCapture(&captureData, 3);
-    currentMode = LINE_FAST_VERTICAL;
-    return;
-  }
-  if (isCommand("lh"))
-  {
-    openCapture(&captureData, 3);
-    currentMode = LINE_FAST_HORIZONTAL;
-    return;
-  }
-  if (isCommand("dl"))
-  {
-    openCapture(&captureData, 4);
-    currentMode = LINE;
-    return;
+  
+  const char* commands[] = {"tt", "tv", "th", "ts", "ch", "cf", "gh", "gf", "rh", "rf", "ri", "rj", "sc", "lv", "lh", "dl"};
+  const int numCommands = sizeof(commands)/sizeof(*commands);
+
+  for (int i = 0; i < numCommands; i++) {
+    if (isCommand(commands[i])) {
+      switch(i) {
+        case 0:
+          currentMode = TEXT;
+          openCapture(&captureData, 1);
+          break;
+        case 1:
+          currentMode = TEXT_CENTER_VERTICAL;
+          openCapture(&captureData, 1);
+          break;
+        case 2:
+          currentMode = TEXT_CENTER_HORIZONTAL;
+          openCapture(&captureData, 1);
+          break;
+        case 3:
+          currentMode = TEXT_SIZE;
+          openCapture(&captureData, 1);
+          break;
+        case 4:
+          currentMode = CIRCLE_HOLLOW;
+          openCapture(&captureData, 3);
+          break;
+        case 5:
+          currentMode = CIRCLE_FILL;
+          openCapture(&captureData, 3);
+          break;
+        case 6:
+          currentMode = TRIANGLE_HOLLOW;
+          openCapture(&captureData, 6);
+          break;
+        case 7:
+          currentMode = TRIANGLE_FILL;
+          openCapture(&captureData, 6);
+          break;
+        case 8:
+          currentMode = RECTANGLE_HOLLOW;
+          openCapture(&captureData, 4);
+          break;
+        case 9:
+          currentMode = RECTANGLE_FILL;
+          openCapture(&captureData, 4);
+          break;
+        case 10:
+          currentMode = RECTANGLE_ROUND_HOLLOW;
+          openCapture(&captureData, 5);
+          break;
+        case 11:
+          currentMode = RECTANGLE_ROUND_FILL;
+          openCapture(&captureData, 5);
+          break;
+        case 12:
+          currentMode = SET_CURSOR;
+          openCapture(&captureData, 2);
+          break;
+        case 13:
+          currentMode = LINE_FAST_VERTICAL;
+          openCapture(&captureData, 3);
+          break;
+        case 14:
+          currentMode = LINE_FAST_HORIZONTAL;
+          openCapture(&captureData, 3);
+          break;
+        case 15:
+          currentMode = LINE;
+          openCapture(&captureData, 4);
+          break;
+        default:
+          Serial.println(F("Unknown Command"));
+          break;
+      }
+      return;
+    }
   }
 }
-boolean serialDisplay::isCommand(char *command)
+
+boolean serialDisplay::isCommand(const char *command)
 {
   return strcmp(captureData.capture[0], command) == 0;
 }
