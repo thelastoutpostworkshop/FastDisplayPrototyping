@@ -70,6 +70,7 @@ public:
   ~serialDisplay();
   void readCommandsFromSerial(void);
   void runCommands(char *);
+  void runCommands(const __FlashStringHelper *ifsh);
 };
 
 serialDisplay::serialDisplay(DISP *d)
@@ -95,6 +96,15 @@ void serialDisplay::runCommands(char *commands)
   for (int i = 0; i < strlen(commands); i++)
   {
     decodeInput(*(commands + i));
+  }
+}
+void serialDisplay::runCommands(const __FlashStringHelper *ifsh)
+{
+  PGM_P p = reinterpret_cast<PGM_P>(ifsh);
+  while (1) {
+    unsigned char c = pgm_read_byte(p++);
+    if (c == 0) break;
+    decodeInput(c);
   }
 }
 

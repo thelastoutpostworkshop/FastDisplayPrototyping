@@ -33,14 +33,14 @@ void setup() {
   // tft.setFreeFont(LABEL2_FONT);
 
   //Buffer Limit from the Serial Monitor is 64 bytes
-  sDisplay.runCommands("x;ts2;sc10,10;#17e0;thDisplay Prototyping;");
-  sDisplay.runCommands("sc10,30;ts1;thLibrary v1.0;");
-  sDisplay.runCommands("sc10,10;tvVertical Center;sc10,80;ttNormal text;");
-  sDisplay.runCommands("#f804;ch20,60,10;#ffe0;cf50,60,10;");
-  sDisplay.runCommands("#05ff;gh70,50,90,60,70,70;#ffff;gf100,50,120,60,100,70;");
-  sDisplay.runCommands("#fc7c;rh130,50,20,20;#263c;rf160,50,20,20;#efe0;ri10,100,40,40,10;");
-  sDisplay.runCommands("#f9e0;rj60,100,40,40,13;#1f9d;lv2,45,280;#07ff;lh2,170,240;");
-  sDisplay.runCommands("#ded8;dl2,170,240,320;");
+  sDisplay.runCommands(F("x;ts2;sc10,10;#17e0;thDisplay Prototyping;"));
+  sDisplay.runCommands(F("sc10,30;ts1;thLibrary v1.0;"));
+  sDisplay.runCommands(F("sc10,10;tvVertical Center;sc10,80;ttNormal text;"));
+  sDisplay.runCommands(F("#f804;ch20,60,10;#ffe0;cf50,60,10;"));
+  sDisplay.runCommands(F("#05ff;gh70,50,90,60,70,70;#ffff;gf100,50,120,60,100,70;"));
+  sDisplay.runCommands(F("#fc7c;rh130,50,20,20;#263c;rf160,50,20,20;#efe0;ri10,100,40,40,10;"));
+  sDisplay.runCommands(F("#f9e0;rj60,100,40,40,13;#1f9d;lv2,45,280;#07ff;lh2,170,240;"));
+  sDisplay.runCommands(F("#ded8;dl2,170,240,320;"));
   // // Clear the screen
   // tft.fillScreen(TFT_BLACK);
 
