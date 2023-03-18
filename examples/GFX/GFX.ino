@@ -1,7 +1,7 @@
 
 #include <Adafruit_TFTLCD.h> // Hardware-specific library
 #include <Adafruit_GFX.h>    // Core graphics library
-#include "serialDisplay.h"
+#include <DisplayPrototyping.h>
 
 // TFT_eSPI tft = TFT_eSPI(); // Invoke custom library
 
