@@ -44,7 +44,8 @@ private:
     DISPLAY_COLOR,
     CLEAR_SCREEN,
     SET_CURSOR,
-    VERTICAL_LINE
+    VERTICAL_LINE,
+    ROTATE
   };
 
   DISP *display;
@@ -165,7 +166,7 @@ void serialDisplay::captureCommand(char input)
   captureInput(&captureData, input);
   closeCapture(&captureData);
   
-  const char* commands[] = {"tt", "tv", "th", "ts", "ch", "cf", "gh", "gf", "rh", "rf", "ri", "rj", "sc", "lv", "lh", "dl"};
+  const char* commands[] = {"tt", "tv", "th", "ts", "ch", "cf", "gh", "gf", "rh", "rf", "ri", "rj", "sc", "lv", "lh", "dl","ro"};
   const int numCommands = sizeof(commands)/sizeof(*commands);
 
   for (int i = 0; i < numCommands; i++) {
@@ -234,6 +235,10 @@ void serialDisplay::captureCommand(char input)
         case 15:
           currentMode = LINE;
           openCapture(&captureData, 4);
+          break;
+        case 16:
+          currentMode = ROTATE;
+          openCapture(&captureData, 1);
           break;
         default:
           Serial.println(F("Unknown Command"));
@@ -321,6 +326,7 @@ void serialDisplay::decodeInput(char input)
   case TRIANGLE_HOLLOW:
   case CIRCLE_FILL:
   case CIRCLE_HOLLOW:
+  case ROTATE:
     if (input == ',')
     {
       nextArgCapture(&captureData);
@@ -467,6 +473,10 @@ void serialDisplay::executeCommand(void)
   case LINE:
     arg = getIntFromCapture(&captureData, 4);
     display->drawLine(arg[0], arg[1], arg[2],arg[3], currentColor);
+    break;
+  case ROTATE:
+    arg = getIntFromCapture(&captureData, 1);
+    display->setRotation(arg[0]);
     break;
   default:
     Serial.println(F("Unknown Command"));
