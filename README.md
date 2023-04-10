@@ -6,7 +6,7 @@
 ### Display supported
 All display supported by Adafruit GFX and TFT eSPI libraries
 
-## Table of Contents
+## Contents
 1. [Installation](#installation)
 
 ### Installation
