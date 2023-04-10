@@ -481,7 +481,8 @@ void serialDisplay::executeCommand(void)
 #if defined(_ADAFRUIT_TFTLCD_H_)
     y = display->getCursorY();
     display->getTextBounds(captureData.capture[0], &x, &y, &x1, &y1, &w, &h);
-    display->setCursor((displayWidth - w) / 2, y);
+    x = (displayWidth - w) / 2;
+    display->setCursor(x, y);
 #endif // _ADAFRUIT_TFTLCD_H_
 #if defined(_TFT_eSPIH_)
     w = display->textWidth(captureData.capture[0]);
@@ -490,12 +491,15 @@ void serialDisplay::executeCommand(void)
     display->setCursor(x, y);
 #endif // _TFT_eSPIH_
     display->print(captureData.capture[0]);
+    serialPrintFormatted(PSTR("%s.setCursor(%d,%d);"), displayName, x, y);
+    serialPrintFormatted(PSTR("%s.print(\"%s\");"), displayName, captureData.capture[0]);
     break;
   case TEXT_CENTER_VERTICAL:
 #if defined(_ADAFRUIT_TFTLCD_H_)
     x = display->getCursorX();
     display->getTextBounds(captureData.capture[0], &x, &y, &x1, &y1, &w, &h);
-    display->setCursor(x, (displayHeight - h) / 2);
+    y =  (displayHeight - h) / 2;
+    display->setCursor(x,y);
 #endif // _ADAFRUIT_TFTLCD_H_
 #if defined(_TFT_eSPIH_)
     h = display->fontHeight();
@@ -504,7 +508,8 @@ void serialDisplay::executeCommand(void)
     display->setCursor(x, y);
 #endif // _TFT_eSPIH_
     display->print(captureData.capture[0]);
-
+    serialPrintFormatted(PSTR("%s.setCursor(%d,%d);"), displayName, x, y);
+    serialPrintFormatted(PSTR("%s.print(\"%s\");"), displayName, captureData.capture[0]);
     break;
   case CLEAR_SCREEN:
     display->fillScreen(COLOR_BLACK);

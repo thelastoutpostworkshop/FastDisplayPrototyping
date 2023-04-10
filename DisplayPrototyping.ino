@@ -1,31 +1,14 @@
 
-#include <Adafruit_TFTLCD.h> // Hardware-specific library
-#include <Adafruit_GFX.h>    // Core graphics library
+#include <TFT_eSPI.h>
 #include "src/DisplayPrototyping.h""
 
-// TFT_eSPI tft = TFT_eSPI(); // Invoke custom library
-
-// The control pins for the LCD can be assigned to any digital or
-// analog pins...but we'll use the analog pins as this allows us to
-// double up the pins with the touch screen (see the TFT paint example).
-#define LCD_CS A3    // Chip Select goes to Analog 3
-#define LCD_CD A2    // Command/Data goes to Analog 2
-#define LCD_WR A1    // LCD Write goes to Analog 1
-#define LCD_RD A0    // LCD Read goes to Analog 0
-#define LCD_RESET A4 // Can alternately just connect to Arduino's reset pin
-Adafruit_TFTLCD tft(LCD_CS, LCD_CD, LCD_WR, LCD_RD, LCD_RESET);
-
-// Using two fonts since numbers are nice when bold
-// #define LABEL1_FONT &FreeSansOblique12pt7b // Key label font 1
-// #define LABEL2_FONT &FreeSansBold12pt7b    // Key label font 2
-
-
+TFT_eSPI tft = TFT_eSPI(); // Invoke custom library
 serialDisplay sDisplay(&tft);
 
 //------------------------------------------------------------------------------------------
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
 
   tft.begin();
   tft.setRotation(0);
@@ -33,7 +16,7 @@ void setup() {
   // tft.setFreeFont(LABEL2_FONT);
 
   //Buffer Limit from the Serial Monitor is 64 bytes
-  sDisplay.runCommands(F("x;ts2;sc10,10;#17e0;thDisplay Prototyping;"));
+  sDisplay.runCommands(F("x;ts1;sc10,10;#17e0;thDisplay Prototyping;"));
   sDisplay.runCommands(F("sc10,30;ts1;thLibrary v1.0;"));
   sDisplay.runCommands(F("sc10,10;tvVertical Center;sc10,80;ttNormal text;"));
   sDisplay.runCommands(F("#f804;ch20,60,10;#ffe0;cf50,60,10;"));
