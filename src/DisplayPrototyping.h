@@ -1,11 +1,15 @@
-
 #if defined(_ADAFRUIT_TFTLCD_H_)
 
 #define DISP Adafruit_TFTLCD
 
 #endif // _ADAFRUIT_TFTLCD_H_
 
-// #include <TFT_eSPI.h>  // Hardware-specific library
+#if defined(_TFT_eSPIH_)
+
+#define DISP TFT_eSPI
+
+#endif // _TFT_eSPIH_
+
 #define MAX_DATA_CAPTURE 30
 #define MAX_ARG_CAPTURE 6
 #define COLOR_BLACK 0x0000
@@ -55,6 +59,10 @@ private:
   int displayWidth;
   int displayHeight;
   unsigned long lastSerialRead;
+  char serialBuffer[255];
+  const char *displayName;
+
+  const char *displaySizeKeywords = "WwHh";
 
   void decodeInput(char input);
   void executeCommand(void);
@@ -65,25 +73,33 @@ private:
   int *getIntFromCapture(Capture *, int);
   void captureCommand(char);
   boolean isCommand(const char *);
+  void serialPrintFormatted(const char *formatStr, ...);
+  bool containsOnlyDigits(const char *);
 
 public:
-  serialDisplay(DISP *d);
+  serialDisplay(DISP *d, const char *dName = nullptr);
   ~serialDisplay();
   void readCommandsFromSerial(void);
   void runCommands(char *);
   void runCommands(const __FlashStringHelper *ifsh);
 };
 
-serialDisplay::serialDisplay(DISP *d)
+serialDisplay::serialDisplay(DISP *d, const char *dName)
 {
+  if (dName != nullptr)
+  {
+    displayName = dName;
+  }
+  else
+  {
+    displayName = "tft";
+  }
+
   currentMode = UNDEFINED;
   display = d;
-#if defined(_ADAFRUIT_TFTLCD_H_)
 
   displayWidth = d->width();
   displayHeight = d->height();
-
-#endif //
 
   lastSerialRead = millis();
 }
@@ -102,11 +118,25 @@ void serialDisplay::runCommands(char *commands)
 void serialDisplay::runCommands(const __FlashStringHelper *ifsh)
 {
   PGM_P p = reinterpret_cast<PGM_P>(ifsh);
-  while (1) {
+  while (1)
+  {
     unsigned char c = pgm_read_byte(p++);
-    if (c == 0) break;
+    if (c == 0)
+      break;
     decodeInput(c);
   }
+}
+
+bool serialDisplay::containsOnlyDigits(const char *str)
+{
+  for (int i = 0; str[i] != '\0'; i++)
+  {
+    if (!isdigit(str[i]))
+    {
+      return false;
+    }
+  }
+  return true;
 }
 
 int *serialDisplay::getIntFromCapture(Capture *capture, int count)
@@ -114,7 +144,35 @@ int *serialDisplay::getIntFromCapture(Capture *capture, int count)
   static int res[MAX_ARG_CAPTURE];
   for (int i = 0; i < count && i < MAX_ARG_CAPTURE; i++)
   {
-    res[i] = atoi(capture->capture[i]);
+    if (containsOnlyDigits(capture->capture[i]))
+    {
+      res[i] = atoi(capture->capture[i]);
+    }
+    else
+    {
+      if (strchr(displaySizeKeywords, capture->capture[i][0]))
+      {
+        switch (capture->capture[i][0])
+        {
+        case 'W':
+        case 'w':
+          /* code */
+          res[i] = displayWidth;
+          break;
+        case 'H':
+        case 'h':
+          res[i] = displayHeight;
+          break;
+        default:
+          res[i] = 0;
+          break;
+        }
+      }
+      else
+      {
+        res[i] = 0;
+      }
+    }
   }
   return res;
 }
@@ -165,84 +223,87 @@ void serialDisplay::captureCommand(char input)
 {
   captureInput(&captureData, input);
   closeCapture(&captureData);
-  
-  const char* commands[] = {"tt", "tv", "th", "ts", "ch", "cf", "gh", "gf", "rh", "rf", "ri", "rj", "sc", "lv", "lh", "dl","ro"};
-  const int numCommands = sizeof(commands)/sizeof(*commands);
 
-  for (int i = 0; i < numCommands; i++) {
-    if (isCommand(commands[i])) {
-      switch(i) {
-        case 0:
-          currentMode = TEXT;
-          openCapture(&captureData, 1);
-          break;
-        case 1:
-          currentMode = TEXT_CENTER_VERTICAL;
-          openCapture(&captureData, 1);
-          break;
-        case 2:
-          currentMode = TEXT_CENTER_HORIZONTAL;
-          openCapture(&captureData, 1);
-          break;
-        case 3:
-          currentMode = TEXT_SIZE;
-          openCapture(&captureData, 1);
-          break;
-        case 4:
-          currentMode = CIRCLE_HOLLOW;
-          openCapture(&captureData, 3);
-          break;
-        case 5:
-          currentMode = CIRCLE_FILL;
-          openCapture(&captureData, 3);
-          break;
-        case 6:
-          currentMode = TRIANGLE_HOLLOW;
-          openCapture(&captureData, 6);
-          break;
-        case 7:
-          currentMode = TRIANGLE_FILL;
-          openCapture(&captureData, 6);
-          break;
-        case 8:
-          currentMode = RECTANGLE_HOLLOW;
-          openCapture(&captureData, 4);
-          break;
-        case 9:
-          currentMode = RECTANGLE_FILL;
-          openCapture(&captureData, 4);
-          break;
-        case 10:
-          currentMode = RECTANGLE_ROUND_HOLLOW;
-          openCapture(&captureData, 5);
-          break;
-        case 11:
-          currentMode = RECTANGLE_ROUND_FILL;
-          openCapture(&captureData, 5);
-          break;
-        case 12:
-          currentMode = SET_CURSOR;
-          openCapture(&captureData, 2);
-          break;
-        case 13:
-          currentMode = LINE_FAST_VERTICAL;
-          openCapture(&captureData, 3);
-          break;
-        case 14:
-          currentMode = LINE_FAST_HORIZONTAL;
-          openCapture(&captureData, 3);
-          break;
-        case 15:
-          currentMode = LINE;
-          openCapture(&captureData, 4);
-          break;
-        case 16:
-          currentMode = ROTATE;
-          openCapture(&captureData, 1);
-          break;
-        default:
-          Serial.println(F("Unknown Command"));
-          break;
+  const char *commands[] = {"tt", "tv", "th", "ts", "ch", "cf", "gh", "gf", "rh", "rf", "ri", "rj", "sc", "lv", "lh", "dl", "ro"};
+  const int numCommands = sizeof(commands) / sizeof(*commands);
+
+  for (int i = 0; i < numCommands; i++)
+  {
+    if (isCommand(commands[i]))
+    {
+      switch (i)
+      {
+      case 0:
+        currentMode = TEXT;
+        openCapture(&captureData, 1);
+        break;
+      case 1:
+        currentMode = TEXT_CENTER_VERTICAL;
+        openCapture(&captureData, 1);
+        break;
+      case 2:
+        currentMode = TEXT_CENTER_HORIZONTAL;
+        openCapture(&captureData, 1);
+        break;
+      case 3:
+        currentMode = TEXT_SIZE;
+        openCapture(&captureData, 1);
+        break;
+      case 4:
+        currentMode = CIRCLE_HOLLOW;
+        openCapture(&captureData, 3);
+        break;
+      case 5:
+        currentMode = CIRCLE_FILL;
+        openCapture(&captureData, 3);
+        break;
+      case 6:
+        currentMode = TRIANGLE_HOLLOW;
+        openCapture(&captureData, 6);
+        break;
+      case 7:
+        currentMode = TRIANGLE_FILL;
+        openCapture(&captureData, 6);
+        break;
+      case 8:
+        currentMode = RECTANGLE_HOLLOW;
+        openCapture(&captureData, 4);
+        break;
+      case 9:
+        currentMode = RECTANGLE_FILL;
+        openCapture(&captureData, 4);
+        break;
+      case 10:
+        currentMode = RECTANGLE_ROUND_HOLLOW;
+        openCapture(&captureData, 5);
+        break;
+      case 11:
+        currentMode = RECTANGLE_ROUND_FILL;
+        openCapture(&captureData, 5);
+        break;
+      case 12:
+        currentMode = SET_CURSOR;
+        openCapture(&captureData, 2);
+        break;
+      case 13:
+        currentMode = LINE_FAST_VERTICAL;
+        openCapture(&captureData, 3);
+        break;
+      case 14:
+        currentMode = LINE_FAST_HORIZONTAL;
+        openCapture(&captureData, 3);
+        break;
+      case 15:
+        currentMode = LINE;
+        openCapture(&captureData, 4);
+        break;
+      case 16:
+        currentMode = ROTATE;
+        openCapture(&captureData, 1);
+        break;
+      default:
+        Serial.println(F("Unknown Command"));
+        break;
       }
       return;
     }
@@ -309,7 +370,7 @@ void serialDisplay::decodeInput(char input)
     }
     else
     {
-      if (input >= '0' && input <= '9')
+      if (isdigit(input))
       {
         captureInput(&captureData, input);
       }
@@ -333,20 +394,20 @@ void serialDisplay::decodeInput(char input)
     }
     else
     {
-      if (input >= '0' && input <= '9')
+      if (isdigit(input) || strchr(displaySizeKeywords, input))
       {
         captureInput(&captureData, input);
       }
     }
     break;
   case DISPLAY_COLOR:
-    if ((input >= '0' && input <= '9') || (input >= 'a' && input <= 'f') || (input >= 'A' && input <= 'F'))
+    if (isdigit(input) || (input >= 'a' && input <= 'f') || (input >= 'A' && input <= 'F'))
     {
       captureInput(&captureData, input);
     }
     break;
   case TEXT_SIZE:
-    if ((input >= '0' && input <= '9'))
+    if (isdigit(input))
     {
       captureInput(&captureData, input);
     }
@@ -377,6 +438,15 @@ void serialDisplay::readCommandsFromSerial(void)
   delay(10);
 }
 
+void serialDisplay::serialPrintFormatted(const char *formatStr, ...)
+{
+  va_list args;
+  va_start(args, formatStr);
+  vsnprintf_P(serialBuffer, sizeof(serialBuffer), formatStr, args);
+  va_end(args);
+  Serial.println(serialBuffer);
+}
+
 void serialDisplay::executeCommand(void)
 {
   int16_t x, y, x1, y1;
@@ -389,19 +459,23 @@ void serialDisplay::executeCommand(void)
   }
 
   closeCapture(&captureData);
+  const char *formatStr = nullptr;
+
   switch (currentMode)
   {
   case DISPLAY_COLOR:
     currentColor = strtol(captureData.capture[0], NULL, 16);
-    ;
     display->setTextColor(currentColor);
+    serialPrintFormatted(PSTR("%s.setTextColor(0x%x);"), displayName, currentColor);
     break;
   case TEXT_SIZE:
     arg = getIntFromCapture(&captureData, 1);
     display->setTextSize(arg[0]);
+    serialPrintFormatted(PSTR("%s.setTextSize(%d);"), displayName, arg[0]);
     break;
   case TEXT:
     display->print(captureData.capture[0]);
+    serialPrintFormatted(PSTR("%s.print(%s);"), displayName, captureData.capture[0]);
     break;
   case TEXT_CENTER_HORIZONTAL:
 #if defined(_ADAFRUIT_TFTLCD_H_)
@@ -409,6 +483,12 @@ void serialDisplay::executeCommand(void)
     display->getTextBounds(captureData.capture[0], &x, &y, &x1, &y1, &w, &h);
     display->setCursor((displayWidth - w) / 2, y);
 #endif // _ADAFRUIT_TFTLCD_H_
+#if defined(_TFT_eSPIH_)
+    w = display->textWidth(captureData.capture[0]);
+    x = (displayWidth - w) / 2;
+    y = display->getCursorY();
+    display->setCursor(x, y);
+#endif // _TFT_eSPIH_
     display->print(captureData.capture[0]);
     break;
   case TEXT_CENTER_VERTICAL:
@@ -417,66 +497,87 @@ void serialDisplay::executeCommand(void)
     display->getTextBounds(captureData.capture[0], &x, &y, &x1, &y1, &w, &h);
     display->setCursor(x, (displayHeight - h) / 2);
 #endif // _ADAFRUIT_TFTLCD_H_
+#if defined(_TFT_eSPIH_)
+    h = display->fontHeight();
+    y = (displayHeight - h) / 2;
+    x = display->getCursorX();
+    display->setCursor(x, y);
+#endif // _TFT_eSPIH_
     display->print(captureData.capture[0]);
 
     break;
   case CLEAR_SCREEN:
     display->fillScreen(COLOR_BLACK);
+    serialPrintFormatted(PSTR("%s.fillScreen(0x%x);"), displayName, COLOR_BLACK);
     break;
   case FILL_SCREEN:
     display->fillScreen(currentColor);
+    serialPrintFormatted(PSTR("%s.fillScreen(0x%x);"), displayName, currentColor);
     break;
   case SET_CURSOR:
     arg = getIntFromCapture(&captureData, 2);
     display->setCursor(arg[0], arg[1]);
+    serialPrintFormatted(PSTR("%s.setCursor(%d,%d);"), displayName, arg[0], arg[1]);
     break;
   case CIRCLE_HOLLOW:
     arg = getIntFromCapture(&captureData, 3);
     display->drawCircle(arg[0], arg[1], arg[2], currentColor);
+    serialPrintFormatted(PSTR("%s.drawCircle(%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], currentColor);
     break;
   case CIRCLE_FILL:
     arg = getIntFromCapture(&captureData, 3);
     display->fillCircle(arg[0], arg[1], arg[2], currentColor);
+    serialPrintFormatted(PSTR("%s.fillCircle(%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], currentColor);
     break;
   case TRIANGLE_HOLLOW:
     arg = getIntFromCapture(&captureData, 6);
     display->drawTriangle(arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], currentColor);
+    serialPrintFormatted(PSTR("%s.drawTriangle(%d,%d,%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], currentColor);
     break;
   case TRIANGLE_FILL:
     arg = getIntFromCapture(&captureData, 6);
     display->fillTriangle(arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], currentColor);
+    serialPrintFormatted(PSTR("%s.fillTriangle(%d,%d,%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], currentColor);
     break;
   case RECTANGLE_HOLLOW:
     arg = getIntFromCapture(&captureData, 4);
     display->drawRect(arg[0], arg[1], arg[2], arg[3], currentColor);
+    serialPrintFormatted(PSTR("%s.drawRect(%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], currentColor);
     break;
   case RECTANGLE_FILL:
     arg = getIntFromCapture(&captureData, 4);
     display->fillRect(arg[0], arg[1], arg[2], arg[3], currentColor);
+    serialPrintFormatted(PSTR("%s.fillRect(%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], currentColor);
     break;
   case RECTANGLE_ROUND_HOLLOW:
     arg = getIntFromCapture(&captureData, 5);
     display->drawRoundRect(arg[0], arg[1], arg[2], arg[3], arg[4], currentColor);
+    serialPrintFormatted(PSTR("%s.drawRoundRect(%d,%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], currentColor);
     break;
   case RECTANGLE_ROUND_FILL:
     arg = getIntFromCapture(&captureData, 5);
     display->fillRoundRect(arg[0], arg[1], arg[2], arg[3], arg[4], currentColor);
+    serialPrintFormatted(PSTR("%s.fillRoundRect(%d,%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], currentColor);
     break;
   case LINE_FAST_VERTICAL:
     arg = getIntFromCapture(&captureData, 3);
     display->drawFastVLine(arg[0], arg[1], arg[2], currentColor);
+    serialPrintFormatted(PSTR("%s.drawFastVLine(%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], currentColor);
     break;
   case LINE_FAST_HORIZONTAL:
     arg = getIntFromCapture(&captureData, 3);
     display->drawFastHLine(arg[0], arg[1], arg[2], currentColor);
+    serialPrintFormatted(PSTR("%s.drawFastHLine(%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], currentColor);
     break;
   case LINE:
     arg = getIntFromCapture(&captureData, 4);
-    display->drawLine(arg[0], arg[1], arg[2],arg[3], currentColor);
+    display->drawLine(arg[0], arg[1], arg[2], arg[3], currentColor);
+    serialPrintFormatted(PSTR("%s.drawLine(%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], currentColor);
     break;
   case ROTATE:
     arg = getIntFromCapture(&captureData, 1);
     display->setRotation(arg[0]);
+    serialPrintFormatted(PSTR("%s.setRotation(%d);"), displayName, arg[0]);
     break;
   default:
     Serial.println(F("Unknown Command"));
