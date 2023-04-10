@@ -21,14 +21,17 @@ Adafruit_TFTLCD tft(LCD_CS, LCD_CD, LCD_WR, LCD_RD, LCD_RESET);
 serialDisplay sDisplay(&tft);
 
 void setup() {
-  Serial.begin(9600); // Mandatory for using the display prototyping library
+  Serial.begin(9600); // This line mandatory for using the display prototyping library
+
   tft.begin();
   tft.setRotation(0);
+
   // Your specific code here
 }
 
 void loop(void) {
-  sDisplay.readCommandsFromSerial(); // Mandatory for using the display prototyping library
+  sDisplay.readCommandsFromSerial(); // This line mandatory for using the display prototyping library
+  
   // Your specific code here
 }
 ```
