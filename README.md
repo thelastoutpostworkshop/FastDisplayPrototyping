@@ -1,4 +1,7 @@
-# Display Prototyping for Adafruit GFX or TFT eSPI 
+# Display Prototyping for Adafruit GFX and TFT eSPI 
+
+## Display supported
+All display supported by Adafruit GFX and TFT eSPI libraries
 
 ### Commands
 
