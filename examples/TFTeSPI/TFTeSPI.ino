@@ -5,6 +5,9 @@
 // Follow your display driver documentation
 TFT_eSPI tft = TFT_eSPI(); 
 
+// Initialize the display prototyping library
+serialDisplay sDisplay(&tft);
+
 void setup() {
   Serial.begin(9600); // This line mandatory for using the display prototyping library
 
