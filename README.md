@@ -18,6 +18,6 @@
 | **lv**[x,y,length] | Draw a vertical line | **lv**50,50,20 | ✓ | ✓ |
 | **lh**[x,y,length] | Draw a horizontal line | **lh**50,50,20 | ✓ | ✓ |
 | **dl**[x1,y1,x2,y2] | draw a line between 2 points | **dl**10,10,50,50 | ✓ | ✓ |
-| **ro**[number] | Set Rotation (0-3 or 4-7 for BMP drawing) | **ro**1 | ✓ | ✗ |
+| **ro**[number] | Set rotation setting for display (0-3 or 4-7 for BMP drawing) | **ro**1 | ✓ | ✗ |
 
 
