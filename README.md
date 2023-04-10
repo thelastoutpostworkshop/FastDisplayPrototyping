@@ -63,7 +63,7 @@ void loop(void) {
 }
 ```
 
-## Commands
+## Serial Commands
 
 | Command | Description | Usage | Adafruit GFX | TFT_eSPI |
 |---------|-------------|-------|--------------|------|
