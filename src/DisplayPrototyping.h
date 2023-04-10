@@ -448,15 +448,6 @@ void serialDisplay::readCommandsFromSerial(void)
   delay(10);
 }
 
-void serialDisplay::serialPrintFormatted(const char *formatStr, ...)
-{
-  va_list args;
-  va_start(args, formatStr);
-  vsnprintf_P(serialBuffer, sizeof(serialBuffer), formatStr, args);
-  va_end(args);
-  Serial.println(serialBuffer);
-}
-
 void serialDisplay::executeCommand(void)
 {
   int16_t x, y, x1, y1;
