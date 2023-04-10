@@ -15,6 +15,15 @@
 #define COLOR_BLACK 0x0000
 #define DEBOUNCE_READ_SERIAL 300
 
+inline void serialPrintFormattedMacro(const char *fmt, ...) {
+  #ifdef OUTPUT_CODE_ON_SERIAL
+    va_list args;
+    va_start(args, fmt);
+    serialPrintFormatted(fmt, args);
+    va_end(args);
+  #endif
+}
+
 class serialDisplay
 {
 private:
@@ -466,16 +475,16 @@ void serialDisplay::executeCommand(void)
   case DISPLAY_COLOR:
     currentColor = strtol(captureData.capture[0], NULL, 16);
     display->setTextColor(currentColor);
-    serialPrintFormatted(PSTR("%s.setTextColor(0x%x);"), displayName, currentColor);
+    serialPrintFormattedMacro(PSTR("%s.setTextColor(0x%x);"), displayName, currentColor);
     break;
   case TEXT_SIZE:
     arg = getIntFromCapture(&captureData, 1);
     display->setTextSize(arg[0]);
-    serialPrintFormatted(PSTR("%s.setTextSize(%d);"), displayName, arg[0]);
+    serialPrintFormattedMacro(PSTR("%s.setTextSize(%d);"), displayName, arg[0]);
     break;
   case TEXT:
     display->print(captureData.capture[0]);
-    serialPrintFormatted(PSTR("%s.print(%s);"), displayName, captureData.capture[0]);
+    serialPrintFormattedMacro(PSTR("%s.print(%s);"), displayName, captureData.capture[0]);
     break;
   case TEXT_CENTER_HORIZONTAL:
 #if defined(_ADAFRUIT_TFTLCD_H_)
@@ -491,15 +500,15 @@ void serialDisplay::executeCommand(void)
     display->setCursor(x, y);
 #endif // _TFT_eSPIH_
     display->print(captureData.capture[0]);
-    serialPrintFormatted(PSTR("%s.setCursor(%d,%d);"), displayName, x, y);
-    serialPrintFormatted(PSTR("%s.print(\"%s\");"), displayName, captureData.capture[0]);
+    serialPrintFormattedMacro(PSTR("%s.setCursor(%d,%d);"), displayName, x, y);
+    serialPrintFormattedMacro(PSTR("%s.print(\"%s\");"), displayName, captureData.capture[0]);
     break;
   case TEXT_CENTER_VERTICAL:
 #if defined(_ADAFRUIT_TFTLCD_H_)
     x = display->getCursorX();
     display->getTextBounds(captureData.capture[0], &x, &y, &x1, &y1, &w, &h);
-    y =  (displayHeight - h) / 2;
-    display->setCursor(x,y);
+    y = (displayHeight - h) / 2;
+    display->setCursor(x, y);
 #endif // _ADAFRUIT_TFTLCD_H_
 #if defined(_TFT_eSPIH_)
     h = display->fontHeight();
@@ -508,81 +517,81 @@ void serialDisplay::executeCommand(void)
     display->setCursor(x, y);
 #endif // _TFT_eSPIH_
     display->print(captureData.capture[0]);
-    serialPrintFormatted(PSTR("%s.setCursor(%d,%d);"), displayName, x, y);
-    serialPrintFormatted(PSTR("%s.print(\"%s\");"), displayName, captureData.capture[0]);
+    serialPrintFormattedMacro(PSTR("%s.setCursor(%d,%d);"), displayName, x, y);
+    serialPrintFormattedMacro(PSTR("%s.print(\"%s\");"), displayName, captureData.capture[0]);
     break;
   case CLEAR_SCREEN:
     display->fillScreen(COLOR_BLACK);
-    serialPrintFormatted(PSTR("%s.fillScreen(0x%x);"), displayName, COLOR_BLACK);
+    serialPrintFormattedMacro(PSTR("%s.fillScreen(0x%x);"), displayName, COLOR_BLACK);
     break;
   case FILL_SCREEN:
     display->fillScreen(currentColor);
-    serialPrintFormatted(PSTR("%s.fillScreen(0x%x);"), displayName, currentColor);
+    serialPrintFormattedMacro(PSTR("%s.fillScreen(0x%x);"), displayName, currentColor);
     break;
   case SET_CURSOR:
     arg = getIntFromCapture(&captureData, 2);
     display->setCursor(arg[0], arg[1]);
-    serialPrintFormatted(PSTR("%s.setCursor(%d,%d);"), displayName, arg[0], arg[1]);
+    serialPrintFormattedMacro(PSTR("%s.setCursor(%d,%d);"), displayName, arg[0], arg[1]);
     break;
   case CIRCLE_HOLLOW:
     arg = getIntFromCapture(&captureData, 3);
     display->drawCircle(arg[0], arg[1], arg[2], currentColor);
-    serialPrintFormatted(PSTR("%s.drawCircle(%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], currentColor);
+    serialPrintFormattedMacro(PSTR("%s.drawCircle(%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], currentColor);
     break;
   case CIRCLE_FILL:
     arg = getIntFromCapture(&captureData, 3);
     display->fillCircle(arg[0], arg[1], arg[2], currentColor);
-    serialPrintFormatted(PSTR("%s.fillCircle(%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], currentColor);
+    serialPrintFormattedMacro(PSTR("%s.fillCircle(%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], currentColor);
     break;
   case TRIANGLE_HOLLOW:
     arg = getIntFromCapture(&captureData, 6);
     display->drawTriangle(arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], currentColor);
-    serialPrintFormatted(PSTR("%s.drawTriangle(%d,%d,%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], currentColor);
+    serialPrintFormattedMacro(PSTR("%s.drawTriangle(%d,%d,%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], currentColor);
     break;
   case TRIANGLE_FILL:
     arg = getIntFromCapture(&captureData, 6);
     display->fillTriangle(arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], currentColor);
-    serialPrintFormatted(PSTR("%s.fillTriangle(%d,%d,%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], currentColor);
+    serialPrintFormattedMacro(PSTR("%s.fillTriangle(%d,%d,%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], currentColor);
     break;
   case RECTANGLE_HOLLOW:
     arg = getIntFromCapture(&captureData, 4);
     display->drawRect(arg[0], arg[1], arg[2], arg[3], currentColor);
-    serialPrintFormatted(PSTR("%s.drawRect(%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], currentColor);
+    serialPrintFormattedMacro(PSTR("%s.drawRect(%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], currentColor);
     break;
   case RECTANGLE_FILL:
     arg = getIntFromCapture(&captureData, 4);
     display->fillRect(arg[0], arg[1], arg[2], arg[3], currentColor);
-    serialPrintFormatted(PSTR("%s.fillRect(%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], currentColor);
+    serialPrintFormattedMacro(PSTR("%s.fillRect(%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], currentColor);
     break;
   case RECTANGLE_ROUND_HOLLOW:
     arg = getIntFromCapture(&captureData, 5);
     display->drawRoundRect(arg[0], arg[1], arg[2], arg[3], arg[4], currentColor);
-    serialPrintFormatted(PSTR("%s.drawRoundRect(%d,%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], currentColor);
+    serialPrintFormattedMacro(PSTR("%s.drawRoundRect(%d,%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], currentColor);
     break;
   case RECTANGLE_ROUND_FILL:
     arg = getIntFromCapture(&captureData, 5);
     display->fillRoundRect(arg[0], arg[1], arg[2], arg[3], arg[4], currentColor);
-    serialPrintFormatted(PSTR("%s.fillRoundRect(%d,%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], currentColor);
+    serialPrintFormattedMacro(PSTR("%s.fillRoundRect(%d,%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], currentColor);
     break;
   case LINE_FAST_VERTICAL:
     arg = getIntFromCapture(&captureData, 3);
     display->drawFastVLine(arg[0], arg[1], arg[2], currentColor);
-    serialPrintFormatted(PSTR("%s.drawFastVLine(%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], currentColor);
+    serialPrintFormattedMacro(PSTR("%s.drawFastVLine(%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], currentColor);
     break;
   case LINE_FAST_HORIZONTAL:
     arg = getIntFromCapture(&captureData, 3);
     display->drawFastHLine(arg[0], arg[1], arg[2], currentColor);
-    serialPrintFormatted(PSTR("%s.drawFastHLine(%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], currentColor);
+    serialPrintFormattedMacro(PSTR("%s.drawFastHLine(%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], currentColor);
     break;
   case LINE:
     arg = getIntFromCapture(&captureData, 4);
     display->drawLine(arg[0], arg[1], arg[2], arg[3], currentColor);
-    serialPrintFormatted(PSTR("%s.drawLine(%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], currentColor);
+    serialPrintFormattedMacro(PSTR("%s.drawLine(%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], currentColor);
     break;
   case ROTATE:
     arg = getIntFromCapture(&captureData, 1);
     display->setRotation(arg[0]);
-    serialPrintFormatted(PSTR("%s.setRotation(%d);"), displayName, arg[0]);
+    serialPrintFormattedMacro(PSTR("%s.setRotation(%d);"), displayName, arg[0]);
     break;
   default:
     Serial.println(F("Unknown Command"));
