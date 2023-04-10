@@ -5,6 +5,20 @@
 | **tt**[string]| Print text | **tt**Hello World! | ✓  | ✓  |
 | **tv**[string]| Print text centered vertically | **tv**Hello World! | ✓  | ✓  |
 | **th**[string]| Print text centered horizontally | **th**Hello World! | ✓  | ✓  |
+| **ts**[number] | Set text size | **ts**3 | ✓ | ✓ |
+| **ch**[x,y,radius] | Draw a hollow circle | **ch**50,50,30 | ✓ | ✓ |
+| **cf**[x,y,radius] | Draw a filled circle | **cf**50,50,30 | ✓ | ✓ |
+| **gh**[x1,y1,x2,y2,x3,y3] | Draw a hollow triangle | **gh**10,10,20,20,30,10 | ✓ | ✓ |
+| **gf**[x1,y1,x2,y2,x3,y3] | Draw a filled triangle | **gf**10,10,20,20,30,10 | ✓ | ✓ |
+| **rh**[x,y,width,height] | Draw a hollow rectangle | **rh**20,20,40,30 | ✓ | ✓ |
+| **rf**[x,y,width,height] | Draw a filled rectangle | **rf**20,20,40,30 | ✓ | ✓ |
+| **ri**[x,y,width,height,radius] | Draw a hollow rounded rectangle | **ri**20,20,40,30,5 | ✓ | ✓ |
+| **rj**[x,y,width,height,radius] | Draw a filled rounded rectangle | **rj**20,20,40,30,5 | ✓ | ✓ |
+| **sc**[x,y] | Set cursor position | **sc**10,20 | ✓ | ✓ |
+| **lv**[x,y,length] | Draw a fast vertical line | **lv**50,50,20 | ✓ | ✓ |
+| **lh**[x,y,length] | Draw a fast horizontal line | **lh**50,50,20 | ✓ | ✓ |
+| **dl**[x1,y1,x2,y2] | Draw a line | **dl**10,10,50,50 | ✓ | ✓ |
+| **ro**[angle] | Rotate display | **ro**90 | ✓ | ✗ |
 
 
 | ts      | Settext size | ts<number> | number: 1-9 | ts3 | Yes | Yes |
