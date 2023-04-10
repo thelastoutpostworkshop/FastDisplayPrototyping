@@ -8,6 +8,7 @@ All display supported by Adafruit GFX and TFT eSPI libraries
 To get started, download the source code (zip) [the latest release](https://github.com/thelastoutpostworkshop/DisplayPrototyping/releases/latest) and extract its contents. Then, simply copy the resulting folder into your Arduino "libraries" directory, which is typically located in the "Documents" folder on Windows systems.
 
 ## Code Setup Adafruit GFX
+(You can also use the examples provided with the library, open them in the Arduino IDE)
 
 ```c
 #include <Adafruit_TFTLCD.h> 
