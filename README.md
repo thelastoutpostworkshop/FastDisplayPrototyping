@@ -20,7 +20,8 @@ To get started, download the source code (zip) [the latest release](https://gith
 
 ```c
 #include <Adafruit_TFTLCD.h> 
-#include <Adafruit_GFX.h>    
+#include <Adafruit_GFX.h>
+#define OUTPUT_CODE_ON_SERIAL     // Corresponding code output to Serial Monitor
 #include <DisplayPrototyping.h> // Display Protyping Library
 
 // Follow your display driver documentation
@@ -50,6 +51,7 @@ void loop(void) {
 
 ```c
 #include <TFT_eSPI.h>
+#define OUTPUT_CODE_ON_SERIAL     // Corresponding code output to Serial Monitor
 #include "DisplayPrototyping.h"
 
 // Follow your display driver documentation
