@@ -3,7 +3,7 @@
 ## Display supported
 All display supported by Adafruit GFX and TFT eSPI libraries
 
-### Commands
+## Commands
 
 | Command | Description | Usage | Adafruit GFX | TFT_eSPI |
 |---------|-------------|-------|--------------|------|
