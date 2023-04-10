@@ -4,8 +4,35 @@
 ## Display supported
 All display supported by Adafruit GFX and TFT eSPI libraries
 
-## Installation and Setup
+## Installation
 To get started, download the source code (zip) [the latest release](https://github.com/thelastoutpostworkshop/DisplayPrototyping/releases/latest) and extract its contents. Then, simply copy the resulting folder into your Arduino "libraries" directory, which is typically located in the "Documents" folder on Windows systems.
+
+## Code Setup Adafruit GFX
+<pre>
+```c
+#include <Adafruit_TFTLCD.h> // Hardware-specific library
+#include <Adafruit_GFX.h>    // Core graphics library
+#include <DisplayPrototyping.h>
+
+// Follow your display driver documentation
+Adafruit_TFTLCD tft(LCD_CS, LCD_CD, LCD_WR, LCD_RD, LCD_RESET);
+
+// Initialize the display prototyping library
+serialDisplay sDisplay(&tft);
+
+void setup() {
+  Serial.begin(9600); // Mandatory for using the display prototyping library
+  tft.begin();
+  tft.setRotation(0);
+  // Your specific code here
+}
+
+void loop(void) {
+  sDisplay.readCommandsFromSerial(); // Mandatory for using the display prototyping library
+  // Your specific code here
+}
+```
+</pre>
 
 ## Commands
 
