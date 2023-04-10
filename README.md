@@ -4,10 +4,10 @@
 |---------|-------------|-------|-----------|---------|--------------|------|
 | tt      | Print text | tt | None | ttHello World! | Yes | Yes |
 | tv      | Print text centered vertically | tv | None | tvHello World! | Yes | Yes |
-| th      | Print text centered horizontally | th | None | thHelloWorld | Yes | Yes |
-| ts      | Settext size | ts<size> | size: 1-9 | ts3 | Yes | Yes |
-| ch      | Set mode to hollow circle (CIRCLE_HOLLOW) | ch<x><y><radius> | x, y: coordinates; radius: circle radius | ch50,50,30 | Yes | Yes |
-| cf      | Set mode to filled circle (CIRCLE_FILL) | cf<x><y><radius> | x, y: coordinates; radius: circle radius | cf50,50,30 | Yes | Yes |
+| th      | Print text centered horizontally | th | None | thHelloWorld! | Yes | Yes |
+| ts      | Settext size | ts<size> | number: 1-9 | ts3 | Yes | Yes |
+| ch      | Draw a hollow circle | ch<x>,<y>,<radius> | x, y: coordinates; radius: circle radius | ch50,50,30 | Yes | Yes |
+| cf      | Draw a filled circle | cf<x>,<y>,<radius> | x, y: coordinates; radius: circle radius | cf50,50,30 | Yes | Yes |
 | gh      | Set mode to hollow triangle (TRIANGLE_HOLLOW) | gh<x1><y1><x2><y2><x3><y3> | x1, y1, x2, y2, x3, y3: triangle vertices coordinates | gh10,10,20,20,30,10 | Yes | Yes |
 | gf      | Set mode to filled triangle (TRIANGLE_FILL) | gf<x1><y1><x2><y2><x3><y3> | x1, y1, x2, y2, x3, y3: triangle vertices coordinates | gf10,10,20,20,30,10 | Yes | Yes |
 | rh      | Set mode to hollow rectangle (RECTANGLE_HOLLOW) | rh<x><y><width><height> | x, y: coordinates; width, height: rectangle dimensions | rh20,20,40,30 | Yes | Yes |
