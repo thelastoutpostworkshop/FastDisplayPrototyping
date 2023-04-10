@@ -2,10 +2,10 @@
 
 | Command | Description | Usage | Adafruit GFX | TFT_eSPI |
 |---------|-------------|-------|--------------|------|
-| __tt__[string]| Print text | __tt__ Hello World! | Yes | Yes |
+| **tt**[string]| Print text | **tt**Hello World! | Yes | Yes |
+| **tv**[string]| Print text centered vertically | **tv**Hello World! | Yes | Yes |
 
 
-| tv      | Print text centered vertically | tv | None | tvHello World! | Yes | Yes |
 | th      | Print text centered horizontally | th | None | thHelloWorld! | Yes | Yes |
 | ts      | Settext size | ts<number> | number: 1-9 | ts3 | Yes | Yes |
 | ch      | Draw a hollow circle | ch<x>,<y>,<radius> | x, y: coordinates; radius: circle radius | ch50,50,30 | Yes | Yes |
