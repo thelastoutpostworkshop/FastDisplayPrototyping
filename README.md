@@ -3,9 +3,9 @@
 | Command | Description | Usage | Arguments | Example | Adafruit GFX | espi |
 |---------|-------------|-------|-----------|---------|--------------|------|
 | tt      | Print text | tt | None | ttHello World! | Yes | Yes |
-| tv      | Set mode to text centered vertically (TEXT_CENTER_VERTICAL) | tv | None | - | Yes | Yes |
-| th      | Set mode to text centered horizontally (TEXT_CENTER_HORIZONTAL) | th | None | - | Yes | Yes |
-| ts      | Set mode to text size (TEXT_SIZE) | ts<size> | size: 1-9 | ts3 | Yes | Yes |
+| tv      | Print text centered vertically | tv | None | tvHello World! | Yes | Yes |
+| th      | Print text centered horizontally | th | None | thHelloWorld | Yes | Yes |
+| ts      | Settext size | ts<size> | size: 1-9 | ts3 | Yes | Yes |
 | ch      | Set mode to hollow circle (CIRCLE_HOLLOW) | ch<x><y><radius> | x, y: coordinates; radius: circle radius | ch50,50,30 | Yes | Yes |
 | cf      | Set mode to filled circle (CIRCLE_FILL) | cf<x><y><radius> | x, y: coordinates; radius: circle radius | cf50,50,30 | Yes | Yes |
 | gh      | Set mode to hollow triangle (TRIANGLE_HOLLOW) | gh<x1><y1><x2><y2><x3><y3> | x1, y1, x2, y2, x3, y3: triangle vertices coordinates | gh10,10,20,20,30,10 | Yes | Yes |
