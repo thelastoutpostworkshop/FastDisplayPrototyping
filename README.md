@@ -2,7 +2,7 @@
 
 | Command | Description | Usage | Adafruit GFX | TFT_eSPI |
 |---------|-------------|-------|--------------|------|
-| tt[string]      | Print text | ttHello World! | None |   Yes | Yes |
+| __tt__[string]      | Print text | __tt__Hello World! | Yes | Yes |
 
 
 | tv      | Print text centered vertically | tv | None | tvHello World! | Yes | Yes |
