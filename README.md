@@ -1,7 +1,7 @@
 ### Available Commands
 
-| Command | Description | Usage | Arguments  | Adafruit GFX | espi |
-|---------|-------------|-------|-----------|--------------|------|
+| Command | Description | Usage | Adafruit GFX | TFT_eSPI |
+|---------|-------------|-------|--------------|------|
 | tt[string]      | Print text | ttHello World! | None |   Yes | Yes |
 
 
