@@ -1,6 +1,7 @@
 
 #include <TFT_eSPI.h>
-#include "DisplayPrototyping.h"
+#define OUTPUT_CODE_ON_SERIAL
+#include <DisplayPrototyping.h>
 
 // Follow your display driver documentation
 TFT_eSPI tft = TFT_eSPI(); 
