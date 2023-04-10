@@ -1,8 +1,8 @@
 
 #include <TFT_eSPI.h>
+#define OUTPUT_CODE_ON_SERIAL
 #include "src/DisplayPrototyping.h"
 
-#define OUTPUT_CODE_ON_SERIAL
 
 TFT_eSPI tft = TFT_eSPI(); // Invoke custom library
 serialDisplay sDisplay(&tft);
