@@ -10,9 +10,9 @@ To get started, download the source code (zip) [the latest release](https://gith
 ## Code Setup Adafruit GFX
 
 ```c
-#include <Adafruit_TFTLCD.h> // Hardware-specific library
-#include <Adafruit_GFX.h>    // Core graphics library
-#include <DisplayPrototyping.h>
+#include <Adafruit_TFTLCD.h> 
+#include <Adafruit_GFX.h>    
+#include <DisplayPrototyping.h> // Display Protyping Library
 
 // Follow your display driver documentation
 Adafruit_TFTLCD tft(LCD_CS, LCD_CD, LCD_WR, LCD_RD, LCD_RESET);
@@ -31,7 +31,7 @@ void setup() {
 
 void loop(void) {
   sDisplay.readCommandsFromSerial(); // This line mandatory for using the display prototyping library
-  
+
   // Your specific code here
 }
 ```
