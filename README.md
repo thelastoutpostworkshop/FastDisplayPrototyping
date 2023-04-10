@@ -1,8 +1,8 @@
 ### Available Commands
 
-| Command | Description | Usage | Arguments | Example | Adafruit GFX | espi |
+| Command | Description | Usage | Arguments  | Adafruit GFX | espi |
 |---------|-------------|-------|-----------|---------|--------------|------|
-| tt      | Print text | tt | None | ttHello World! | Yes | Yes |
+| tt[string]      | Print text | ttHello World! | None |   Yes | Yes |
 | tv      | Print text centered vertically | tv | None | tvHello World! | Yes | Yes |
 | th      | Print text centered horizontally | th | None | thHelloWorld! | Yes | Yes |
 | ts      | Settext size | ts<number> | number: 1-9 | ts3 | Yes | Yes |
