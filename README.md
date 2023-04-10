@@ -5,7 +5,7 @@
 All display supported by Adafruit GFX and TFT eSPI libraries
 
 ## Installation and Setup
-To get started, download a zip file of [the latest release](https://github.com/thelastoutpostworkshop/DisplayPrototyping/releases/latest) and extract its contents. Then, simply copy the resulting folder into your Arduino "libraries" directory, which is typically located in the "Documents" folder on Windows systems.
+To get started, download the source code (zip) [the latest release](https://github.com/thelastoutpostworkshop/DisplayPrototyping/releases/latest) and extract its contents. Then, simply copy the resulting folder into your Arduino "libraries" directory, which is typically located in the "Documents" folder on Windows systems.
 
 ## Commands
 
