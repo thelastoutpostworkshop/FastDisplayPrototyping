@@ -2,7 +2,7 @@
 
 | Command | Description | Usage | Arguments | Example | Adafruit GFX | espi |
 |---------|-------------|-------|-----------|---------|--------------|------|
-| tt      | Set mode to text (TEXT) | tt | None | - | Yes | Yes |
+| tt      | Print text | tt | None | ttHello World! | Yes | Yes |
 | tv      | Set mode to text centered vertically (TEXT_CENTER_VERTICAL) | tv | None | - | Yes | Yes |
 | th      | Set mode to text centered horizontally (TEXT_CENTER_HORIZONTAL) | th | None | - | Yes | Yes |
 | ts      | Set mode to text size (TEXT_SIZE) | ts<size> | size: 1-9 | ts3 | Yes | Yes |
