@@ -476,7 +476,7 @@ void serialDisplay::executeCommand(void)
     break;
   case TEXT:
     display->print(captureData.capture[0]);
-    serialPrintFormattedMacro(this,PSTR("%s.print(%s);"), displayName, captureData.capture[0]);
+    serialPrintFormattedMacro(this,PSTR("%s.print(\"%s\");"), displayName, captureData.capture[0]);
     break;
   case TEXT_CENTER_HORIZONTAL:
 #if defined(_ADAFRUIT_TFTLCD_H_)
