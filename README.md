@@ -4,7 +4,7 @@
 ### Tutorial
 
 ### Usage
-![Usage](main/images/usage.png)
+![Usage](https://github.com/thelastoutpostworkshop/DisplayPrototyping/main/images/usage.png)
 
 ### Display supported
 All display supported by Adafruit GFX and TFT eSPI libraries
