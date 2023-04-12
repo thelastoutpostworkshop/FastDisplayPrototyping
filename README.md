@@ -16,7 +16,8 @@ All display supported by Adafruit GFX and TFT eSPI libraries
 1. [Installation](#installation)
 2. [Code Setup Adafruit GFX](#code-setup-adafruit-gfx)
 3. [Code Setup TFT eSPI](#code-setup-tft-espi)
-4. [Serial Commands](#serial-commands)
+4. [Examples](#examples)
+5. [Serial Commands](#serial-commands)
 
 ### Installation
 To get started, download the source code (zip) [the latest release](https://github.com/thelastoutpostworkshop/DisplayPrototyping/releases/latest) and extract its contents. Then, simply copy the resulting folder into your Arduino "libraries" directory, which is typically located in the "Documents" folder on Windows systems.
@@ -78,6 +79,9 @@ void loop(void) {
   // Your specific code here
 }
 ```
+### Examples
+| Type this in the Serial Monitor | Result on the display |
+|x;sc10,10;thVertical Center | Text Centered vertically on row 10 |
 
 ### Serial Commands
 
