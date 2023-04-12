@@ -4,8 +4,9 @@
 ### Tutorial
 
 ### Usage
-In the serial monitor type x;ttHello World!
-Make sure you choose No Line Ending the the menu to the right:
+In the serial monitor type x;ttHello World!<br>  
+And click enter, the command will be send to your microcontroller.<br>
+Make sure you choose No Line Ending the the menu to the right:<br>
 ![Usage](https://github.com/thelastoutpostworkshop/DisplayPrototyping/blob/main/images/Usage.png)
 
 ### Display supported
