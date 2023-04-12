@@ -2,7 +2,7 @@
 #include <Adafruit_TFTLCD.h> // Hardware-specific library
 #include <Adafruit_GFX.h>    // Core graphics library
 #define OUTPUT_CODE_ON_SERIAL
-#include <DisplayPrototyping.h>
+#include <FastDisplayPrototyping.h>
 
 // Follow your display driver documentation
 Adafruit_TFTLCD tft(LCD_CS, LCD_CD, LCD_WR, LCD_RD, LCD_RESET);
@@ -21,6 +21,5 @@ void setup() {
 
 void loop(void) {
   sDisplay.readCommandsFromSerial(); // This line mandatory for using the display prototyping library
-  
   // Your specific code here
 }

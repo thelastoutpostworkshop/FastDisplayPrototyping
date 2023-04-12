@@ -1,7 +1,7 @@
 
 #include <TFT_eSPI.h>
 #define OUTPUT_CODE_ON_SERIAL
-#include "src/DisplayPrototyping.h"
+#include "src/FastDisplayPrototyping.h"
 
 
 TFT_eSPI tft = TFT_eSPI(); // Invoke custom library

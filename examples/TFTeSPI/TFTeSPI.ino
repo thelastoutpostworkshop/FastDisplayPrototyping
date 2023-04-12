@@ -1,7 +1,7 @@
 
 #include <TFT_eSPI.h>
 #define OUTPUT_CODE_ON_SERIAL
-#include <DisplayPrototyping.h>
+#include <FastDisplayPrototyping.h>
 
 // Follow your display driver documentation
 TFT_eSPI tft = TFT_eSPI(); 
@@ -20,6 +20,5 @@ void setup() {
 
 void loop(void) {
   sDisplay.readCommandsFromSerial(); // This line mandatory for using the display prototyping library
-  
   // Your specific code here
 }
