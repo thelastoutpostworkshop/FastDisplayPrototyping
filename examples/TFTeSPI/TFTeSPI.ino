@@ -10,7 +10,7 @@ TFT_eSPI tft = TFT_eSPI();
 serialDisplay sDisplay(&tft);
 
 void setup() {
-  Serial.begin(115200); // This line mandatory for using the display prototyping library
+  Serial.begin(115200);  // This line mandatory for using the display prototyping library, change the baud rate if needed
 
   tft.begin();
   tft.setRotation(0);

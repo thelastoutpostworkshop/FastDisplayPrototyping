@@ -11,7 +11,7 @@ Adafruit_TFTLCD tft(LCD_CS, LCD_CD, LCD_WR, LCD_RD, LCD_RESET);
 serialDisplay sDisplay(&tft);
 
 void setup() {
-  Serial.begin(9600); // This line mandatory for using the display prototyping library
+  Serial.begin(9600); // This line mandatory for using the display prototyping library, change the baud rate if needed
 
   tft.begin();
   tft.setRotation(0);
