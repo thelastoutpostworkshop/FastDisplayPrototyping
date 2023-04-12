@@ -46,7 +46,7 @@ void setup() {
 }
 
 void loop(void) {
-  sDisplay.readCommandsFromSerial(); // This line mandatory for using the display prototyping library
+  sDisplay.readCommandsFromSerial();  // This line mandatory for using the display prototyping library, change the baud rate if needed
 
   // Your specific code here
 }
@@ -64,7 +64,7 @@ void loop(void) {
 TFT_eSPI tft = TFT_eSPI(); 
 
 void setup() {
-  Serial.begin(9600); // This line mandatory for using the display prototyping library
+  Serial.begin(9600); //  // This line mandatory for using the display prototyping library, change the baud rate if needed
 
   tft.begin();
   tft.setRotation(0);
