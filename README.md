@@ -4,7 +4,7 @@
 ### Tutorial
 
 ### Usage
-![Usage](images/usage.png)
+![Usage](main/images/usage.png)
 
 ### Display supported
 All display supported by Adafruit GFX and TFT eSPI libraries
