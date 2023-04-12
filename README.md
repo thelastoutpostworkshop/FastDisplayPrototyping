@@ -81,6 +81,7 @@ void loop(void) {
 ```
 ### Examples
 | Type this in the Serial Monitor | Result on the display |
+|---------|-------------|
 |x;sc10,10;thVertical Center | Text Centered vertically on row 10 |
 
 ### Serial Commands
