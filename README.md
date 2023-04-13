@@ -7,7 +7,7 @@
 Simply use the serial monitor to send graphical commands to your microcontroller, in the example below the commands `x;sc0,0,ttHello World!` sent will clear the display and show Hello World! Make sure the option **No Line Endind** is selected in the Serial Monitor.
 ![Usage](https://github.com/thelastoutpostworkshop/DisplayPrototyping/blob/main/images/usage_serial_monitor.png)
 
-### Display supported
+### Type of Displays supported
 All display supported by Adafruit GFX and TFT eSPI libraries
 
 ## Contents
@@ -18,10 +18,10 @@ All display supported by Adafruit GFX and TFT eSPI libraries
 5. [Serial Commands](#serial-commands)
 
 ### Installation
-To get started, download the source code (zip) [the latest release](https://github.com/thelastoutpostworkshop/DisplayPrototyping/releases/latest) and extract its contents. Then, simply copy the resulting folder into your Arduino "libraries" directory, which is typically located in the "Documents" folder on Windows systems.
+To get started, download the source code (zip) [the latest release](https://github.com/thelastoutpostworkshop/DisplayPrototyping/releases/latest). Then install the library in the Arduino IDE with the menu `Sketch > Include Library > Add ZIP Library`.
 
 ### Code Setup Adafruit GFX
-(You can also use the examples provided with the library, open them in the Arduino IDE)
+(**You can also use the examples provided with the library, open them in the Arduino IDE**)
 
 ```c
 #include <Adafruit_TFTLCD.h> 
@@ -52,7 +52,7 @@ void loop(void) {
 ```
 
 ### Code Setup TFT eSPI
-(You can also use the examples provided with the library, open them in the Arduino IDE)
+(**You can also use the examples provided with the library, open them in the Arduino IDE**)
 
 ```c
 #include <TFT_eSPI.h>
