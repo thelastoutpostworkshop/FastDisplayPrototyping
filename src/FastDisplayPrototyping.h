@@ -74,6 +74,7 @@ private:
   int32_t *getIntFromCapture(Capture *, int);
   int32_t getIntFromCapture(char *);
   float getFloatFromCapture(char *);
+  bool getBoolFromCapture(char *);
   int getValueFromKeyword(char);
   void captureCommand(char);
   boolean isCommand(const char *);
@@ -170,7 +171,7 @@ int32_t *serialDisplay::getIntFromCapture(Capture *capture, int count)
   static int32_t res[MAX_ARG_CAPTURE];
   for (int i = 0; i < count && i < MAX_ARG_CAPTURE; i++)
   {
-      res[i] = getIntFromCapture(capture->capture[i]);
+    res[i] = getIntFromCapture(capture->capture[i]);
   }
   return res;
 }
@@ -185,6 +186,18 @@ int32_t serialDisplay::getIntFromCapture(char *capture)
   {
     return getValueFromKeyword(capture[0]);
   }
+}
+
+bool serialDisplay::getBoolFromCapture(char *capture)
+{
+  if (!containsOnlyDigits(capture))
+  {
+    if (getValueFromKeyword(capture[0]) == 1)
+    {
+      return true;
+    }
+  }
+  return false;
 }
 
 int serialDisplay::getValueFromKeyword(char c)
