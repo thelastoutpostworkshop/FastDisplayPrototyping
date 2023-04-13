@@ -86,7 +86,7 @@ For colors you can use this [RGB565 Color Picker](http://www.barth-dev.de/online
 |---------|-------------|
 |x;sc10,10;thVertical Center | Clear screen & Text Centered vertically on row 10 |
 |x;#ffe0;cf50,60,10 | Clear screen & Yellow filled circle at position 50,60 radius of 10 |
-|x;#00ff;ri10,10,40,40,10 | Clear screen & Blue rounded rectangle outline at position 10,10; width 40; height 40; corner radius 10 |
+|x;#00ff;ri10,10,40,40,10 | Clear screen & Blue rounded rectangle outline at position 10,10, width 40, height 40, corner radius 10 |
 
 ### Serial Commands
 
