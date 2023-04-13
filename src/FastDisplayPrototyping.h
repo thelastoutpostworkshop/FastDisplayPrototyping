@@ -202,6 +202,14 @@ int serialDisplay::getValueFromKeyword(char c)
     case 'h':
       return (displayHeight);
       break;
+    case 'T':
+    case 't':
+      return 1;
+      break;
+    case 'F':
+    case 'f':
+      return 0;
+      break;
     }
   }
   return 0;
