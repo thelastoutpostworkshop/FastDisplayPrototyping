@@ -4,9 +4,7 @@
 ### Tutorial
 
 ### Usage
-In the serial monitor type x;sc0,0,ttHello World!<br>
-And click enter, the command will be send to your microcontroller, the screen of your display should clear and show Hello World!<br>
-Make sure you choose No Line Ending the the menu to the right:<br>
+Simply use the serial monitor to send graphical commands to your microcontroller, in the example below the commands x;sc0,0,ttHello World! sent will clear the display and show Hello World!
 ![Usage](https://github.com/thelastoutpostworkshop/DisplayPrototyping/blob/main/images/usage_serial_monitor.png)
 
 ### Display supported
