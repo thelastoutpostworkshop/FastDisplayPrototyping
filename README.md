@@ -15,7 +15,7 @@ All display supported by Adafruit GFX and TFT_eSPI libraries
 2. [Code Setup Adafruit GFX](#code-setup-adafruit-gfx)
 3. [Code Setup TFT_eSPI](#code-setup-tft-espi)
 4. [Examples](#examples)
-5. [Serial Commands](#serial-commands)
+5. [Serial Commands Reference](#serial-commands)
 
 ### Installation
 To get started, download the source code (zip) [the latest release](https://github.com/thelastoutpostworkshop/DisplayPrototyping/releases/latest). Then install the library in the Arduino IDE with the menu `Sketch > Include Library > Add ZIP Library`.
@@ -79,7 +79,7 @@ void loop(void) {
 }
 ```
 ### Examples
-For colors you can use this [RGB565 Color Picker](http://www.barth-dev.de/online/rgb565-color-picker/#)
+For colors you can use this [RGB565 Color Picker](http://www.barth-dev.de/online/rgb565-color-picker/#) (There are many others on the web)
 
 | Type this in the Serial Monitor | Result on the display |
 |---------|-------------|
@@ -87,7 +87,7 @@ For colors you can use this [RGB565 Color Picker](http://www.barth-dev.de/online
 |x;#ffe0;cf50,60,10 | Clear screen & Yellow filled circle at position 50,60 radius of 10 |
 |x;#00ff;ri10,10,40,40,10 | Clear screen & Blue rounded rectangle outline at position 10,10, width 40, height 40, corner radius 10 |
 
-### Serial Commands
+### Serial Commands Reference
 
 | Command | Description | Usage | Adafruit GFX | TFT_eSPI |
 |---------|-------------|-------|--------------|------|
