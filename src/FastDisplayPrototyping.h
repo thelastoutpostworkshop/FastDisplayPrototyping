@@ -57,7 +57,7 @@ private:
   DISP *display;
   MODE currentMode;
   Capture captureData;
-  uint16_t currentColor = 0xFFFF;
+  uint32_t currentColor = 0xFFFF;
   int displayWidth;
   int displayHeight;
   unsigned long lastSerialRead;
@@ -77,7 +77,7 @@ private:
   float getFloatFromCapture(char *);
   bool getBoolFromCapture(char *);
   int getValueFromKeyword(char);
-  long getColorFromCapture(char *);
+  uint32_t getColorFromCapture(char *);
   void captureCommand(char);
   boolean isCommand(const char *);
   void serialPrintFormatted(const char *formatStr, ...);
@@ -168,9 +168,9 @@ float serialDisplay::getFloatFromCapture(char *capture)
   }
 }
 
-long serialDisplay::getColorFromCapture(char *capture)
+uint32_t serialDisplay::getColorFromCapture(char *capture)
 {
-  return strtol(capture, NULL, 16);
+  return strtoul(capture, NULL, 16);
 }
 
 int32_t *serialDisplay::getIntFromCapture(Capture *capture, int count)
