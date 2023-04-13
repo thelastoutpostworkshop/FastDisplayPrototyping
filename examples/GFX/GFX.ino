@@ -1,7 +1,7 @@
 
-#include <Adafruit_TFTLCD.h> // Hardware-specific library
-#include <Adafruit_GFX.h>    // Core graphics library
-#define OUTPUT_CODE_ON_SERIAL
+#include <Adafruit_TFTLCD.h>    // Hardware-specific library
+#include <Adafruit_GFX.h>       // Core graphics library
+#define OUTPUT_CODE_ON_SERIAL   // Output graphical functions used for the display
 #include <FastDisplayPrototyping.h>
 
 // Follow your display driver documentation

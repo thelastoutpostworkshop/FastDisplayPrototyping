@@ -1,6 +1,5 @@
-
-#include <TFT_eSPI.h>
-#define OUTPUT_CODE_ON_SERIAL
+#include <TFT_eSPI.h>                 // Core graphics library
+#define OUTPUT_CODE_ON_SERIAL         // Output graphical functions used for the display
 #include <FastDisplayPrototyping.h>
 
 // Follow your display driver documentation
