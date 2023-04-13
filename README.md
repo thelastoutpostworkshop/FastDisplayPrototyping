@@ -95,6 +95,7 @@ For colors you can use this [RGB565 Color Picker](http://www.barth-dev.de/online
 | **tv**[string]| Print text centered vertically | **tv**Hello World! | ✓  | ✓  |
 | **th**[string]| Print text centered horizontally | **th**Hello World! | ✓  | ✓  |
 | **ts**[size] | Set text size | **ts**3 | ✓ | ✓ |
+| **dp**[x,y] | Draw a pixel at position x,y | **dp**10,10 | ✓ | ✓ |
 | **ch**[x,y,radius] | Draw a circle outline | **ch**50,50,30 | ✓ | ✓ |
 | **cf**[x,y,radius] | Draw a filled circle | **cf**50,50,30 | ✓ | ✓ |
 | **gh**[x1,y1,x2,y2,x3,y3] | Draw a triangle outline using 3 points (vertices) | **gh**10,10,20,20,30,10 | ✓ | ✓ |
@@ -109,4 +110,6 @@ For colors you can use this [RGB565 Color Picker](http://www.barth-dev.de/online
 | **dl**[x1,y1,x2,y2] | draw a line between 2 points | **dl**10,10,50,50 | ✓ | ✓ |
 | **ro**[number] | Set rotation setting for display (0-3 or 4-7 for BMP drawing) | **ro**1 | ✓ | ✗ |
 
+### Configuration
 
+### Library Behavior
