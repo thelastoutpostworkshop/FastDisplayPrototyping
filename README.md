@@ -1,5 +1,5 @@
 # Fast Display Prototyping for Adafruit GFX and TFT eSPI
-**Streamline your development process!** This library enables rapid prototyping of graphical functions by utilizing the Arduino IDE's serial monitor to communicate via the serial port with any display supported by Adafruit GFX and TFT eSPI libraries. By eliminating the need for time-consuming microcontroller uploads when testing graphical functions, developers can focus on refining their designs more efficiently. 
+**Streamline your development process!** This library enables rapid prototyping of graphical functions by utilizing the Arduino IDE's serial monitor to communicate via the serial port with any display supported by Adafruit GFX and TFT_eSPI libraries. By eliminating the need for time-consuming microcontroller uploads when testing graphical functions, developers can focus on refining their designs more efficiently. 
 
 ### Tutorial
 
@@ -8,12 +8,12 @@ Simply use the serial monitor to send graphical commands to your microcontroller
 ![Usage](https://github.com/thelastoutpostworkshop/DisplayPrototyping/blob/main/images/usage_serial_monitor.png)
 
 ### Type of Displays supported
-All display supported by Adafruit GFX and TFT eSPI libraries
+All display supported by Adafruit GFX and TFT_eSPI libraries
 
 ## Contents
 1. [Installation](#installation)
 2. [Code Setup Adafruit GFX](#code-setup-adafruit-gfx)
-3. [Code Setup TFT eSPI](#code-setup-tft-espi)
+3. [Code Setup TFT_eSPI](#code-setup-tft-espi)
 4. [Examples](#examples)
 5. [Serial Commands](#serial-commands)
 
@@ -51,7 +51,7 @@ void loop(void) {
 }
 ```
 
-### Code Setup TFT eSPI
+### Code Setup TFT_eSPI
 (You can also use the examples provided with the library in the Arduino IDE through the menu `File > Examples > FastDisplayPrototyping`
 
 ```c
