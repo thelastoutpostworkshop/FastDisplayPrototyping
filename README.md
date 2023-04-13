@@ -114,3 +114,5 @@ void loop(void) {
 ### Configuration
 
 ### Library Behavior
+
+### Library Size
