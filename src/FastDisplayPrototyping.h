@@ -11,7 +11,7 @@
 #endif // _TFT_eSPIH_
 
 #define MAX_DATA_CAPTURE 30
-#define MAX_ARG_CAPTURE 6
+#define MAX_ARG_CAPTURE 9
 #define COLOR_BLACK 0x0000
 #define DEBOUNCE_READ_SERIAL 300
 
