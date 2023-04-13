@@ -39,6 +39,7 @@ private:
     TRIANGLE_FILL,
     RECTANGLE_HOLLOW,
     RECTANGLE_FILL,
+    RECTANGLE_FILL_GRADIENT_HORIZONTAL,
     RECTANGLE_ROUND_HOLLOW,
     RECTANGLE_ROUND_FILL,
     LINE_FAST_VERTICAL,
@@ -275,7 +276,7 @@ void serialDisplay::captureCommand(char input)
   captureInput(&captureData, input);
   closeCapture(&captureData);
 
-  const char *commands[] = {"tt", "tv", "th", "ts", "ch", "cf", "gh", "gf", "rh", "rf", "ri", "rj", "sc", "lv", "lh", "dl", "ro", "dp"};
+  const char *commands[] = {"tt", "tv", "th", "ts", "ch", "cf", "gh", "gf", "rh", "rf", "ri", "rj", "sc", "lv", "lh", "dl", "ro", "dp", "rk"};
   const int numCommands = sizeof(commands) / sizeof(*commands);
 
   for (int i = 0; i < numCommands; i++)
@@ -355,6 +356,10 @@ void serialDisplay::captureCommand(char input)
       case 17:
         currentMode = PIXEL;
         openCapture(&captureData, 2);
+        break;
+      case 18:
+        currentMode = RECTANGLE_FILL_GRADIENT_HORIZONTAL;
+        openCapture(&captureData, 6);
         break;
       default:
         Serial.println(F("Unknown Command"));
@@ -437,6 +442,7 @@ void serialDisplay::decodeInput(char input)
   case RECTANGLE_ROUND_FILL:
   case RECTANGLE_ROUND_HOLLOW:
   case RECTANGLE_FILL:
+  case RECTANGLE_FILL_GRADIENT_HORIZONTAL:
   case RECTANGLE_HOLLOW:
   case TRIANGLE_FILL:
   case TRIANGLE_HOLLOW:
@@ -450,7 +456,7 @@ void serialDisplay::decodeInput(char input)
     }
     else
     {
-      if (isdigit(input) || strchr(displaySizeKeywords, input))
+      if (isdigit(input) || strchr(displaySizeKeywords, input) || (input >= 'a' && input <= 'f') || (input >= 'A' && input <= 'F'))
       {
         captureInput(&captureData, input);
       }
@@ -635,6 +641,11 @@ void serialDisplay::executeCommand(void)
     arg = getIntFromCapture(&captureData, 2);
     display->drawPixel(arg[0], arg[1], currentColor);
     serialPrintFormattedMacro(this, PSTR("%s.drawPixel(%d,%d,0x%x);"), displayName, arg[0], arg[1], currentColor);
+    break;
+  case RECTANGLE_FILL_GRADIENT_HORIZONTAL:
+    arg = getIntFromCapture(&captureData, 6);
+    display->fillRectVGradient(arg[0], arg[1], arg[2], arg[3], arg[4], arg[5]);
+    serialPrintFormattedMacro(this, PSTR("%s.fillRectVGradient(%d,%d,%d,%d,0x%x,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5]);
     break;
   default:
     Serial.println(F("Unknown Command"));
