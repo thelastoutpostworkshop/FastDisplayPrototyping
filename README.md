@@ -51,7 +51,7 @@ void loop(void) {
 ```
 
 ### Code Setup TFT_eSPI
-You can also use get this setup code with the examples provided with the library in the Arduino IDE through the menu `File > Examples > FastDisplayPrototyping`
+>ℹ️ You can also use get this setup code with the examples provided with the library in the Arduino IDE through the menu `File > Examples > FastDisplayPrototyping`
 
 ```c
 #include <TFT_eSPI.h>                 // Core graphics library
@@ -79,7 +79,7 @@ void loop(void) {
 }
 ```
 ### Examples
-For colors you can use this [RGB565 Color Picker](http://www.barth-dev.de/online/rgb565-color-picker/#) (There are many others on the web)
+>ℹ️ For colors you can use this [RGB565 Color Picker](http://www.barth-dev.de/online/rgb565-color-picker/#) (There are many others on the web)
 
 | Type this in the Serial Monitor | Result on the display |
 |---------|-------------|
