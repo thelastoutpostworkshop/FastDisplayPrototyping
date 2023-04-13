@@ -84,6 +84,7 @@ void loop(void) {
 |---------|-------------|
 |x;sc10,10;thVertical Center | Clear screen & Text Centered vertically on row 10 |
 |x;#ffe0;cf50,60,10 | Clear screen & Yellow filled circle at position 50,60 radius of 10 |
+For colors you can use this [RGB565 Color Picker](http://www.barth-dev.de/online/rgb565-color-picker/#)
 
 ### Serial Commands
 
