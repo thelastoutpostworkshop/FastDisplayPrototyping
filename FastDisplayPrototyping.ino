@@ -34,4 +34,4 @@ void setup() {
 void loop(void) {
 
   sDisplay.readCommandsFromSerial();
-}x;sc10,10;thVertical Centerx;sc10,10;thVertical Center
+}
