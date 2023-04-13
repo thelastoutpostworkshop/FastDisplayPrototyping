@@ -77,6 +77,7 @@ private:
   float getFloatFromCapture(char *);
   bool getBoolFromCapture(char *);
   int getValueFromKeyword(char);
+  long getColorFromCapture(char *);
   void captureCommand(char);
   boolean isCommand(const char *);
   void serialPrintFormatted(const char *formatStr, ...);
@@ -165,6 +166,11 @@ float serialDisplay::getFloatFromCapture(char *capture)
   {
     return getValueFromKeyword(capture[0]);
   }
+}
+
+long serialDisplay::getColorFromCapture(char *capture)
+{
+  return strtol(capture, NULL, 16);
 }
 
 int32_t *serialDisplay::getIntFromCapture(Capture *capture, int count)
@@ -517,7 +523,7 @@ void serialDisplay::executeCommand(void)
   switch (currentMode)
   {
   case DISPLAY_COLOR:
-    currentColor = strtol(captureData.capture[0], NULL, 16);
+    currentColor = getColorFromCapture(captureData.capture[0]);
     display->setTextColor(currentColor);
     serialPrintFormattedMacro(this, PSTR("%s.setTextColor(0x%x);"), displayName, currentColor);
     break;
