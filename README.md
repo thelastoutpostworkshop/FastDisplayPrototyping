@@ -82,7 +82,8 @@ void loop(void) {
 ### Examples
 | Type this in the Serial Monitor | Result on the display |
 |---------|-------------|
-|x;sc10,10;thVertical Center | Text Centered vertically on row 10 |
+|x;sc10,10;thVertical Center | Clear screen & Text Centered vertically on row 10 |
+|x;#ffe0;cf50,60,10 | Clear screen & Yellow filled circle at position 50,60 radius of 10 |
 
 ### Serial Commands
 
