@@ -21,7 +21,7 @@ All display supported by Adafruit GFX and TFT_eSPI libraries
 To get started, download the source code (zip) [the latest release](https://github.com/thelastoutpostworkshop/DisplayPrototyping/releases/latest). Then install the library in the Arduino IDE with the menu `Sketch > Include Library > Add ZIP Library`.
 
 ### Code Setup Adafruit GFX
-(You can also use the examples provided with the library in the Arduino IDE through the menu `File > Examples > FastDisplayPrototyping`
+You can also use get this setup code with the examples provided with the library in the Arduino IDE through the menu `File > Examples > FastDisplayPrototyping`
 
 ```c
 #include <Adafruit_TFTLCD.h> 
@@ -52,7 +52,7 @@ void loop(void) {
 ```
 
 ### Code Setup TFT_eSPI
-(You can also use the examples provided with the library in the Arduino IDE through the menu `File > Examples > FastDisplayPrototyping`
+You can also use get this setup code with the examples provided with the library in the Arduino IDE through the menu `File > Examples > FastDisplayPrototyping`
 
 ```c
 #include <TFT_eSPI.h>
