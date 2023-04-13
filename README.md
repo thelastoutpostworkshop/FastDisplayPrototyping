@@ -15,7 +15,7 @@ All display supported by Adafruit GFX and TFT_eSPI libraries
 2. [Code Setup Adafruit GFX](#code-setup-adafruit-gfx)
 3. [Code Setup TFT_eSPI](#code-setup-tft_espi)
 4. [Examples](#examples)
-5. [Serial Commands Reference](#serial-commands-references)
+5. [Serial Commands Reference](#serial-commands-reference)
 
 ### Installation
 To get started, download the source code (zip) [the latest release](https://github.com/thelastoutpostworkshop/DisplayPrototyping/releases/latest). Then install the library in the Arduino IDE with the menu `Sketch > Include Library > Add ZIP Library`.
