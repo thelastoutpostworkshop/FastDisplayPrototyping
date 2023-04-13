@@ -71,7 +71,7 @@ private:
   void openCapture(Capture *, int);
   void closeCapture(Capture *);
   void nextArgCapture(Capture *);
-  int *getIntFromCapture(Capture *, int);
+  int32_t *getIntFromCapture(Capture *, int);
   void captureCommand(char);
   boolean isCommand(const char *);
   void serialPrintFormatted(const char *formatStr, ...);
@@ -150,9 +150,9 @@ bool serialDisplay::containsOnlyDigits(const char *str)
   return true;
 }
 
-int *serialDisplay::getIntFromCapture(Capture *capture, int count)
+int32_t *serialDisplay::getIntFromCapture(Capture *capture, int count)
 {
-  static int res[MAX_ARG_CAPTURE];
+  static int32_t res[MAX_ARG_CAPTURE];
   for (int i = 0; i < count && i < MAX_ARG_CAPTURE; i++)
   {
     if (containsOnlyDigits(capture->capture[i]))
@@ -458,7 +458,7 @@ void serialDisplay::executeCommand(void)
 {
   int16_t x, y, x1, y1;
   uint16_t w, h;
-  int *arg;
+  int32_t *arg;
 
   if (currentColor == UNDEFINED)
   {
