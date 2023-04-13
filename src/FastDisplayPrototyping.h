@@ -73,6 +73,7 @@ private:
   void closeCapture(Capture *);
   void nextArgCapture(Capture *);
   int32_t *getIntFromCapture(Capture *, int);
+  int32_t *getIntFromCapture(Capture *, int,int);
   int32_t getIntFromCapture(char *);
   float getFloatFromCapture(char *);
   bool getBoolFromCapture(char *);
@@ -175,8 +176,12 @@ uint32_t serialDisplay::getColorFromCapture(char *capture)
 
 int32_t *serialDisplay::getIntFromCapture(Capture *capture, int count)
 {
+  return getIntFromCapture(capture,0,count-1);
+}
+int32_t *serialDisplay::getIntFromCapture(Capture *capture, int start,int end)
+{
   static int32_t res[MAX_ARG_CAPTURE];
-  for (int i = 0; i < count && i < MAX_ARG_CAPTURE; i++)
+  for (int i = start; i <= end && i <= MAX_ARG_CAPTURE; i++)
   {
     res[i] = getIntFromCapture(capture->capture[i]);
   }
