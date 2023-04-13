@@ -72,6 +72,7 @@ private:
   void closeCapture(Capture *);
   void nextArgCapture(Capture *);
   int32_t *getIntFromCapture(Capture *, int);
+  int getValueFromKeyword(char);
   void captureCommand(char);
   boolean isCommand(const char *);
   void serialPrintFormatted(const char *formatStr, ...);
@@ -161,31 +162,30 @@ int32_t *serialDisplay::getIntFromCapture(Capture *capture, int count)
     }
     else
     {
-      if (strchr(displaySizeKeywords, capture->capture[i][0]))
-      {
-        switch (capture->capture[i][0])
-        {
-        case 'W':
-        case 'w':
-          /* code */
-          res[i] = displayWidth;
-          break;
-        case 'H':
-        case 'h':
-          res[i] = displayHeight;
-          break;
-        default:
-          res[i] = 0;
-          break;
-        }
-      }
-      else
-      {
-        res[i] = 0;
-      }
+      res[i] = getValueFromKeyword(capture->capture[i][0]);
     }
   }
   return res;
+}
+
+int serialDisplay::getValueFromKeyword(char c)
+{
+  if (strchr(displaySizeKeywords, c))
+  {
+    switch (c)
+    {
+    case 'W':
+    case 'w':
+      /* code */
+      return (displayWidth);
+      break;
+    case 'H':
+    case 'h':
+      return (displayHeight);
+      break;
+    }
+  }
+  return 0;
 }
 
 void serialDisplay::captureInput(Capture *capture, char input)
@@ -594,7 +594,7 @@ void serialDisplay::executeCommand(void)
   case PIXEL:
     arg = getIntFromCapture(&captureData, 2);
     display->drawPixel(arg[0], arg[1], currentColor);
-    serialPrintFormattedMacro(this, PSTR("%s.drawPixel(%d,%d,0x%x);"), displayName, arg[0], arg[1],currentColor);
+    serialPrintFormattedMacro(this, PSTR("%s.drawPixel(%d,%d,0x%x);"), displayName, arg[0], arg[1], currentColor);
     break;
   default:
     Serial.println(F("Unknown Command"));
