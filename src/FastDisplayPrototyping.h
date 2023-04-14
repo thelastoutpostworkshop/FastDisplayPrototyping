@@ -406,6 +406,10 @@ void serialDisplay::captureCommand(char input)
         currentMode = ELLIPSE_FILL;
         openCapture(&captureData, 4);
         break;
+      case 21:
+        currentMode = ARC;
+        openCapture(&captureData, 4);
+        break;
       default:
         Serial.println(F("Unknown Command"));
         break;
