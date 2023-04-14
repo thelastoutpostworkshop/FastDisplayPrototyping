@@ -36,7 +36,7 @@ private:
     CIRCLE_HOLLOW,
     CIRCLE_FILL,
     ELLIPSE_OUTLINE,
-    ELLISPE_FILL,
+    ELLIPSE_FILL,
     TRIANGLE_HOLLOW,
     TRIANGLE_FILL,
     RECTANGLE_HOLLOW,
@@ -389,7 +389,7 @@ void serialDisplay::captureCommand(char input)
         openCapture(&captureData, 4);
         break;
       case 20:
-        currentMode = ELLISPE_FILL;
+        currentMode = ELLIPSE_FILL;
         openCapture(&captureData, 4);
         break;
       default:
@@ -480,7 +480,7 @@ void serialDisplay::decodeInput(char input)
   case CIRCLE_FILL:
   case CIRCLE_HOLLOW:
   case ELLIPSE_OUTLINE:
-  case ELLISPE_FILL:
+  case ELLIPSE_FILL:
   case ROTATE:
   case PIXEL:
     if (input == ',')
@@ -687,7 +687,7 @@ void serialDisplay::executeCommand(void)
     display->drawEllipse(arg[0], arg[1], arg[2], arg[3], currentColor);
     serialPrintFormattedMacro(this, PSTR("%s.drawEllipse(%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], currentColor);
     break;
-  case ELLISPE_FILL:
+  case ELLIPSE_FILL:
     arg = getIntFromCapture(&captureData, 4);
     display->fillEllipse(arg[0], arg[1], arg[2], arg[3], currentColor);
     serialPrintFormattedMacro(this, PSTR("%s.fillEllipse(%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], currentColor);
