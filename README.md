@@ -90,7 +90,7 @@ void loop(void) {
 ### Serial Commands Reference
 >ℹ️ You can replace any numeric value with **w** or **h** and it will be replaced by the width or the height of the display, for example `lh10,10,w`
 
-| Command | Usage | Description | Adafruit GFX | TFT_eSPI |
+| Graphical function | Serial Command | Description | Adafruit GFX | TFT_eSPI |
 |---------|-------|-------------|--------------|----------|
 | **tt**[string] | **tt**Hello World! | Print text | ✓  | ✓  |
 | **tv**[string] | **tv**Hello World! | Print text centered vertically | ✓  | ✓  |
@@ -110,7 +110,7 @@ void loop(void) {
 | **lh**[x,y,length] | **lh**50,50,20 | Draw a horizontal line | ✓ | ✓ |
 | **dl**[x1,y1,x2,y2] | **dl**10,10,50,50 | draw a line between 2 points | ✓ | ✓ |
 | **ro**[number] | **ro**1 | Set rotation setting for display (0-3 or 4-7 for BMP drawing) | ✓ | ✓ |
-| **rk**[`x,y,width,height,color1,color2`] | **rk**10,10,60,60,07e0,001f | Draw a filled rectangle at position **x**,**y** with a horizontal color gradient starting from **color1** on the left side and smoothly transitions to `color2` towards the right side | ✗ | ✓ |
+| fillRectHGradient(x,y,w,h,color1,color2) | **rk**10,10,60,60,07e0,001f | Draw a filled rectangle at position **x**,**y** with a horizontal color gradient starting from **color1** on the left side and smoothly transitions to `color2` towards the right side | ✗ | ✓ |
 
 
 ### Configuration
