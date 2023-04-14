@@ -100,7 +100,7 @@ void loop(void) {
 | drawPixel(x,y,color) | **dp**10,10 | Draw a pixel at position `x`,`y` using the current color | ✓ | ✓ |
 | drawCircle(x,y,r,color) | **ch**50,50,30 | Draw a circle outline at position `x`,`y` of radius `r` using the current color | ✓ | ✓ |
 | fillCircle(x,y,r,color) | **cf**50,50,30 | Draw a filled circle at position `x`,`y` of radius `r` using the current color  | ✓ | ✓ |
-| **gh**[x1,y1,x2,y2,x3,y3] | **gh**10,10,20,20,30,10 | Draw a triangle outline using 3 points (vertices) | ✓ | ✓ |
+| drawTriangle(x1,y1,x2,y2,x3,y3,color) | **gh**10,10,20,20,30,10 | Draw a triangle outline using 3 points `x1,y1,x2,y2,x3,y3` (vertices) using the current color | ✓ | ✓ |
 | **gf**[x1,y1,x2,y2,x3,y3] | **gf**10,10,20,20,30,10 | Draw a filled triangle using 3 points (vertices)| ✓ | ✓ |
 | **rh**[x,y,width,height] | **rh**20,20,40,30 | Draw a rectangle outline | ✓ | ✓ |
 | **rf**[x,y,width,height] | **rf**20,20,40,30 | Draw a filled rectangle | ✓ | ✓ |
