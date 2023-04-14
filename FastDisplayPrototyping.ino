@@ -26,6 +26,7 @@ void setup()
   sDisplay.runCommands(F("#fc7c;rh130,50,20,20;#263c;rf160,50,20,20;#efe0;ri10,100,40,40,10;"));
   sDisplay.runCommands(F("#f9e0;rj60,100,40,40,13;#1f9d;lv2,45,280;#07ff;lh2,170,240;"));
   sDisplay.runCommands(F("#ded8;dl2,170,240,320;"));
+  sDisplay.runCommands(F("ca50,50,50,40,0,180,00ff,ffff,1"));
 
   // tft.fillScreen(TFT_BLACK);
   // tft.fillRectHGradient(10,50,50,50,0x72ff,0xd2ff);
