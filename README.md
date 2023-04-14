@@ -107,6 +107,7 @@ void loop(void) {
 | drawCircle(x,y,r,color) | **ch**50,50,30 | Draw a circle outline with the center at position `x`,`y` of radius `r` using the current color | ✓ | ✓ |
 | fillCircle(x,y,r,color) | **cf**50,50,30 | Draw a filled circle with the center at position `x`,`y` of radius `r` using the current color  | ✓ | ✓ |
 | drawEllipse(x,y,r1,r2,color) | **ce**50,50,30 | Draw an ellipse outline with the center at position `x`,`y` of horizontal radius `r1` and vertical radius `r2` using the current color  | ✗ | ✓ |
+| fillEllipse(x,y,r1,r2,color) | **ce**50,50,30 | Draw a filled ellipse with the center at position `x`,`y` of horizontal radius `r1` and vertical radius `r2` using the current color  | ✗ | ✓ |
 | **Rectangle Functions** |                                    |             |              |          |
 | drawRect(x,y,w,h,color) | **rh**20,20,40,30 | Draw a rectangle outline at position `x`,`y` of width `w` and height `h` using the current color | ✓ | ✓ |
 | fillRect(x,y,w,h,color) | **rf**20,20,40,30 | Draw a filled rectangle at position `x`,`y` of width `w` and height `h` using the current color | ✓ | ✓ |
