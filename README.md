@@ -96,7 +96,7 @@ void loop(void) {
 |---------|-------|-------------|--------------|----------|
 | setTextColor(color) | #00FF | Set Text and Graphic `color` | ✓  | ✓  |
 | print(string) | **tt**Hello World! | Print `string` at current cursor position | ✓  | ✓  |
-| setTextSize(size) | **ts**3 | Set character `size` multiplier (this increases pixel size) | ✓ | ✓ |
+| setTextSize(size) | `ts`3 | Set character `size` multiplier (this increases pixel size) | ✓ | ✓ |
 | drawPixel(x,y,color) | **dp**10,10 | Draw a pixel at position `x`,`y` using the current color | ✓ | ✓ |
 | drawCircle(x,y,r,color) | **ch**50,50,30 | Draw a circle outline at position `x`,`y` of radius `r` using the current color | ✓ | ✓ |
 | **cf**[x,y,r] | **cf**50,50,30 | Draw a filled circle | ✓ | ✓ |
