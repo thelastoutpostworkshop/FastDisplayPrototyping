@@ -3,13 +3,13 @@
 #define OUTPUT_CODE_ON_SERIAL
 #include "src/FastDisplayPrototyping.h"
 
-
 TFT_eSPI tft = TFT_eSPI(); // Invoke custom library
 serialDisplay sDisplay(&tft);
 
 //------------------------------------------------------------------------------------------
 
-void setup() {
+void setup()
+{
   Serial.begin(115200);
 
   tft.begin();
@@ -17,7 +17,7 @@ void setup() {
 
   // tft.setFreeFont(LABEL2_FONT);
 
-  //Buffer Limit from the Serial Monitor is 64 bytes
+  // Buffer Limit from the Serial Monitor is 64 bytes
   sDisplay.runCommands(F("x;ts1;sc10,10;#17e0;thDisplay Prototyping;"));
   sDisplay.runCommands(F("sc10,30;ts1;thLibrary v1.0;lh0,22,w"));
   sDisplay.runCommands(F("sc10,10;tvVertical Center;sc10,85;ttNormal text;"));
@@ -31,7 +31,8 @@ void setup() {
   // tft.fillRectHGradient(10,50,50,50,0x72ff,0xd2ff);
 }
 
-void loop(void) {
+void loop(void)
+{
 
   sDisplay.readCommandsFromSerial();
 }

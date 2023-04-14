@@ -73,11 +73,12 @@ private:
   void closeCapture(Capture *);
   void nextArgCapture(Capture *);
   int32_t *getIntFromCapture(Capture *, int);
-  int32_t *getIntFromCapture(Capture *, int,int);
+  int32_t *getIntFromCapture(Capture *, int, int);
   int32_t getIntFromCapture(char *);
   float getFloatFromCapture(char *);
   bool getBoolFromCapture(char *);
   int getValueFromKeyword(char);
+  int32_t *getColorFromCapture(Capture *, int, int);
   uint32_t getColorFromCapture(char *);
   void captureCommand(char);
   boolean isCommand(const char *);
@@ -173,12 +174,21 @@ uint32_t serialDisplay::getColorFromCapture(char *capture)
 {
   return strtoul(capture, NULL, 16);
 }
+int32_t *serialDisplay::getColorFromCapture(Capture *capture, int start, int end)
+{
+  static int32_t res[MAX_ARG_CAPTURE];
+  for (int i = start; i <= end && i <= MAX_ARG_CAPTURE; i++)
+  {
+    res[i] = getColorFromCapture(capture->capture[i]);
+  }
+  return res;
+}
 
 int32_t *serialDisplay::getIntFromCapture(Capture *capture, int count)
 {
-  return getIntFromCapture(capture,0,count-1);
+  return getIntFromCapture(capture, 0, count - 1);
 }
-int32_t *serialDisplay::getIntFromCapture(Capture *capture, int start,int end)
+int32_t *serialDisplay::getIntFromCapture(Capture *capture, int start, int end)
 {
   static int32_t res[MAX_ARG_CAPTURE];
   for (int i = start; i <= end && i <= MAX_ARG_CAPTURE; i++)
@@ -515,7 +525,7 @@ void serialDisplay::executeCommand(void)
 {
   int16_t x, y, x1, y1;
   uint16_t w, h;
-  int32_t *arg;
+  int32_t *arg, *colorArg;
 
   if (currentColor == UNDEFINED)
   {
@@ -654,9 +664,10 @@ void serialDisplay::executeCommand(void)
     serialPrintFormattedMacro(this, PSTR("%s.drawPixel(%d,%d,0x%x);"), displayName, arg[0], arg[1], currentColor);
     break;
   case RECTANGLE_FILL_GRADIENT_HORIZONTAL:
-    arg = getIntFromCapture(&captureData, 6);
-    display->fillRectVGradient(arg[0], arg[1], arg[2], arg[3], arg[4], arg[5]);
-    serialPrintFormattedMacro(this, PSTR("%s.fillRectVGradient(%d,%d,%d,%d,0x%x,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5]);
+    arg = getIntFromCapture(&captureData, 0, 3);
+    colorArg = getColorFromCapture(&captureData, 4, 5);
+    display->fillRectHGradient(arg[0], arg[1], arg[2], arg[3], colorArg[4], colorArg[5]);
+    serialPrintFormattedMacro(this, PSTR("%s.fillRectVGradient(%d,%d,%d,%d,0x%x,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], colorArg[4], colorArg[5]);
     break;
   default:
     Serial.println(F("Unknown Command"));
