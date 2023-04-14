@@ -92,10 +92,8 @@ void loop(void) {
 
 | Graphical function | Corresponding Serial Command | Description | Adafruit GFX | TFT_eSPI |
 |---------|-------|-------------|--------------|----------|
-| **tt**[string] | **tt**Hello World! | Print text | ✓  | ✓  |
-| **tv**[string] | **tv**Hello World! | Print text centered vertically | ✓  | ✓  |
-| **th**[string] | **th**Hello World! | Print text centered horizontally | ✓  | ✓  |
-| **ts**[size] | **ts**3 | Set text size | ✓ | ✓ |
+| print(string) | **tt**Hello World! | Print `string` at current cursor position | ✓  | ✓  |
+| setTextSize(size) | **ts**3 | Set character `size` multiplier (this increases pixel size) | ✓ | ✓ |
 | **dp**[x,y] | **dp**10,10 | Draw a pixel at position x,y | ✓ | ✓ |
 | **ch**[x,y,radius] | **ch**50,50,30 | Draw a circle outline | ✓ | ✓ |
 | **cf**[x,y,radius] | **cf**50,50,30 | Draw a filled circle | ✓ | ✓ |
