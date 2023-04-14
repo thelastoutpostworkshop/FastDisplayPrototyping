@@ -96,7 +96,7 @@ void loop(void) {
 | Graphical function | Corresponding Serial Command Example | Description | 
 |--------------------|---------------------------------------|-------------|
 | **Text Functions** |                                       |             |  
-| setTextColor(color) ![GFX]![ESPI] | #00FF | Set Text and Graphic `color` | ✓ | ✓ |
+| setTextColor(color)<br>![GFX]![ESPI] | #00FF | Set Text and Graphic `color` | ✓ | ✓ |
 | setCursor(x,y) ![GFX]![ESPI] | **sc**10,20 | Set the text cursor at position `x`,`y`| 
 | print(string) ![GFX]![ESPI] | **tt**Hello World! | Print `string` at current cursor position | 
 | setTextSize(size) ![GFX]![ESPI] | **ts**3 | Set character `size` multiplier (increases pixel size) |
