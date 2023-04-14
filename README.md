@@ -126,4 +126,4 @@ void loop(void) {
 
 ### Library Size
 
-[badgeGFX](https://img.shields.io/badge/GFX-green)
+[badgeGFX]: https://img.shields.io/badge/GFX-green
