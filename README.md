@@ -110,7 +110,7 @@ void loop(void) {
 | fillRect(x,y,w,h,color) | **rf**20,20,40,30 | Draw a filled rectangle at position `x`,`y` of width `w` and height `h` using the current color | ✓ | ✓ |
 | **Rounded Rectangle Functions** |                             |             |              |          |
 | drawRoundRect<br>(x,y,w,h,r,color) | **ri**20,20,40,30,5 | Draw a rounded corner rectangle outline at position `x`,`y` of width `w`, height `h` and radius `r` using the current color | ✓ | ✓ |
-| fillRoundRect<br>(x,y,w,h,r,color) | **rj**20,20,40,30,5 | Draw a filled rounded corner rectangle at position `x`,`y` of width `w`, height `h` and radius `r` using the current
+| fillRoundRect<br>(x,y,w,h,r,color) | **rj**20,20,40,30,5 | Draw a filled rounded corner rectangle at position `x`,`y` of width `w`, height `h` and radius `r` using the current | ✓ | ✓ |
 | **Triangle Functions** |                                     |             |              |          |
 | drawTriangle<br>(x1,y1,x2,y2,x3,y3,color) | **gh**10,10,20,20,30,10 | Draw a triangle outline using 3 points `x1,y1,x2,y2,x3,y3` (vertices) using the current color | ✓ | ✓ |
 | fillTriangle<br>(x1,y1,x2,y2,x3,y3,color) | **gf**10,10,20,20,30,10 | Draw a filled triangle using 3 points `x1,y1,x2,y2,x3,y3` (vertices) using the current color| ✓ | ✓ |
