@@ -94,7 +94,7 @@ void loop(void) {
 
 | Graphical function | Corresponding Serial Command Example | Description | Adafruit GFX | TFT_eSPI |
 |---------|-------|-------------|--------------|----------|
-| setTextColor(color) | **#**00FF | Set Text and Graphic `color` | ✓  | ✓  |
+| setTextColor(color) | #00FF | Set Text and Graphic `color` | ✓  | ✓  |
 | print(string) | **tt**Hello World! | Print `string` at current cursor position | ✓  | ✓  |
 | setTextSize(size) | **ts**3 | Set character `size` multiplier (this increases pixel size) | ✓ | ✓ |
 | drawPixel(x,y,color) | **dp**10,10 | Draw a pixel at position `x`,`y` using the current color | ✓ | ✓ |
