@@ -90,27 +90,28 @@ void loop(void) {
 ### Serial Commands Reference
 >ℹ️ You can replace any numeric value with **w** or **h** and it will be replaced by the width or the height of the display, for example `lh10,10,w`
 
-| Command | Description | Usage | Adafruit GFX | TFT_eSPI |
-|---------|-------------|-------|--------------|------|
-| **tt**[string]| Print text | **tt**Hello World! | ✓  | ✓  |
-| **tv**[string]| Print text centered vertically | **tv**Hello World! | ✓  | ✓  |
-| **th**[string]| Print text centered horizontally | **th**Hello World! | ✓  | ✓  |
-| **ts**[size] | Set text size | **ts**3 | ✓ | ✓ |
-| **dp**[x,y] | Draw a pixel at position x,y | **dp**10,10 | ✓ | ✓ |
-| **ch**[x,y,radius] | Draw a circle outline | **ch**50,50,30 | ✓ | ✓ |
-| **cf**[x,y,radius] | Draw a filled circle | **cf**50,50,30 | ✓ | ✓ |
-| **gh**[x1,y1,x2,y2,x3,y3] | Draw a triangle outline using 3 points (vertices) | **gh**10,10,20,20,30,10 | ✓ | ✓ |
-| **gf**[x1,y1,x2,y2,x3,y3] | Draw a filled triangle using 3 points (vertices)| **gf**10,10,20,20,30,10 | ✓ | ✓ |
-| **rh**[x,y,width,height] | Draw a rectangle outline | **rh**20,20,40,30 | ✓ | ✓ |
-| **rf**[x,y,width,height] | Draw a filled rectangle | **rf**20,20,40,30 | ✓ | ✓ |
-| **ri**[x,y,width,height,radius] | Draw a rounded corner rectangle outline | **ri**20,20,40,30,5 | ✓ | ✓ |
-| **rj**[x,y,width,height,radius] | Draw a rounded corner filled rectangle | **rj**20,20,40,30,5 | ✓ | ✓ |
-| **sc**[x,y] | Set the text cursor position | **sc**10,20 | ✓ | ✓ |
-| **lv**[x,y,length] | Draw a vertical line | **lv**50,50,20 | ✓ | ✓ |
-| **lh**[x,y,length] | Draw a horizontal line | **lh**50,50,20 | ✓ | ✓ |
-| **dl**[x1,y1,x2,y2] | draw a line between 2 points | **dl**10,10,50,50 | ✓ | ✓ |
-| **ro**[number] | Set rotation setting for display (0-3 or 4-7 for BMP drawing) | **ro**1 | ✓ | ✓ |
-| **rk**[`x,y,width,height,color1,color2`] | Draw a filled rectangle at position **x**,**y** with a horizontal color gradient starting from **color1** on the left side and smoothly transitions to `color2` towards the right side | **rk**10,10,60,60,07e0,001f | ✗ | ✓ |
+| Command | Usage | Description | Adafruit GFX | TFT_eSPI |
+|---------|-------|-------------|--------------|----------|
+| **tt**[string] | **tt**Hello World! | Print text | ✓  | ✓  |
+| **tv**[string] | **tv**Hello World! | Print text centered vertically | ✓  | ✓  |
+| **th**[string] | **th**Hello World! | Print text centered horizontally | ✓  | ✓  |
+| **ts**[size] | **ts**3 | Set text size | ✓ | ✓ |
+| **dp**[x,y] | **dp**10,10 | Draw a pixel at position x,y | ✓ | ✓ |
+| **ch**[x,y,radius] | **ch**50,50,30 | Draw a circle outline | ✓ | ✓ |
+| **cf**[x,y,radius] | **cf**50,50,30 | Draw a filled circle | ✓ | ✓ |
+| **gh**[x1,y1,x2,y2,x3,y3] | **gh**10,10,20,20,30,10 | Draw a triangle outline using 3 points (vertices) | ✓ | ✓ |
+| **gf**[x1,y1,x2,y2,x3,y3] | **gf**10,10,20,20,30,10 | Draw a filled triangle using 3 points (vertices)| ✓ | ✓ |
+| **rh**[x,y,width,height] | **rh**20,20,40,30 | Draw a rectangle outline | ✓ | ✓ |
+| **rf**[x,y,width,height] | **rf**20,20,40,30 | Draw a filled rectangle | ✓ | ✓ |
+| **ri**[x,y,width,height,radius] | **ri**20,20,40,30,5 | Draw a rounded corner rectangle outline | ✓ | ✓ |
+| **rj**[x,y,width,height,radius] | **rj**20,20,40,30,5 | Draw a rounded corner filled rectangle | ✓ | ✓ |
+| **sc**[x,y] | **sc**10,20 | Set the text cursor position | ✓ | ✓ |
+| **lv**[x,y,length] | **lv**50,50,20 | Draw a vertical line | ✓ | ✓ |
+| **lh**[x,y,length] | **lh**50,50,20 | Draw a horizontal line | ✓ | ✓ |
+| **dl**[x1,y1,x2,y2] | **dl**10,10,50,50 | draw a line between 2 points | ✓ | ✓ |
+| **ro**[number] | **ro**1 | Set rotation setting for display (0-3 or 4-7 for BMP drawing) | ✓ | ✓ |
+| **rk**[`x,y,width,height,color1,color2`] | **rk**10,10,60,60,07e0,001f | Draw a filled rectangle at position **x**,**y** with a horizontal color gradient starting from **color1** on the left side and smoothly transitions to `color2` towards the right side | ✗ | ✓ |
+
 
 ### Configuration
 
