@@ -93,7 +93,7 @@ void loop(void) {
 >ℹ️ For colors you can use this [RGB565 Color Picker](http://www.barth-dev.de/online/rgb565-color-picker/#) (There are many others on the web)
 
 | Graphical function | Corresponding Serial Command Example | Description | Adafruit GFX | TFT_eSPI |
-|--------------------|---------------------------------------|-------------|--------------|----------|
+|--------------------|---------------------------------------|-------------|:--------------:|:----------:|
 | **Text Functions** |                                       |             |              |          |
 | setTextColor(color) | #00FF | Set Text and Graphic `color` | ✓ | ✓ |
 | setCursor(x,y) | **sc**10,20 | Set the text cursor at position `x`,`y`| ✓ | ✓ |
