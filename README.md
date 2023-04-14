@@ -108,7 +108,7 @@ void loop(void) {
 | fillCircle(x,y,r,color)<br>![GFX]![ESPI] | **cf**75,50,30 | Draw a filled circle with the center at position `x`,`y` of radius `r` using the current color  | 
 | drawEllipse(x,y,r1,r2,color)<br>![ESPI] | **ce**75,75,25,50 | Draw an ellipse outline with the center at position `x`,`y` of horizontal radius `r1` and vertical radius `r2` using the current color  |
 | fillEllipse(x,y,r1,r2,color)<br>![ESPI] | **cg**75,75,25,50 | Draw a filled ellipse with the center at position `x`,`y` of horizontal radius `r1` and vertical radius `r2` using the current color  | 
-| drawArc(x,y,r1,r2,startAngle,endAngle,<br>fgColor,bgColor,smoothArc)<br>![ESPI] | **ca**50,50,50,40,0,180,00ff,ffff,1 | Draw a filled ellipse with the center at position `x`,`y` of horizontal radius `r1` and vertical radius `r2` using the current color  | 
+| drawArc(x,y,r1,r2,startAngle,endAngle,<br>fgColor,bgColor,smoothArc)<br>![ESPI] | **ca**50,50,50,40,0,180,00ff,ffff,1 | Draw an arc with the center at position `x`,`y` outer radius of `r1` inner radius of `r2` starting at angle `startAngle` ending at `endAngle` using a foreground color `fgColor` and background color `bgColor` | 
 | **Rectangle Functions** |                                    |             |              
 | drawRect(x,y,w,h,color)<br>![GFX]![ESPI]  | **rh**20,20,40,30 | Draw a rectangle outline at position `x`,`y` of width `w` and height `h` using the current color | 
 | fillRect(x,y,w,h,color)<br>![GFX]![ESPI]  | **rf**20,20,40,30 | Draw a filled rectangle at position `x`,`y` of width `w` and height `h` using the current color | 
