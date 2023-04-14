@@ -68,6 +68,8 @@ private:
   const char *displayName;
 
   const char *displaySizeKeywords = "WwHh";
+  const char *trueS = "true";
+  const char *falseS = "false";
 
   void decodeInput(char input);
   void executeCommand(void);
@@ -712,7 +714,7 @@ void serialDisplay::executeCommand(void)
     colorArg = getColorFromCapture(&captureData, 6, 7);
     boolArg = getBoolFromCapture(&captureData, 8, 8);
     display->drawArc(arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], colorArg[6], colorArg[7], boolArg[8]);
-    serialPrintFormattedMacro(this, PSTR("%s.drawArc(%d,%d,%d,%d,%d,%d,0x%x,0x%x,%s);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], colorArg[6], colorArg[7], boolArg[8] ? "true" : "false");
+    serialPrintFormattedMacro(this, PSTR("%s.drawArc(%d,%d,%d,%d,%d,%d,0x%x,0x%x,%s);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], colorArg[6], colorArg[7], boolArg[8] ? trueS : falseS);
     break;
 #endif
   default:
