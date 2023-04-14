@@ -664,10 +664,12 @@ void serialDisplay::executeCommand(void)
     serialPrintFormattedMacro(this, PSTR("%s.drawPixel(%d,%d,0x%x);"), displayName, arg[0], arg[1], currentColor);
     break;
   case RECTANGLE_FILL_GRADIENT_HORIZONTAL:
+#if defined(_TFT_eSPIH_)
     arg = getIntFromCapture(&captureData, 0, 3);
     colorArg = getColorFromCapture(&captureData, 4, 5);
     display->fillRectHGradient(arg[0], arg[1], arg[2], arg[3], colorArg[4], colorArg[5]);
     serialPrintFormattedMacro(this, PSTR("%s.fillRectVGradient(%d,%d,%d,%d,0x%x,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], colorArg[4], colorArg[5]);
+#endif
     break;
   default:
     Serial.println(F("Unknown Command"));
