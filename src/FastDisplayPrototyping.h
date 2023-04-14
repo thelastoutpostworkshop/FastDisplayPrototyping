@@ -301,7 +301,7 @@ void serialDisplay::captureCommand(char input)
   closeCapture(&captureData);
 
   const char *commands[] = {"tt", "tv", "th", "ts", "ch", "cf", "gh", "gf", "rh", "rf", "ri", "rj",
-                            "sc", "lv", "lh", "dl", "ro", "dp", "rk", "ce", "cg","ca"};
+                            "sc", "lv", "lh", "dl", "ro", "dp", "rk", "ce", "cg", "ca"};
   const int numCommands = sizeof(commands) / sizeof(*commands);
 
   for (int i = 0; i < numCommands; i++)
@@ -691,7 +691,9 @@ void serialDisplay::executeCommand(void)
     serialPrintFormattedMacro(this, PSTR("%s.fillEllipse(%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], currentColor);
     break;
   case ARC:
-  break;
+    arg = getIntFromCapture(&captureData, 0, 5);
+    colorArg = getColorFromCapture(&captureData, 6, 7);
+    break;
 #endif
   default:
     Serial.println(F("Unknown Command"));
