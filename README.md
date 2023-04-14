@@ -104,8 +104,8 @@ void loop(void) {
 | fillTriangle<br>(x1,y1,x2,y2,x3,y3,color) | **gf**10,10,20,20,30,10 | Draw a filled triangle using 3 points `x1,y1,x2,y2,x3,y3` (vertices) using the current color| ✓ | ✓ |
 | drawRect(x,y,w,h,color) | **rh**20,20,40,30 | Draw a rectangle outline at position `x`,`y` of width `w` and height `h`using the current color | ✓ | ✓ |
 | fillRect(x,y,w,h,color) | **rf**20,20,40,30 | Draw a filled rectangle at position `x`,`y` of width `w` and height `h` using the current color | ✓ | ✓ |
-| drawRoundRect(x,y,w,h,r,color) | **ri**20,20,40,30,5 | Draw a rounded rectangle outline at position `x`,`y` of width `w`, height `h` and radius `r` using the current color | ✓ | ✓ |
-| **rj**[x,y,width,height,radius] | **rj**20,20,40,30,5 | Draw a rounded corner filled rectangle | ✓ | ✓ |
+| drawRoundRect<br>(x,y,w,h,r,color) | **ri**20,20,40,30,5 | Draw a rounded corner rectangle outline at position `x`,`y` of width `w`, height `h` and radius `r` using the current color | ✓ | ✓ |
+| fillRoundRect<br>(x,y,w,h,r,color) | **rj**20,20,40,30,5 | Draw a filled rounded corner rectangle at position `x`,`y` of width `w`, height `h` and radius `r` using the current color | ✓ | ✓ |
 | **sc**[x,y] | **sc**10,20 | Set the text cursor position | ✓ | ✓ |
 | **lv**[x,y,length] | **lv**50,50,20 | Draw a vertical line | ✓ | ✓ |
 | **lh**[x,y,length] | **lh**50,50,20 | Draw a horizontal line | ✓ | ✓ |
