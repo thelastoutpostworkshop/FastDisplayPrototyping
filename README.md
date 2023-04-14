@@ -80,6 +80,7 @@ void loop(void) {
 ```
 ### Examples
 >ℹ️ You can send multiple graphical commands through the Serial Monitor by seperating them with a semi-colon `;` <br>
+
 | Type this in the Serial Monitor | Result on the display |
 |---------|-------------|
 |x;sc10,10;thVertical Center | Clear screen & Text Centered vertically on row 10 |
