@@ -93,27 +93,6 @@ void loop(void) {
 >ℹ️ For colors you can use this [RGB565 Color Picker](http://www.barth-dev.de/online/rgb565-color-picker/#) (There are many others on the web)
 
 | Graphical function | Corresponding Serial Command Example | Description | Adafruit GFX | TFT_eSPI |
-|---------|-------|-------------|--------------|----------|
-| setTextColor(color) | #00FF | Set Text and Graphic `color` | ✓  | ✓  |
-| setCursor(x,y) | **sc**10,20 | Set the text cursor at position `x`,`y`| ✓ | ✓ |
-| print(string) | **tt**Hello World! | Print `string` at current cursor position | ✓  | ✓  |
-| setTextSize(size) | **ts**3 | Set character `size` multiplier (this increases pixel size) | ✓ | ✓ |
-| drawPixel(x,y,color) | **dp**10,10 | Draw a pixel at position `x`,`y` using the current color | ✓ | ✓ |
-| drawCircle(x,y,r,color) | **ch**50,50,30 | Draw a circle outline at position `x`,`y` of radius `r` using the current color | ✓ | ✓ |
-| fillCircle(x,y,r,color) | **cf**50,50,30 | Draw a filled circle at position `x`,`y` of radius `r` using the current color  | ✓ | ✓ |
-| drawTriangle<br>(x1,y1,x2,y2,x3,y3,color) | **gh**10,10,20,20,30,10 | Draw a triangle outline using 3 points `x1,y1,x2,y2,x3,y3` (vertices) using the current color | ✓ | ✓ |
-| fillTriangle<br>(x1,y1,x2,y2,x3,y3,color) | **gf**10,10,20,20,30,10 | Draw a filled triangle using 3 points `x1,y1,x2,y2,x3,y3` (vertices) using the current color| ✓ | ✓ |
-| drawRect(x,y,w,h,color) | **rh**20,20,40,30 | Draw a rectangle outline at position `x`,`y` of width `w` and height `h`using the current color | ✓ | ✓ |
-| fillRect(x,y,w,h,color) | **rf**20,20,40,30 | Draw a filled rectangle at position `x`,`y` of width `w` and height `h` using the current color | ✓ | ✓ |
-| drawRoundRect<br>(x,y,w,h,r,color) | **ri**20,20,40,30,5 | Draw a rounded corner rectangle outline at position `x`,`y` of width `w`, height `h` and radius `r` using the current color | ✓ | ✓ |
-| fillRoundRect<br>(x,y,w,h,r,color) | **rj**20,20,40,30,5 | Draw a filled rounded corner rectangle at position `x`,`y` of width `w`, height `h` and radius `r` using the current color | ✓ | ✓ |
-| drawFastVLine<br>(x,y,h,color) | **lv**50,50,20 | Draw a vertical line at position `x`,`y` and height `h` using the current color | ✓ | ✓ |
-| drawFastHLine<br>(x,y,w,color)  | **lh**50,50,20 | Draw a horizontal line at position `x`,`y` and width `w` using the current color | ✓ | ✓ |
-| drawLine(x1,y1,x2,y2) | **dl**10,10,50,50 | draw a line between 2 points `(x1,y1,x2,y2)` using the current color | ✓ | ✓ |
-| setRotation(r) | **ro**1 | Set rotation `r` for display (0-3 or 4-7 for BMP drawing) | ✓ | ✓ |
-| fillRectHGradient<br>(x,y,w,h,color1,color2) | **rk**10,10,60,60,07E0,001F | Draw a filled rectangle at position `x`,`y` of width `w` and height `h`, with a horizontal color gradient starting from `color1` on the left side and smoothly transitions to `color2` towards the right side | ✗ | ✓ |
-
-| Graphical function | Corresponding Serial Command Example | Description | Adafruit GFX | TFT_eSPI |
 |--------------------|---------------------------------------|-------------|--------------|----------|
 | **Text Functions** |                                       |             |              |          |
 | setTextColor(color) | #00FF | Set Text and Graphic `color` | ✓ | ✓ |
@@ -126,15 +105,15 @@ void loop(void) {
 | **Circle Functions** |                                       |             |              |          |
 | drawCircle(x,y,r,color) | **ch**50,50,30 | Draw a circle outline at position `x`,`y` of radius `r` using the current color | ✓ | ✓ |
 | fillCircle(x,y,r,color) | **cf**50,50,30 | Draw a filled circle at position `x`,`y` of radius `r` using the current color  | ✓ | ✓ |
-| **Triangle Functions** |                                     |             |              |          |
-| drawTriangle(x1,y1,x2,y2,x3,y3,color) | **gh**10,10,20,20,30,10 | Draw a triangle outline using 3 points `x1,y1,x2,y2,x3,y3` (vertices) using the current color | ✓ | ✓ |
-| fillTriangle(x1,y1,x2,y2,x3,y3,color) | **gf**10,10,20,20,30,10 | Draw a filled triangle using 3 points `x1,y1,x2,y2,x3,y3` (vertices) using the current color| ✓ | ✓ |
 | **Rectangle Functions** |                                    |             |              |          |
 | drawRect(x,y,w,h,color) | **rh**20,20,40,30 | Draw a rectangle outline at position `x`,`y` of width `w` and height `h` using the current color | ✓ | ✓ |
 | fillRect(x,y,w,h,color) | **rf**20,20,40,30 | Draw a filled rectangle at position `x`,`y` of width `w` and height `h` using the current color | ✓ | ✓ |
 | **Rounded Rectangle Functions** |                             |             |              |          |
-| drawRoundRect(x,y,w,h,r,color) | **ri**20,20,40,30,5 | Draw a rounded corner rectangle outline at position `x`,`y` of width `w`, height `h` and radius `r` using the current color | ✓ | ✓ |
-| fillRoundRect(x,y,w,h,r,color) | **rj**20,20,40,30,5 | Draw a filled rounded corner rectangle at position `x`,`y` of width `w`, height `h` and radius `r` using the current
+| drawRoundRect<br>(x,y,w,h,r,color) | **ri**20,20,40,30,5 | Draw a rounded corner rectangle outline at position `x`,`y` of width `w`, height `h` and radius `r` using the current color | ✓ | ✓ |
+| fillRoundRect<br>(x,y,w,h,r,color) | **rj**20,20,40,30,5 | Draw a filled rounded corner rectangle at position `x`,`y` of width `w`, height `h` and radius `r` using the current
+| **Triangle Functions** |                                     |             |              |          |
+| drawTriangle<br>(x1,y1,x2,y2,x3,y3,color) | **gh**10,10,20,20,30,10 | Draw a triangle outline using 3 points `x1,y1,x2,y2,x3,y3` (vertices) using the current color | ✓ | ✓ |
+| fillTriangle<br>(x1,y1,x2,y2,x3,y3,color) | **gf**10,10,20,20,30,10 | Draw a filled triangle using 3 points `x1,y1,x2,y2,x3,y3` (vertices) using the current color| ✓ | ✓ |
 
 ### Using the Serial Commands in Code
 
