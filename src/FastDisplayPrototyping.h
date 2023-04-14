@@ -35,6 +35,7 @@ private:
     TEXT_SIZE,
     CIRCLE_HOLLOW,
     CIRCLE_FILL,
+    ELLIPSE_OUTLINE,
     TRIANGLE_HOLLOW,
     TRIANGLE_FILL,
     RECTANGLE_HOLLOW,
@@ -297,7 +298,7 @@ void serialDisplay::captureCommand(char input)
   captureInput(&captureData, input);
   closeCapture(&captureData);
 
-  const char *commands[] = {"tt", "tv", "th", "ts", "ch", "cf", "gh", "gf", "rh", "rf", "ri", "rj", "sc", "lv", "lh", "dl", "ro", "dp", "rk"};
+  const char *commands[] = {"tt", "tv", "th", "ts", "ch", "cf", "gh", "gf", "rh", "rf", "ri", "rj", "sc", "lv", "lh", "dl", "ro", "dp", "rk", "ce"};
   const int numCommands = sizeof(commands) / sizeof(*commands);
 
   for (int i = 0; i < numCommands; i++)
@@ -381,6 +382,10 @@ void serialDisplay::captureCommand(char input)
       case 18:
         currentMode = RECTANGLE_FILL_GRADIENT_HORIZONTAL;
         openCapture(&captureData, 6);
+        break;
+      case 19:
+        currentMode = ELLIPSE_OUTLINE;
+        openCapture(&captureData, 4);
         break;
       default:
         Serial.println(F("Unknown Command"));
@@ -469,6 +474,7 @@ void serialDisplay::decodeInput(char input)
   case TRIANGLE_HOLLOW:
   case CIRCLE_FILL:
   case CIRCLE_HOLLOW:
+  case ELLIPSE_OUTLINE:
   case ROTATE:
   case PIXEL:
     if (input == ',')
@@ -663,14 +669,19 @@ void serialDisplay::executeCommand(void)
     display->drawPixel(arg[0], arg[1], currentColor);
     serialPrintFormattedMacro(this, PSTR("%s.drawPixel(%d,%d,0x%x);"), displayName, arg[0], arg[1], currentColor);
     break;
-  case RECTANGLE_FILL_GRADIENT_HORIZONTAL:
 #if defined(_TFT_eSPIH_)
+  case RECTANGLE_FILL_GRADIENT_HORIZONTAL:
     arg = getIntFromCapture(&captureData, 0, 3);
     colorArg = getColorFromCapture(&captureData, 4, 5);
     display->fillRectHGradient(arg[0], arg[1], arg[2], arg[3], colorArg[4], colorArg[5]);
     serialPrintFormattedMacro(this, PSTR("%s.fillRectVGradient(%d,%d,%d,%d,0x%x,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], colorArg[4], colorArg[5]);
-#endif
     break;
+  case ELLIPSE_OUTLINE:
+    arg = getIntFromCapture(&captureData, 4);
+    display->drawEllipse(arg[0], arg[1], arg[2], arg[3], currentColor);
+    serialPrintFormattedMacro(this, PSTR("%s.drawEllipse(%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], currentColor);
+    break;
+#endif
   default:
     Serial.println(F("Unknown Command"));
     break;
