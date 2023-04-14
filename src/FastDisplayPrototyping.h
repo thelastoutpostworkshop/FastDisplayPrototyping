@@ -229,12 +229,9 @@ bool *serialDisplay::getBoolFromCapture(Capture *capture, int start, int end)
 
 bool serialDisplay::getBoolFromCapture(char *capture)
 {
-  if (!containsOnlyDigits(capture))
+  if (capture[0] == '1')
   {
-    if (getValueFromKeyword(capture[0]) == 1)
-    {
-      return true;
-    }
+    return true;
   }
   return false;
 }
@@ -253,14 +250,6 @@ int serialDisplay::getValueFromKeyword(char c)
     case 'H':
     case 'h':
       return (displayHeight);
-      break;
-    case 'T':
-    case 't':
-      return 1;
-      break;
-    case 'F':
-    case 'f':
-      return 0;
       break;
     }
   }
