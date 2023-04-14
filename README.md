@@ -90,7 +90,7 @@ void loop(void) {
 ### Serial Commands Reference
 >ℹ️ You can replace any numeric value with **w** or **h** and it will be replaced by the width or the height of the display, for example `lh10,10,w`
 
-| Graphical function | Serial Command | Description | Adafruit GFX | TFT_eSPI |
+| Graphical function | Corresponding Serial Command | Description | Adafruit GFX | TFT_eSPI |
 |---------|-------|-------------|--------------|----------|
 | **tt**[string] | **tt**Hello World! | Print text | ✓  | ✓  |
 | **tv**[string] | **tv**Hello World! | Print text centered vertically | ✓  | ✓  |
