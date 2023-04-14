@@ -89,7 +89,7 @@ void loop(void) {
 
 ### Serial Commands Reference
 >ℹ️ You can replace any numeric value with **w** or **h** and it will be replaced by the width or the height of the display, for example `lh10,10,w`<br>
->ℹ️ For most serial commands, you don't need to specify a color, as they will use the color provided by the # serial command. This reduces the amount of typing needed<br>
+>ℹ️ For most serial commands, you don't need to specify a color, as they will use the current color set by the `#` serial command. This reduces the amount of typing needed<br>
 >ℹ️ For colors you can use this [RGB565 Color Picker](http://www.barth-dev.de/online/rgb565-color-picker/#) (There are many others on the web)
 
 | Graphical function | Corresponding Serial Command Example | Description | Adafruit GFX | TFT_eSPI |
@@ -98,8 +98,8 @@ void loop(void) {
 | print(string) | **tt**Hello World! | Print `string` at current cursor position | ✓  | ✓  |
 | setTextSize(size) | **ts**3 | Set character `size` multiplier (this increases pixel size) | ✓ | ✓ |
 | drawPixel(x,y,color) | **dp**10,10 | Draw a pixel at position `x`,`y` using the current color | ✓ | ✓ |
-| **ch**[x,y,radius] | **ch**50,50,30 | Draw a circle outline | ✓ | ✓ |
-| **cf**[x,y,radius] | **cf**50,50,30 | Draw a filled circle | ✓ | ✓ |
+| drawCircle(x,y,r,color) | **ch**50,50,30 | Draw a circle outline at position `x`,`y` of radius `r` using the current color | ✓ | ✓ |
+| **cf**[x,y,r] | **cf**50,50,30 | Draw a filled circle | ✓ | ✓ |
 | **gh**[x1,y1,x2,y2,x3,y3] | **gh**10,10,20,20,30,10 | Draw a triangle outline using 3 points (vertices) | ✓ | ✓ |
 | **gf**[x1,y1,x2,y2,x3,y3] | **gf**10,10,20,20,30,10 | Draw a filled triangle using 3 points (vertices)| ✓ | ✓ |
 | **rh**[x,y,width,height] | **rh**20,20,40,30 | Draw a rectangle outline | ✓ | ✓ |
