@@ -107,8 +107,8 @@ void loop(void) {
 | fillRect(x,y,w,h,color) | **rf**20,20,40,30 | Draw a filled rectangle at position `x`,`y` of width `w` and height `h` using the current color | ✓ | ✓ |
 | drawRoundRect<br>(x,y,w,h,r,color) | **ri**20,20,40,30,5 | Draw a rounded corner rectangle outline at position `x`,`y` of width `w`, height `h` and radius `r` using the current color | ✓ | ✓ |
 | fillRoundRect<br>(x,y,w,h,r,color) | **rj**20,20,40,30,5 | Draw a filled rounded corner rectangle at position `x`,`y` of width `w`, height `h` and radius `r` using the current color | ✓ | ✓ |
-| drawFastVLine(x,y,h,color) | **lv**50,50,20 | Draw a vertical line at position `x`,`y` and height `h` using the current color | ✓ | ✓ |
-| drawFastHLine(x,y,w,color)  | **lh**50,50,20 | Draw a horizontal line at position `x`,`y` and width `w` using the current color | ✓ | ✓ |
+| drawFastVLine<br>(x,y,h,color) | **lv**50,50,20 | Draw a vertical line at position `x`,`y` and height `h` using the current color | ✓ | ✓ |
+| drawFastHLine<br>(x,y,w,color)  | **lh**50,50,20 | Draw a horizontal line at position `x`,`y` and width `w` using the current color | ✓ | ✓ |
 | drawLine(x1,y1,x2,y2) | **dl**10,10,50,50 | draw a line between 2 points `(x1,y1,x2,y2)` using the current color | ✓ | ✓ |
 | setRotation(r) | **ro**1 | Set rotation `r` for display (0-3 or 4-7 for BMP drawing) | ✓ | ✓ |
 | fillRectHGradient<br>(x,y,w,h,color1,color2) | **rk**10,10,60,60,07e0,001f | Draw a filled rectangle at position `x`,`y` of width `w` and height `h`, with a horizontal color gradient starting from `color1` on the left side and smoothly transitions to `color2` towards the right side | ✗ | ✓ |
