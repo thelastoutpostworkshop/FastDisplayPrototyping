@@ -91,13 +91,13 @@ void loop(void) {
 >ℹ️ You can replace any numeric value with **w** or **h** and it will be replaced by the width or the height of the display, for example `lh10,10,w`<br>
 >ℹ️ For most serial commands, you don't need to specify a color, as they will use the current color set by the `#` serial command. This reduces the amount of typing needed<br>
 >ℹ️ For colors you can use this [RGB565 Color Picker](http://www.barth-dev.de/online/rgb565-color-picker/#) (There are many others on the web)<br>
->ℹ️ A graphical function supported by Adafruit GFX is indicated with ![badgeGFX] and this one for TFT_eSPI ![eSPI](https://img.shields.io/badge/eSPI-blue)   
+>ℹ️ A graphical function supported by Adafruit GFX is indicated with ![GFX] and supported by TFT_eSPI is indicated with ![ESPI]
 
 | Graphical function | Corresponding Serial Command Example | Description | 
 |--------------------|---------------------------------------|-------------|
 | **Text Functions** |                                       |             |  
-| setTextColor(color)![GFX] | #00FF | Set Text and Graphic `color` | ✓ | ✓ |
-| setCursor(x,y) | **sc**10,20 | Set the text cursor at position `x`,`y`| 
+| setTextColor(color)![GFX]![ESPI] | #00FF | Set Text and Graphic `color` | ✓ | ✓ |
+| setCursor(x,y)![GFX]![ESPI] | **sc**10,20 | Set the text cursor at position `x`,`y`| 
 | print(string) | **tt**Hello World! | Print `string` at current cursor position | 
 | setTextSize(size) | **ts**3 | Set character `size` multiplier (increases pixel size) |
 | **Basic Drawing Functions** |                                 |             |              
@@ -126,4 +126,5 @@ void loop(void) {
 
 ### Library Size
 
-[badgeGFX]: https://img.shields.io/badge/GFX-green
+[GFX]: https://img.shields.io/badge/GFX-green
+[ESPI]: https://img.shields.io/badge/eSPI-blue
