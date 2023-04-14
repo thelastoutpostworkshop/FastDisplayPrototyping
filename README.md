@@ -96,27 +96,27 @@ void loop(void) {
 | Graphical function | Corresponding Serial Command Example | Description | 
 |--------------------|---------------------------------------|-------------|
 | **Text Functions** |                                       |             |  
-| setTextColor(color)![GFX]![ESPI] | #00FF | Set Text and Graphic `color` | ✓ | ✓ |
-| setCursor(x,y)![GFX]![ESPI] | **sc**10,20 | Set the text cursor at position `x`,`y`| 
-| print(string)![GFX]![ESPI] | **tt**Hello World! | Print `string` at current cursor position | 
-| setTextSize(size)![GFX]![ESPI] | **ts**3 | Set character `size` multiplier (increases pixel size) |
+| setTextColor(color) ![GFX]![ESPI] | #00FF | Set Text and Graphic `color` | ✓ | ✓ |
+| setCursor(x,y) ![GFX]![ESPI] | **sc**10,20 | Set the text cursor at position `x`,`y`| 
+| print(string) ![GFX]![ESPI] | **tt**Hello World! | Print `string` at current cursor position | 
+| setTextSize(size) ![GFX]![ESPI] | **ts**3 | Set character `size` multiplier (increases pixel size) |
 | **Basic Drawing Functions** |                                 |             |              
-| drawPixel(x,y,color)![GFX]![ESPI] | **dp**10,10 | Draw a pixel at position `x`,`y` using the current color |
-| drawLine(x1,y1,x2,y2)![GFX]![ESPI] | **dl**10,10,50,50 | Draw a line between 2 points `(x1,y1,x2,y2)` using the current color | 
+| drawPixel(x,y,color) ![GFX]![ESPI] | **dp**10,10 | Draw a pixel at position `x`,`y` using the current color |
+| drawLine(x1,y1,x2,y2) ![GFX]![ESPI] | **dl**10,10,50,50 | Draw a line between 2 points `(x1,y1,x2,y2)` using the current color | 
 | **Circle Functions** |                                       |             |              
-| drawCircle(x,y,r,color)![GFX]![ESPI] | **ch**50,50,30 | Draw a circle outline with the center at position `x`,`y` of radius `r` using the current color | 
-| fillCircle(x,y,r,color)![GFX]![ESPI] | **cf**75,50,30 | Draw a filled circle with the center at position `x`,`y` of radius `r` using the current color  | 
-| drawEllipse(x,y,r1,r2,color)![ESPI] | **ce**75,75,25,50 | Draw an ellipse outline with the center at position `x`,`y` of horizontal radius `r1` and vertical radius `r2` using the current color  |
-| fillEllipse(x,y,r1,r2,color)![ESPI] | **cg**75,75,25,50 | Draw a filled ellipse with the center at position `x`,`y` of horizontal radius `r1` and vertical radius `r2` using the current color  | 
-| drawArc(x,y,r1,r2,startAngle,endAngle,<br>fgColor,bgColor,smoothArc)![ESPI] | **ca**50,50,50,40,0,180,00ff,ffff,1 | Draw a filled ellipse with the center at position `x`,`y` of horizontal radius `r1` and vertical radius `r2` using the current color  | 
+| drawCircle(x,y,r,color) ![GFX]![ESPI] | **ch**50,50,30 | Draw a circle outline with the center at position `x`,`y` of radius `r` using the current color | 
+| fillCircle(x,y,r,color) ![GFX]![ESPI] | **cf**75,50,30 | Draw a filled circle with the center at position `x`,`y` of radius `r` using the current color  | 
+| drawEllipse(x,y,r1,r2,color) ![ESPI] | **ce**75,75,25,50 | Draw an ellipse outline with the center at position `x`,`y` of horizontal radius `r1` and vertical radius `r2` using the current color  |
+| fillEllipse(x,y,r1,r2,color) ![ESPI] | **cg**75,75,25,50 | Draw a filled ellipse with the center at position `x`,`y` of horizontal radius `r1` and vertical radius `r2` using the current color  | 
+| drawArc(x,y,r1,r2,startAngle,endAngle,<br>fgColor,bgColor,smoothArc) ![ESPI] | **ca**50,50,50,40,0,180,00ff,ffff,1 | Draw a filled ellipse with the center at position `x`,`y` of horizontal radius `r1` and vertical radius `r2` using the current color  | 
 | **Rectangle Functions** |                                    |             |              
-| drawRect(x,y,w,h,color) | **rh**20,20,40,30 | Draw a rectangle outline at position `x`,`y` of width `w` and height `h` using the current color | 
-| fillRect(x,y,w,h,color) | **rf**20,20,40,30 | Draw a filled rectangle at position `x`,`y` of width `w` and height `h` using the current color | 
-| drawRoundRect<br>(x,y,w,h,r,color) | **ri**20,20,40,30,5 | Draw a rounded corner rectangle outline at position `x`,`y` of width `w`, height `h` and radius `r` using the current color | 
-| fillRoundRect<br>(x,y,w,h,r,color) | **rj**20,20,40,30,5 | Draw a filled rounded corner rectangle at position `x`,`y` of width `w`, height `h` and radius `r` using the current | 
+| drawRect(x,y,w,h,color) ![GFX]![ESPI]  | **rh**20,20,40,30 | Draw a rectangle outline at position `x`,`y` of width `w` and height `h` using the current color | 
+| fillRect(x,y,w,h,color) ![GFX]![ESPI]  | **rf**20,20,40,30 | Draw a filled rectangle at position `x`,`y` of width `w` and height `h` using the current color | 
+| drawRoundRect<br>(x,y,w,h,r,color) ![GFX]![ESPI]  | **ri**20,20,40,30,5 | Draw a rounded corner rectangle outline at position `x`,`y` of width `w`, height `h` and radius `r` using the current color | 
+| fillRoundRect<br>(x,y,w,h,r,color) ![GFX]![ESPI] | **rj**20,20,40,30,5 | Draw a filled rounded corner rectangle at position `x`,`y` of width `w`, height `h` and radius `r` using the current | 
 | **Triangle Functions** |                                     |             |              
-| drawTriangle<br>(x1,y1,x2,y2,x3,y3,color) | **gh**10,10,20,20,30,10 | Draw a triangle outline using 3 points `x1,y1,x2,y2,x3,y3` (vertices) using the current color | 
-| fillTriangle<br>(x1,y1,x2,y2,x3,y3,color) | **gf**10,10,20,20,30,10 | Draw a filled triangle using 3 points `x1,y1,x2,y2,x3,y3` (vertices) using the current color| 
+| drawTriangle<br>(x1,y1,x2,y2,x3,y3,color) ![GFX]![ESPI]  | **gh**10,10,20,20,30,10 | Draw a triangle outline using 3 points `x1,y1,x2,y2,x3,y3` (vertices) using the current color | 
+| fillTriangle<br>(x1,y1,x2,y2,x3,y3,color) ![GFX]![ESPI]  | **gf**10,10,20,20,30,10 | Draw a filled triangle using 3 points `x1,y1,x2,y2,x3,y3` (vertices) using the current color| 
 
 ### Using the Serial Commands in Code
 
