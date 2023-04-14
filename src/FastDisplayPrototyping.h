@@ -37,6 +37,7 @@ private:
     CIRCLE_FILL,
     ELLIPSE_OUTLINE,
     ELLIPSE_FILL,
+    ARC,
     TRIANGLE_HOLLOW,
     TRIANGLE_FILL,
     RECTANGLE_HOLLOW,
@@ -299,7 +300,8 @@ void serialDisplay::captureCommand(char input)
   captureInput(&captureData, input);
   closeCapture(&captureData);
 
-  const char *commands[] = {"tt", "tv", "th", "ts", "ch", "cf", "gh", "gf", "rh", "rf", "ri", "rj", "sc", "lv", "lh", "dl", "ro", "dp", "rk", "ce","cg"};
+  const char *commands[] = {"tt", "tv", "th", "ts", "ch", "cf", "gh", "gf", "rh", "rf", "ri", "rj",
+                            "sc", "lv", "lh", "dl", "ro", "dp", "rk", "ce", "cg","ca"};
   const int numCommands = sizeof(commands) / sizeof(*commands);
 
   for (int i = 0; i < numCommands; i++)
@@ -479,10 +481,12 @@ void serialDisplay::decodeInput(char input)
   case TRIANGLE_HOLLOW:
   case CIRCLE_FILL:
   case CIRCLE_HOLLOW:
+  case ARC:
   case ELLIPSE_OUTLINE:
   case ELLIPSE_FILL:
   case ROTATE:
   case PIXEL:
+  case DISPLAY_COLOR:
     if (input == ',')
     {
       nextArgCapture(&captureData);
@@ -493,12 +497,6 @@ void serialDisplay::decodeInput(char input)
       {
         captureInput(&captureData, input);
       }
-    }
-    break;
-  case DISPLAY_COLOR:
-    if (isdigit(input) || (input >= 'a' && input <= 'f') || (input >= 'A' && input <= 'F'))
-    {
-      captureInput(&captureData, input);
     }
     break;
   case TEXT_SIZE:
@@ -692,6 +690,8 @@ void serialDisplay::executeCommand(void)
     display->fillEllipse(arg[0], arg[1], arg[2], arg[3], currentColor);
     serialPrintFormattedMacro(this, PSTR("%s.fillEllipse(%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], currentColor);
     break;
+  case ARC:
+  break;
 #endif
   default:
     Serial.println(F("Unknown Command"));
