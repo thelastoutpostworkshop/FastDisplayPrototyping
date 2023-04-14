@@ -94,7 +94,7 @@ void loop(void) {
 |---------|-------|-------------|--------------|----------|
 | print(string) | **tt**Hello World! | Print `string` at current cursor position | ✓  | ✓  |
 | setTextSize(size) | **ts**3 | Set character `size` multiplier (this increases pixel size) | ✓ | ✓ |
-| **dp**[x,y] | **dp**10,10 | Draw a pixel at position x,y | ✓ | ✓ |
+| drawPixel(x,y,color) | **dp**10,10 | Draw a pixel at position `x`,`y` using the current color | ✓ | ✓ |
 | **ch**[x,y,radius] | **ch**50,50,30 | Draw a circle outline | ✓ | ✓ |
 | **cf**[x,y,radius] | **cf**50,50,30 | Draw a filled circle | ✓ | ✓ |
 | **gh**[x1,y1,x2,y2,x3,y3] | **gh**10,10,20,20,30,10 | Draw a triangle outline using 3 points (vertices) | ✓ | ✓ |
