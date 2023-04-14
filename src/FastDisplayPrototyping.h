@@ -408,7 +408,7 @@ void serialDisplay::captureCommand(char input)
         break;
       case 21:
         currentMode = ARC;
-        openCapture(&captureData, 4);
+        openCapture(&captureData, 9);
         break;
       default:
         Serial.println(F("Unknown Command"));
