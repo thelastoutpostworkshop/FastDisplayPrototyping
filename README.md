@@ -110,7 +110,7 @@ void loop(void) {
 | **lh**[x,y,length] | Draw a horizontal line | **lh**50,50,20 | ✓ | ✓ |
 | **dl**[x1,y1,x2,y2] | draw a line between 2 points | **dl**10,10,50,50 | ✓ | ✓ |
 | **ro**[number] | Set rotation setting for display (0-3 or 4-7 for BMP drawing) | **ro**1 | ✓ | ✓ |
-| **rk**[x,y,width,height,color1,color2] | Draw a filled rectangle at position **x**,**y** with a horizontal color gradient starting from **color1** on the left side and smoothly transitions to **color2** towards the right side | **rk**10,10,60,60,07e0,001f | ✗ | ✓ |
+| **rk**[x,y,width,height,color1,color2] | Draw a filled rectangle at position **x**,**y** with a horizontal color gradient starting from **color1** on the left side and smoothly transitions to `color2` towards the right side | **rk**10,10,60,60,07e0,001f | ✗ | ✓ |
 
 ### Configuration
 
