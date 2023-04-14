@@ -80,6 +80,7 @@ private:
   int32_t getIntFromCapture(char *);
   float getFloatFromCapture(char *);
   bool getBoolFromCapture(char *);
+  bool *getBoolFromCapture(Capture *, int, int);
   int getValueFromKeyword(char);
   int32_t *getColorFromCapture(Capture *, int, int);
   uint32_t getColorFromCapture(char *);
@@ -191,6 +192,7 @@ int32_t *serialDisplay::getIntFromCapture(Capture *capture, int count)
 {
   return getIntFromCapture(capture, 0, count - 1);
 }
+
 int32_t *serialDisplay::getIntFromCapture(Capture *capture, int start, int end)
 {
   static int32_t res[MAX_ARG_CAPTURE];
@@ -211,6 +213,16 @@ int32_t serialDisplay::getIntFromCapture(char *capture)
   {
     return getValueFromKeyword(capture[0]);
   }
+}
+
+bool *serialDisplay::getBoolFromCapture(Capture *capture, int start, int end)
+{
+  static bool res[MAX_ARG_CAPTURE];
+  for (int i = start; i <= end && i <= MAX_ARG_CAPTURE; i++)
+  {
+    res[i] = getBoolFromCapture(capture->capture[i]);
+  }
+  return res;
 }
 
 bool serialDisplay::getBoolFromCapture(char *capture)
@@ -536,6 +548,7 @@ void serialDisplay::executeCommand(void)
   int16_t x, y, x1, y1;
   uint16_t w, h;
   int32_t *arg, *colorArg;
+  bool *boolArg;
 
   if (currentColor == UNDEFINED)
   {
@@ -693,6 +706,9 @@ void serialDisplay::executeCommand(void)
   case ARC:
     arg = getIntFromCapture(&captureData, 0, 5);
     colorArg = getColorFromCapture(&captureData, 6, 7);
+    boolArg = getBoolFromCapture(&captureData, 8, 8);
+    display->drawArc(arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], colorArg[6], colorArg[7], boolArg[8]);
+    serialPrintFormattedMacro(this, PSTR("%s.drawArc(%d,%d,%d,%d,%d,%d,0x%x,0x%x,%s);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], colorArg[6], colorArg[7], boolArg[8] ? "true" : "false");
     break;
 #endif
   default:
