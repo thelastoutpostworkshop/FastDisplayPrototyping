@@ -498,6 +498,7 @@ void serialDisplay::decodeInput(char input)
   case TRIANGLE_HOLLOW:
   case CIRCLE_FILL:
   case CIRCLE_HOLLOW:
+  case CIRCLE_SMOOTH_OUTLINE:
   case ARC:
   case ARC_SMOOTH:
   case ELLIPSE_OUTLINE:
@@ -736,3 +737,4 @@ void serialDisplay::executeCommand(void)
   }
   currentMode = UNDEFINED;
 }
+cb50,25,80,70,300,360,00f5,00,1
