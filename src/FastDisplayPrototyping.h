@@ -47,6 +47,7 @@ private:
     RECTANGLE_FILL,
     RECTANGLE_FILL_GRADIENT_HORIZONTAL,
     RECTANGLE_ROUND_HOLLOW,
+    RECTANGLE_ROUND_SMOOTH_OUTLINE,
     RECTANGLE_ROUND_FILL,
     LINE_FAST_VERTICAL,
     LINE_FAST_HORIZONTAL,
@@ -307,7 +308,8 @@ void serialDisplay::captureCommand(char input)
   closeCapture(&captureData);
 
   const char *commands[] = {"tt", "tv", "th", "ts", "ch", "cf", "gh", "gf", "rh", "rf", "ri", "rj",
-                            "sc", "lv", "lh", "dl", "ro", "dp", "rk", "ce", "cg", "ca","cb","ci","cj"};
+                            "sc", "lv", "lh", "dl", "ro", "dp", "rk", "ce", "cg", "ca","cb","ci","cj",
+                            "rs"};
   const int numCommands = sizeof(commands) / sizeof(*commands);
 
   for (int i = 0; i < numCommands; i++)
@@ -416,6 +418,10 @@ void serialDisplay::captureCommand(char input)
         currentMode = CIRCLE_SMOOTH_FILL;
         openCapture(&captureData, 5);
         break;
+      case 25:
+        currentMode = RECTANGLE_ROUND_SMOOTH_OUTLINE;
+        openCapture(&captureData, 8);
+        break;
       default:
         Serial.println(F("Unknown Command"));
         break;
@@ -499,6 +505,7 @@ void serialDisplay::decodeInput(char input)
   case RECTANGLE_FILL:
   case RECTANGLE_FILL_GRADIENT_HORIZONTAL:
   case RECTANGLE_HOLLOW:
+  case RECTANGLE_ROUND_SMOOTH_OUTLINE:
   case TRIANGLE_FILL:
   case TRIANGLE_HOLLOW:
   case CIRCLE_FILL:
@@ -741,6 +748,12 @@ void serialDisplay::executeCommand(void)
     colorArg = getColorFromCapture(&captureData, 3, 4);
     display->fillSmoothCircle(arg[0], arg[1], arg[2], colorArg[3], colorArg[4]);
     serialPrintFormattedMacro(this, PSTR("%s.fillSmoothCircle(%d,%d,%d,0x%x,0x%x);"), displayName, arg[0], arg[1], arg[2], colorArg[3], colorArg[4]);
+    break;
+  case RECTANGLE_ROUND_SMOOTH_OUTLINE:
+    arg = getIntFromCapture(&captureData, 0, 5);
+    colorArg = getColorFromCapture(&captureData, 6, 7);
+    display->drawSmoothRoundRect(arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], colorArg[6], colorArg[7]);
+    serialPrintFormattedMacro(this, PSTR("%s.drawSmoothRoundRect(%d,%d,%d,%d,%d,%d,0x%x,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], colorArg[6], colorArg[7]);
     break;
 #endif
   default:
