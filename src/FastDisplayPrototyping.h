@@ -36,6 +36,7 @@ private:
     CIRCLE_HOLLOW,
     CIRCLE_FILL,
     CIRCLE_SMOOTH_OUTLINE,
+    CIRCLE_SMOOTH_FILL,
     ELLIPSE_OUTLINE,
     ELLIPSE_FILL,
     ARC,
@@ -306,7 +307,7 @@ void serialDisplay::captureCommand(char input)
   closeCapture(&captureData);
 
   const char *commands[] = {"tt", "tv", "th", "ts", "ch", "cf", "gh", "gf", "rh", "rf", "ri", "rj",
-                            "sc", "lv", "lh", "dl", "ro", "dp", "rk", "ce", "cg", "ca","cb","ci"};
+                            "sc", "lv", "lh", "dl", "ro", "dp", "rk", "ce", "cg", "ca","cb","ci","cj"};
   const int numCommands = sizeof(commands) / sizeof(*commands);
 
   for (int i = 0; i < numCommands; i++)
@@ -411,6 +412,10 @@ void serialDisplay::captureCommand(char input)
         currentMode = CIRCLE_SMOOTH_OUTLINE;
         openCapture(&captureData, 5);
         break;
+      case 24:
+        currentMode = CIRCLE_SMOOTH_FILL;
+        openCapture(&captureData, 5);
+        break;
       default:
         Serial.println(F("Unknown Command"));
         break;
@@ -499,6 +504,7 @@ void serialDisplay::decodeInput(char input)
   case CIRCLE_FILL:
   case CIRCLE_HOLLOW:
   case CIRCLE_SMOOTH_OUTLINE:
+  case CIRCLE_SMOOTH_FILL:
   case ARC:
   case ARC_SMOOTH:
   case ELLIPSE_OUTLINE:
@@ -729,6 +735,12 @@ void serialDisplay::executeCommand(void)
     colorArg = getColorFromCapture(&captureData, 3, 4);
     display->drawSmoothCircle(arg[0], arg[1], arg[2], colorArg[3], colorArg[4]);
     serialPrintFormattedMacro(this, PSTR("%s.drawSmoothCircle(%d,%d,%d,0x%x,0x%x);"), displayName, arg[0], arg[1], arg[2], colorArg[3], colorArg[4]);
+    break;
+  case CIRCLE_SMOOTH_FILL:
+    arg = getIntFromCapture(&captureData, 0, 2);
+    colorArg = getColorFromCapture(&captureData, 3, 4);
+    display->fillSmoothCircle(arg[0], arg[1], arg[2], colorArg[3], colorArg[4]);
+    serialPrintFormattedMacro(this, PSTR("%s.fillSmoothCircle(%d,%d,%d,0x%x,0x%x);"), displayName, arg[0], arg[1], arg[2], colorArg[3], colorArg[4]);
     break;
 #endif
   default:
