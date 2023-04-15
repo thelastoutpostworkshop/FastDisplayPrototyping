@@ -36,13 +36,14 @@ void setup()
   sDisplay.runCommands(F("#f104;cf120,10,10;"));
   sDisplay.runCommands(F("#f7c2;ce110,75,10,50;"));
   sDisplay.runCommands(F("#12df;cg90,75,10,50;"));
-  sDisplay.runCommands(F("ca31,100,20,25,0,90,f8a2,ff,0;"));
+  sDisplay.runCommands(F("ca31,100,20,25,0,90,f8a2,00,0;"));
   sDisplay.runCommands(F("#f8b9;rh5,20,20,30;"));
   sDisplay.runCommands(F("#17de;rf5,60,20,30;"));
   sDisplay.runCommands(F("#17cb;ri30,20,20,30,4;"));
   sDisplay.runCommands(F("#18bf;rj30,60,20,30,4;"));
   sDisplay.runCommands(F("#17d4;gh15,120,5,110,25,110;"));
   sDisplay.runCommands(F("#fe42;gf35,120,25,110,55,120;"));
+  sDisplay.runCommands(F("cb50,25,80,70,300,360,00f5,00,1;"));
 
   // tft.fillScreen(TFT_BLACK);
   // tft.fillRectHGradient(10,50,50,50,0x72ff,0xd2ff);

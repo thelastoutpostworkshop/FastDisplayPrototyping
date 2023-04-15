@@ -38,6 +38,7 @@ private:
     ELLIPSE_OUTLINE,
     ELLIPSE_FILL,
     ARC,
+    ARC_SMOOTH,
     TRIANGLE_HOLLOW,
     TRIANGLE_FILL,
     RECTANGLE_HOLLOW,
@@ -304,7 +305,7 @@ void serialDisplay::captureCommand(char input)
   closeCapture(&captureData);
 
   const char *commands[] = {"tt", "tv", "th", "ts", "ch", "cf", "gh", "gf", "rh", "rf", "ri", "rj",
-                            "sc", "lv", "lh", "dl", "ro", "dp", "rk", "ce", "cg", "ca"};
+                            "sc", "lv", "lh", "dl", "ro", "dp", "rk", "ce", "cg", "ca","cb"};
   const int numCommands = sizeof(commands) / sizeof(*commands);
 
   for (int i = 0; i < numCommands; i++)
@@ -401,6 +402,10 @@ void serialDisplay::captureCommand(char input)
         currentMode = ARC;
         openCapture(&captureData, 9);
         break;
+      case 22:
+        currentMode = ARC_SMOOTH;
+        openCapture(&captureData, 9);
+        break;
       default:
         Serial.println(F("Unknown Command"));
         break;
@@ -489,6 +494,7 @@ void serialDisplay::decodeInput(char input)
   case CIRCLE_FILL:
   case CIRCLE_HOLLOW:
   case ARC:
+  case ARC_SMOOTH:
   case ELLIPSE_OUTLINE:
   case ELLIPSE_FILL:
   case ROTATE:
@@ -704,6 +710,13 @@ void serialDisplay::executeCommand(void)
     boolArg = getBoolFromCapture(&captureData, 8, 8);
     display->drawArc(arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], colorArg[6], colorArg[7], boolArg[8]);
     serialPrintFormattedMacro(this, PSTR("%s.drawArc(%d,%d,%d,%d,%d,%d,0x%x,0x%x,%s);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], colorArg[6], colorArg[7], boolArg[8] ? trueS : falseS);
+    break;
+  case ARC_SMOOTH:
+    arg = getIntFromCapture(&captureData, 0, 5);
+    colorArg = getColorFromCapture(&captureData, 6, 7);
+    boolArg = getBoolFromCapture(&captureData, 8, 8);
+    display->drawSmoothArc(arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], colorArg[6], colorArg[7], boolArg[8]);
+    serialPrintFormattedMacro(this, PSTR("%s.drawSmoothArc(%d,%d,%d,%d,%d,%d,0x%x,0x%x,%s);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], colorArg[6], colorArg[7], boolArg[8] ? trueS : falseS);
     break;
 #endif
   default:
