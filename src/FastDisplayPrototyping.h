@@ -49,6 +49,7 @@ private:
     RECTANGLE_ROUND_OUTLINE,
     RECTANGLE_ROUND_SMOOTH_OUTLINE,
     RECTANGLE_ROUND_FILL,
+    RECTANGLE_ROUND_SMOOTH_FILL,
     LINE_FAST_VERTICAL,
     LINE_FAST_HORIZONTAL,
     LINE,
@@ -309,7 +310,7 @@ void serialDisplay::captureCommand(char input)
 
   const char *commands[] = {"tt", "tv", "th", "ts", "ch", "cf", "gh", "gf", "rh", "rf", "ri", "rj",
                             "sc", "lv", "lh", "dl", "ro", "dp", "rk", "ce", "cg", "ca","cb","ci","cj",
-                            "rs"};
+                            "rs","rt"};
   const int numCommands = sizeof(commands) / sizeof(*commands);
 
   for (int i = 0; i < numCommands; i++)
@@ -421,6 +422,10 @@ void serialDisplay::captureCommand(char input)
       case 25:
         currentMode = RECTANGLE_ROUND_SMOOTH_OUTLINE;
         openCapture(&captureData, 8);
+        break;
+      case 26:
+        currentMode = RECTANGLE_ROUND_SMOOTH_FILL;
+        openCapture(&captureData, 7);
         break;
       default:
         Serial.println(F("Unknown Command"));
@@ -754,6 +759,12 @@ void serialDisplay::executeCommand(void)
     colorArg = getColorFromCapture(&captureData, 6, 7);
     display->drawSmoothRoundRect(arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], colorArg[6], colorArg[7]);
     serialPrintFormattedMacro(this, PSTR("%s.drawSmoothRoundRect(%d,%d,%d,%d,%d,%d,0x%x,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], colorArg[6], colorArg[7]);
+    break;
+  case RECTANGLE_ROUND_SMOOTH_FILL:
+    arg = getIntFromCapture(&captureData, 0, 4);
+    colorArg = getColorFromCapture(&captureData, 5, 6);
+    display->fillSmoothRoundRect(arg[0], arg[1], arg[2], arg[3], arg[4], colorArg[5], colorArg[6]);
+    serialPrintFormattedMacro(this, PSTR("%s.fillSmoothRoundRect(%d,%d,%d,%d,%d,0x%x,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], colorArg[5], colorArg[6]);
     break;
 #endif
   default:
