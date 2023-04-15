@@ -33,7 +33,7 @@ private:
     TEXT_CENTER_HORIZONTAL,
     TEXT_CENTER_VERTICAL,
     TEXT_SIZE,
-    CIRCLE_HOLLOW,
+    CIRCLE_OUTLINE,
     CIRCLE_FILL,
     CIRCLE_SMOOTH_OUTLINE,
     CIRCLE_SMOOTH_FILL,
@@ -41,12 +41,12 @@ private:
     ELLIPSE_FILL,
     ARC,
     ARC_SMOOTH,
-    TRIANGLE_HOLLOW,
+    TRIANGLE_OUTLINE,
     TRIANGLE_FILL,
-    RECTANGLE_HOLLOW,
+    RECTANGLE_OUTLINE,
     RECTANGLE_FILL,
     RECTANGLE_FILL_GRADIENT_HORIZONTAL,
-    RECTANGLE_ROUND_HOLLOW,
+    RECTANGLE_ROUND_OUTLINE,
     RECTANGLE_ROUND_SMOOTH_OUTLINE,
     RECTANGLE_ROUND_FILL,
     LINE_FAST_VERTICAL,
@@ -335,7 +335,7 @@ void serialDisplay::captureCommand(char input)
         openCapture(&captureData, 1);
         break;
       case 4:
-        currentMode = CIRCLE_HOLLOW;
+        currentMode = CIRCLE_OUTLINE;
         openCapture(&captureData, 3);
         break;
       case 5:
@@ -343,7 +343,7 @@ void serialDisplay::captureCommand(char input)
         openCapture(&captureData, 3);
         break;
       case 6:
-        currentMode = TRIANGLE_HOLLOW;
+        currentMode = TRIANGLE_OUTLINE;
         openCapture(&captureData, 6);
         break;
       case 7:
@@ -351,7 +351,7 @@ void serialDisplay::captureCommand(char input)
         openCapture(&captureData, 6);
         break;
       case 8:
-        currentMode = RECTANGLE_HOLLOW;
+        currentMode = RECTANGLE_OUTLINE;
         openCapture(&captureData, 4);
         break;
       case 9:
@@ -359,7 +359,7 @@ void serialDisplay::captureCommand(char input)
         openCapture(&captureData, 4);
         break;
       case 10:
-        currentMode = RECTANGLE_ROUND_HOLLOW;
+        currentMode = RECTANGLE_ROUND_OUTLINE;
         openCapture(&captureData, 5);
         break;
       case 11:
@@ -501,15 +501,15 @@ void serialDisplay::decodeInput(char input)
   case LINE_FAST_HORIZONTAL:
   case LINE_FAST_VERTICAL:
   case RECTANGLE_ROUND_FILL:
-  case RECTANGLE_ROUND_HOLLOW:
+  case RECTANGLE_ROUND_OUTLINE:
   case RECTANGLE_FILL:
   case RECTANGLE_FILL_GRADIENT_HORIZONTAL:
-  case RECTANGLE_HOLLOW:
+  case RECTANGLE_OUTLINE:
   case RECTANGLE_ROUND_SMOOTH_OUTLINE:
   case TRIANGLE_FILL:
-  case TRIANGLE_HOLLOW:
+  case TRIANGLE_OUTLINE:
   case CIRCLE_FILL:
-  case CIRCLE_HOLLOW:
+  case CIRCLE_OUTLINE:
   case CIRCLE_SMOOTH_OUTLINE:
   case CIRCLE_SMOOTH_FILL:
   case ARC:
@@ -641,7 +641,7 @@ void serialDisplay::executeCommand(void)
     display->setCursor(arg[0], arg[1]);
     serialPrintFormattedMacro(this, PSTR("%s.setCursor(%d,%d);"), displayName, arg[0], arg[1]);
     break;
-  case CIRCLE_HOLLOW:
+  case CIRCLE_OUTLINE:
     arg = getIntFromCapture(&captureData, 3);
     display->drawCircle(arg[0], arg[1], arg[2], currentColor);
     serialPrintFormattedMacro(this, PSTR("%s.drawCircle(%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], currentColor);
@@ -651,7 +651,7 @@ void serialDisplay::executeCommand(void)
     display->fillCircle(arg[0], arg[1], arg[2], currentColor);
     serialPrintFormattedMacro(this, PSTR("%s.fillCircle(%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], currentColor);
     break;
-  case TRIANGLE_HOLLOW:
+  case TRIANGLE_OUTLINE:
     arg = getIntFromCapture(&captureData, 6);
     display->drawTriangle(arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], currentColor);
     serialPrintFormattedMacro(this, PSTR("%s.drawTriangle(%d,%d,%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], currentColor);
@@ -661,7 +661,7 @@ void serialDisplay::executeCommand(void)
     display->fillTriangle(arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], currentColor);
     serialPrintFormattedMacro(this, PSTR("%s.fillTriangle(%d,%d,%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], currentColor);
     break;
-  case RECTANGLE_HOLLOW:
+  case RECTANGLE_OUTLINE:
     arg = getIntFromCapture(&captureData, 4);
     display->drawRect(arg[0], arg[1], arg[2], arg[3], currentColor);
     serialPrintFormattedMacro(this, PSTR("%s.drawRect(%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], currentColor);
@@ -671,7 +671,7 @@ void serialDisplay::executeCommand(void)
     display->fillRect(arg[0], arg[1], arg[2], arg[3], currentColor);
     serialPrintFormattedMacro(this, PSTR("%s.fillRect(%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], currentColor);
     break;
-  case RECTANGLE_ROUND_HOLLOW:
+  case RECTANGLE_ROUND_OUTLINE:
     arg = getIntFromCapture(&captureData, 5);
     display->drawRoundRect(arg[0], arg[1], arg[2], arg[3], arg[4], currentColor);
     serialPrintFormattedMacro(this, PSTR("%s.drawRoundRect(%d,%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], currentColor);
