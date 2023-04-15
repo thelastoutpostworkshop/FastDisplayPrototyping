@@ -737,4 +737,3 @@ void serialDisplay::executeCommand(void)
   }
   currentMode = UNDEFINED;
 }
-cb50,25,80,70,300,360,00f5,00,1
