@@ -132,6 +132,10 @@ By default, the graphical commands corresponding to the serial commands sent are
 ```c
 #define OUTPUT_CODE_ON_SERIAL  // 
 ```
+To help copy the graphical commands into your code, you can initialize the library with the variable that your are using for the display.  For example, if you use the variable "display" for the display in your code, initialize the library this way:
+```c
+
+```
 
 ### Library Behavior
 
