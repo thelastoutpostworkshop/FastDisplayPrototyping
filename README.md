@@ -130,9 +130,10 @@ The library utilizes the currently defined font in the code. Support for handlin
 ### Configuration
 By default, the graphical commands corresponding to the serial commands sent are displayed in the Serial Monitor, allowing you to easily copy and paste them into your code. If you wish to disable this feature and reduce the library size, you can comment out this definition:
 ```c
-#define OUTPUT_CODE_ON_SERIAL  // 
+// #define OUTPUT_CODE_ON_SERIAL  
 ```
 To facilitate the process of copying graphical commands into your code, you can initialize the library using the variable that represents the display in your code. For instance, if you have a variable named "display" for the display in your code, you can initialize the library as follows:
+![ESPI]
 ```c
 TFT_eSPI display = TFT_eSPI(); 
 fastSerialDisplay sDisplay(&display,"display");
