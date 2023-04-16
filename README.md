@@ -30,14 +30,21 @@ To get started, download the source code (zip) [the latest release](https://gith
 ```c
 #include <Adafruit_TFTLCD.h>    // Hardware-specific library
 #include <Adafruit_GFX.h>       // Core graphics library
-#define OUTPUT_CODE_ON_SERIAL   // Output graphical functions used for the display
+#define OUTPUT_CODE_ON_SERIAL   // Output graphical functions on the Serial Monitor, comment it to disable
 #include <FastDisplayPrototyping.h>
 
-// Follow your display driver documentation
+#define LCD_CS A3 // Chip Select goes to Analog 3
+#define LCD_CD A2 // Command/Data goes to Analog 2
+#define LCD_WR A1 // LCD Write goes to Analog 1
+#define LCD_RD A0 // LCD Read goes to Analog 0
+
+#define LCD_RESET A4 // Can alternately just connect to Arduino's reset pin
+
+// Initialize the display
 Adafruit_TFTLCD tft(LCD_CS, LCD_CD, LCD_WR, LCD_RD, LCD_RESET);
 
 // Initialize the display prototyping library
-serialDisplay sDisplay(&tft);
+FastSerialDisplay sDisplay(&tft,"tft"); 
 
 void setup() {
   Serial.begin(9600); // This line mandatory for using the display prototyping library, change the baud rate if needed
@@ -59,14 +66,14 @@ void loop(void) {
 
 ```c
 #include <TFT_eSPI.h>                 // Core graphics library
-#define OUTPUT_CODE_ON_SERIAL         // Output graphical functions used for the display
+#define OUTPUT_CODE_ON_SERIAL         // Output graphical functions on the Serial Monitor, comment it to disable
 #include <FastDisplayPrototyping.h>
 
-// Follow your display driver documentation
+// Initialize the display
 TFT_eSPI tft = TFT_eSPI(); 
 
 // Initialize the display prototyping library
-serialDisplay sDisplay(&tft);
+FastSerialDisplay tft(&tft,"tft");
 
 void setup() {
   Serial.begin(115200);  // This line mandatory for using the display prototyping library, change the baud rate if needed
