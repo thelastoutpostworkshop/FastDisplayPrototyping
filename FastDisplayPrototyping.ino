@@ -3,7 +3,7 @@
 #include <Adafruit_TFTLCD.h>    // Hardware-specific library
 #include <Adafruit_GFX.h>       // Core graphics library
 #define OUTPUT_CODE_ON_SERIAL   // Output graphical functions on the Serial Monitor, comment it to disable
-#include <FastDisplayPrototyping.h>
+#include "src/FastDisplayPrototyping.h"
 
 #define LCD_CS A3 // Chip Select goes to Analog 3
 #define LCD_CD A2 // Command/Data goes to Analog 2
