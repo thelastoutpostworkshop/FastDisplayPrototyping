@@ -141,8 +141,8 @@ TFT_eSPI tft = TFT_eSPI();
 // Initialize the display prototyping library
 serialDisplay sDisplay(&tft);
 ```
-![GFX]
-```c
+
+![GFX]```c
 // Initialize the display
 Adafruit_TFTLCD display(LCD_CS, LCD_CD, LCD_WR, LCD_RD, LCD_RESET);
 
@@ -150,8 +150,6 @@ Adafruit_TFTLCD display(LCD_CS, LCD_CD, LCD_WR, LCD_RD, LCD_RESET);
 serialDisplay sDisplay(&tft,"display"); 
 ```
 All the graphical commands will be preceded by the "display" keyword, for example `display.fillSmoothRoundRect(80,100,20,20,5,0xfde0,0x0);`
-
-### Library Behavior
 
 ### Library Size
 
