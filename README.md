@@ -132,7 +132,7 @@ By default, the graphical commands corresponding to the serial commands sent are
 ```c
 // #define OUTPUT_CODE_ON_SERIAL  
 ```
-To facilitate the process of copying graphical commands into your code, you can initialize the library using the variable that represents the display in your code. For instance, if you have a variable named "display" for the display in your code, you can initialize the library as follows:<br>
+To facilitate the process of copying graphical commands into your code, you can initialize the library using the variable that represents the display in your code. For instance, if you have a variable named "display" for the display in your code, you can initialize the library as follows:<br><br>
 ![ESPI]
 ```c
 // Initialize the display
