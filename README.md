@@ -128,14 +128,16 @@ void loop(void) {
 The library utilizes the currently defined font in the code. Support for handling multiple preloaded fonts is planned for the upcoming release of the library.
 
 ### Configuration
-By default, the graphical commands corresponding to the serial commands sent are displayed in the Serial Monitor, allowing you to easily copy and paste them into your code. If you wish to disable this feature and reduce the library size, you can comment out this definition :
+By default, the graphical commands corresponding to the serial commands sent are displayed in the Serial Monitor, allowing you to easily copy and paste them into your code. If you wish to disable this feature and reduce the library size, you can comment out this definition:
 ```c
 #define OUTPUT_CODE_ON_SERIAL  // 
 ```
-To help copy the graphical commands into your code, you can initialize the library with the variable that your are using for the display.  For example, if you use the variable "display" for the display in your code, initialize the library this way:
+To facilitate the process of copying graphical commands into your code, you can initialize the library using the variable that represents the display in your code. For instance, if you have a variable named "display" for the display in your code, you can initialize the library as follows:
 ```c
-
+TFT_eSPI display = TFT_eSPI(); 
+fastSerialDisplay sDisplay(&display,"display");
 ```
+All the graphical commands will be preceded by the "display" keyword, for example `display.fillSmoothRoundRect(80,100,20,20,5,0xfde0,0x0);`
 
 ### Library Behavior
 

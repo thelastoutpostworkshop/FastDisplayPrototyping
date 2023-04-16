@@ -3,8 +3,8 @@
 #define OUTPUT_CODE_ON_SERIAL
 #include "src/FastDisplayPrototyping.h"
 
-TFT_eSPI tft = TFT_eSPI(); // Invoke custom library
-fastSerialDisplay sDisplay(&tft,"display");
+TFT_eSPI display = TFT_eSPI(); 
+fastSerialDisplay sDisplay(&display,"display");
 
 //------------------------------------------------------------------------------------------
 
@@ -12,10 +12,10 @@ void setup()
 {
   Serial.begin(115200);
 
-  tft.begin();
-  tft.setRotation(0);
+  display.begin();
+  display.setRotation(0);
 
-  // tft.setFreeFont(LABEL2_FONT);
+  // display.setFreeFont(LABEL2_FONT);
 
   // Buffer Limit from the Serial Monitor is 64 bytes
   // sDisplay.runCommands(F("x;ts1;sc10,10;#17e0;thDisplay Prototyping;"));
@@ -49,8 +49,8 @@ void setup()
   sDisplay.runCommands(F("rs70,60,5,8,20,30,f820,0;"));
   sDisplay.runCommands(F("rt80,100,20,20,5,fde0,0;"));
 
-  // tft.fillScreen(TFT_BLACK);
-  // tft.fillRectHGradient(10,50,50,50,0x72ff,0xd2ff);
+  // display.fillScreen(TFT_BLACK);
+  // display.fillRectHGradient(10,50,50,50,0x72ff,0xd2ff);
 }
 
 void loop(void)
