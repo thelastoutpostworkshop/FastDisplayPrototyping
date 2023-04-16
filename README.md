@@ -96,7 +96,7 @@ void loop(void) {
 |---------|-------------|
 |x;sc10,10;ttHello World! | Clear screen & print text on row 10 |
 |x;#ffe0;cf50,60,10 | Clear screen & Yellow filled circle at position 50,60 radius of 10 |
-|x;#00ff;ri10,10,40,40,10 | Clear screen & Blue rounded rectangle outline at position 10,10, width 40, height 40, corner radius 10 |
+|x;#077f;ri10,10,40,40,10 | Clear screen & Blue rounded rectangle outline at position 10,10, width 40, height 40, corner radius 10 |
 
 ### Serial Commands Reference
 >ℹ️ You can replace any numeric value with **w** or **h** and it will be replaced by the width or the height of the display, for example `lh10,10,w`<br>
