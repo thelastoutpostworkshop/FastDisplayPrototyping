@@ -93,7 +93,6 @@ private:
   uint16_t getColorFromCapture(char *);
   void captureCommand(char);
   boolean isCommand(const char *);
-  void serialPrintFormatted(const char *formatStr, ...);
   bool containsOnlyDigits(const char *);
   inline void serialPrintFormattedMacro(FastSerialDisplay *disp, const char *fmt, ...)
   {
