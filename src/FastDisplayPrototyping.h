@@ -15,7 +15,7 @@
 #define COLOR_BLACK 0x0000
 #define DEBOUNCE_READ_SERIAL 300
 
-class fastSerialDisplay
+class FastSerialDisplay
 {
 private:
   struct Capture
@@ -95,7 +95,7 @@ private:
   boolean isCommand(const char *);
   void serialPrintFormatted(const char *formatStr, ...);
   bool containsOnlyDigits(const char *);
-  inline void serialPrintFormattedMacro(fastSerialDisplay *disp, const char *fmt, ...)
+  inline void serialPrintFormattedMacro(FastSerialDisplay *disp, const char *fmt, ...)
   {
 #ifdef OUTPUT_CODE_ON_SERIAL
     va_list args;
@@ -107,14 +107,14 @@ private:
   }
 
 public:
-  fastSerialDisplay(DISP *d, const char *dName = nullptr);
-  ~fastSerialDisplay();
+  FastSerialDisplay(DISP *d, const char *dName = nullptr);
+  ~FastSerialDisplay();
   void readCommandsFromSerial(void);
   void runCommands(char *);
   void runCommands(const __FlashStringHelper *ifsh);
 };
 
-fastSerialDisplay::fastSerialDisplay(DISP *d, const char *dName)
+FastSerialDisplay::FastSerialDisplay(DISP *d, const char *dName)
 {
   if (dName != nullptr)
   {
@@ -134,18 +134,18 @@ fastSerialDisplay::fastSerialDisplay(DISP *d, const char *dName)
   lastSerialRead = millis();
 }
 
-fastSerialDisplay::~fastSerialDisplay()
+FastSerialDisplay::~FastSerialDisplay()
 {
 }
 
-void fastSerialDisplay::runCommands(char *commands)
+void FastSerialDisplay::runCommands(char *commands)
 {
   for (int i = 0; i < strlen(commands); i++)
   {
     decodeInput(*(commands + i));
   }
 }
-void fastSerialDisplay::runCommands(const __FlashStringHelper *ifsh)
+void FastSerialDisplay::runCommands(const __FlashStringHelper *ifsh)
 {
   PGM_P p = reinterpret_cast<PGM_P>(ifsh);
   while (1)
@@ -157,7 +157,7 @@ void fastSerialDisplay::runCommands(const __FlashStringHelper *ifsh)
   }
 }
 
-bool fastSerialDisplay::containsOnlyDigits(const char *str)
+bool FastSerialDisplay::containsOnlyDigits(const char *str)
 {
   for (int i = 0; str[i] != '\0'; i++)
   {
@@ -169,7 +169,7 @@ bool fastSerialDisplay::containsOnlyDigits(const char *str)
   return true;
 }
 
-float fastSerialDisplay::getFloatFromCapture(char *capture)
+float FastSerialDisplay::getFloatFromCapture(char *capture)
 {
   if (containsOnlyDigits(capture))
   {
@@ -181,11 +181,11 @@ float fastSerialDisplay::getFloatFromCapture(char *capture)
   }
 }
 
-uint32_t fastSerialDisplay::getColorFromCapture(char *capture)
+uint32_t FastSerialDisplay::getColorFromCapture(char *capture)
 {
   return strtoul(capture, NULL, 16);
 }
-int32_t *fastSerialDisplay::getColorFromCapture(Capture *capture, int start, int end)
+int32_t *FastSerialDisplay::getColorFromCapture(Capture *capture, int start, int end)
 {
   static int32_t res[MAX_ARG_CAPTURE];
   for (int i = start; i <= end && i <= MAX_ARG_CAPTURE; i++)
@@ -195,12 +195,12 @@ int32_t *fastSerialDisplay::getColorFromCapture(Capture *capture, int start, int
   return res;
 }
 
-int32_t *fastSerialDisplay::getIntFromCapture(Capture *capture, int count)
+int32_t *FastSerialDisplay::getIntFromCapture(Capture *capture, int count)
 {
   return getIntFromCapture(capture, 0, count - 1);
 }
 
-int32_t *fastSerialDisplay::getIntFromCapture(Capture *capture, int start, int end)
+int32_t *FastSerialDisplay::getIntFromCapture(Capture *capture, int start, int end)
 {
   static int32_t res[MAX_ARG_CAPTURE];
   for (int i = start; i <= end && i <= MAX_ARG_CAPTURE; i++)
@@ -210,7 +210,7 @@ int32_t *fastSerialDisplay::getIntFromCapture(Capture *capture, int start, int e
   return res;
 }
 
-int32_t fastSerialDisplay::getIntFromCapture(char *capture)
+int32_t FastSerialDisplay::getIntFromCapture(char *capture)
 {
   if (containsOnlyDigits(capture))
   {
@@ -222,7 +222,7 @@ int32_t fastSerialDisplay::getIntFromCapture(char *capture)
   }
 }
 
-bool *fastSerialDisplay::getBoolFromCapture(Capture *capture, int start, int end)
+bool *FastSerialDisplay::getBoolFromCapture(Capture *capture, int start, int end)
 {
   static bool res[MAX_ARG_CAPTURE];
   for (int i = start; i <= end && i <= MAX_ARG_CAPTURE; i++)
@@ -232,7 +232,7 @@ bool *fastSerialDisplay::getBoolFromCapture(Capture *capture, int start, int end
   return res;
 }
 
-bool fastSerialDisplay::getBoolFromCapture(char *capture)
+bool FastSerialDisplay::getBoolFromCapture(char *capture)
 {
   if (capture[0] == '1')
   {
@@ -241,7 +241,7 @@ bool fastSerialDisplay::getBoolFromCapture(char *capture)
   return false;
 }
 
-int fastSerialDisplay::getValueFromKeyword(char c)
+int FastSerialDisplay::getValueFromKeyword(char c)
 {
   if (strchr(displaySizeKeywords, c))
   {
@@ -261,7 +261,7 @@ int fastSerialDisplay::getValueFromKeyword(char c)
   return 0;
 }
 
-void fastSerialDisplay::captureInput(Capture *capture, char input)
+void FastSerialDisplay::captureInput(Capture *capture, char input)
 {
   if (capture->index[capture->argIndex] == MAX_DATA_CAPTURE)
   {
@@ -272,7 +272,7 @@ void fastSerialDisplay::captureInput(Capture *capture, char input)
   capture->index[capture->argIndex]++;
 }
 
-void fastSerialDisplay::closeCapture(Capture *capture)
+void FastSerialDisplay::closeCapture(Capture *capture)
 {
   capture->argIndex = 0;
   for (int i = 0; i < capture->maxArg; i++)
@@ -280,7 +280,7 @@ void fastSerialDisplay::closeCapture(Capture *capture)
     capture->capture[i][capture->index[i]] = 0;
   }
 }
-void fastSerialDisplay::openCapture(Capture *capture, int maxArg)
+void FastSerialDisplay::openCapture(Capture *capture, int maxArg)
 {
   capture->argIndex = 0;
   capture->maxArg = maxArg;
@@ -290,7 +290,7 @@ void fastSerialDisplay::openCapture(Capture *capture, int maxArg)
   }
 }
 
-void fastSerialDisplay::nextArgCapture(Capture *capture)
+void FastSerialDisplay::nextArgCapture(Capture *capture)
 {
   if (capture->argIndex >= capture->maxArg)
   {
@@ -303,7 +303,7 @@ void fastSerialDisplay::nextArgCapture(Capture *capture)
   }
 }
 
-void fastSerialDisplay::captureCommand(char input)
+void FastSerialDisplay::captureCommand(char input)
 {
   captureInput(&captureData, input);
   closeCapture(&captureData);
@@ -436,12 +436,12 @@ void fastSerialDisplay::captureCommand(char input)
   }
 }
 
-boolean fastSerialDisplay::isCommand(const char *command)
+boolean FastSerialDisplay::isCommand(const char *command)
 {
   return strcmp(captureData.capture[0], command) == 0;
 }
 
-void fastSerialDisplay::decodeInput(char input)
+void FastSerialDisplay::decodeInput(char input)
 {
   if (input == ';')
   {
@@ -549,7 +549,7 @@ void fastSerialDisplay::decodeInput(char input)
   }
 }
 
-void fastSerialDisplay::readCommandsFromSerial(void)
+void FastSerialDisplay::readCommandsFromSerial(void)
 {
   char input;
   if (Serial.available())
@@ -569,7 +569,7 @@ void fastSerialDisplay::readCommandsFromSerial(void)
   delay(10);
 }
 
-void fastSerialDisplay::executeCommand(void)
+void FastSerialDisplay::executeCommand(void)
 {
   int16_t x, y, x1, y1;
   uint16_t w, h;
