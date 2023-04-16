@@ -99,7 +99,7 @@ void loop(void) {
 | **Text Functions** |                                       |             |  
 | setTextColor(color)<br>![GFX]![ESPI] | #00FF | Set Text and Graphic `color` | ✓ | ✓ |
 | setCursor(x,y)<br>![GFX]![ESPI] | **sc**10,20 | Set the text cursor at position `x`,`y`| 
-| print(string)<br>![GFX]![ESPI] | **tt**Hello World! | Print `string` at current cursor position | 
+| print(string)<br>![GFX]![ESPI] | **tt**Hello World! | Print `string` at current cursor position using the current font | 
 | setTextSize(size)<br>![GFX]![ESPI] | **ts**3 | Set character `size` multiplier (increases pixel size) |
 | **Basic Drawing Functions** |                                 |             |              
 | drawPixel(x,y,color)<br>![GFX]![ESPI] | **dp**10,10 | Draw a pixel at position `x`,`y` using the current color |
@@ -125,6 +125,7 @@ void loop(void) {
 | fillTriangle<br>(x1,y1,x2,y2,x3,y3,color)<br>![GFX]![ESPI]  | **gf**10,10,20,20,30,10 | Draw a filled triangle using 3 points `x1,y1,x2,y2,x3,y3` (vertices) using the current color| 
 
 ### Using Fonts
+The library utilizes the currently defined font in the code. Support for handling multiple preloaded fonts is planned for the upcoming release of the library.
 
 ### Using the Serial Commands in Code
 
