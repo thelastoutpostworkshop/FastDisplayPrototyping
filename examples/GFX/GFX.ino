@@ -15,7 +15,7 @@ Documentation : https://github.com/thelastoutpostworkshop/FastDisplayPrototyping
 Adafruit_TFTLCD display(LCD_CS, LCD_CD, LCD_WR, LCD_RD, LCD_RESET);
 
 // Initialize the display prototyping library
-serialDisplay sDisplay(&tft,"display"); 
+fastSerialDisplay sDisplay(&tft,"display"); 
 
 void setup() {
   Serial.begin(9600); // This line mandatory for using the display prototyping library, change the baud rate if needed
