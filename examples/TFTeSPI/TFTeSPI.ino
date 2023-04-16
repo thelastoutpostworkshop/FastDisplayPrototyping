@@ -1,3 +1,11 @@
+/***
+This example is intended to demonstrate the use of the Fast Display Prototyping Library
+for the TFT_eSPI grahics library.
+
+Tutorial :
+Documentation : https://github.com/thelastoutpostworkshop/FastDisplayPrototyping
+***/
+
 #include <TFT_eSPI.h>                 // Core graphics library
 #define OUTPUT_CODE_ON_SERIAL         // Output graphical functions on the Serial Monitor, comment it to disable
 #include <FastDisplayPrototyping.h>

@@ -1,3 +1,10 @@
+/***
+This example is intended to demonstrate the use of the Fast Display Prototyping Library
+for the Adafruit GFX grahics library.
+
+Tutorial :
+Documentation : https://github.com/thelastoutpostworkshop/FastDisplayPrototyping
+***/
 
 #include <Adafruit_TFTLCD.h>    // Hardware-specific library
 #include <Adafruit_GFX.h>       // Core graphics library
