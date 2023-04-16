@@ -5,7 +5,7 @@ It eliminates the need for time-consuming microcontroller uploads when testing g
 ### Tutorial
 
 ### Usage
-Simply use the serial monitor to send graphical commands to your microcontroller, in the example below the commands `x;sc0,0,ttHello World!` when sent will clear the display and show Hello World! Make sure the option **No Line Endind** is selected in the Serial Monitor.
+Simply use the serial monitor to send graphical commands to your microcontroller, in the example below the commands `x;sc0,0;ttHello World!` when sent will clear the display and show Hello World! Make sure the option **No Line Endind** is selected in the Serial Monitor.
 ![Usage](https://github.com/thelastoutpostworkshop/DisplayPrototyping/blob/main/images/usage_serial_monitor.png)
 
 ### Type of Displays supported
