@@ -187,7 +187,7 @@ uint16_t FastSerialDisplay::getColorFromCapture(char *capture)
 uint16_t *FastSerialDisplay::getColorFromCapture(Capture *capture, int start, int end)
 {
   static uint16_t res[MAX_ARG_CAPTURE];
-  for (int i = start; i <= end && i <= MAX_ARG_CAPTURE; i++)
+  for (int i = start; i <= end && i < MAX_ARG_CAPTURE; i++)
   {
     res[i] = getColorFromCapture(capture->capture[i]);
   }
@@ -202,7 +202,7 @@ int16_t *FastSerialDisplay::getIntFromCapture(Capture *capture, int count)
 int16_t *FastSerialDisplay::getIntFromCapture(Capture *capture, int start, int end)
 {
   static int16_t res[MAX_ARG_CAPTURE];
-  for (int i = start; i <= end && i <= MAX_ARG_CAPTURE; i++)
+  for (int i = start; i <= end && i < MAX_ARG_CAPTURE; i++)
   {
     res[i] = getIntFromCapture(capture->capture[i]);
   }
@@ -224,7 +224,7 @@ int16_t FastSerialDisplay::getIntFromCapture(char *capture)
 bool *FastSerialDisplay::getBoolFromCapture(Capture *capture, int start, int end)
 {
   static bool res[MAX_ARG_CAPTURE];
-  for (int i = start; i <= end && i <= MAX_ARG_CAPTURE; i++)
+  for (int i = start; i <= end && i < MAX_ARG_CAPTURE; i++)
   {
     res[i] = getBoolFromCapture(capture->capture[i]);
   }
