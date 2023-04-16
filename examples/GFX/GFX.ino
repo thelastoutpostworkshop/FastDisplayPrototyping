@@ -4,11 +4,11 @@
 #define OUTPUT_CODE_ON_SERIAL   // Output graphical functions on the Serial Monitor, comment it to disable
 #include <FastDisplayPrototyping.h>
 
-// Follow your display driver documentation
-Adafruit_TFTLCD tft(LCD_CS, LCD_CD, LCD_WR, LCD_RD, LCD_RESET);
+// Initialize the display
+Adafruit_TFTLCD display(LCD_CS, LCD_CD, LCD_WR, LCD_RD, LCD_RESET);
 
 // Initialize the display prototyping library
-serialDisplay sDisplay(&tft);
+serialDisplay sDisplay(&tft,"display"); 
 
 void setup() {
   Serial.begin(9600); // This line mandatory for using the display prototyping library, change the baud rate if needed

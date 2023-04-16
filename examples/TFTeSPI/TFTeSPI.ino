@@ -2,7 +2,7 @@
 #define OUTPUT_CODE_ON_SERIAL         // Output graphical functions on the Serial Monitor, comment it to disable
 #include <FastDisplayPrototyping.h>
 
-// Follow your display driver documentation
+// Initialize the display
 TFT_eSPI tft = TFT_eSPI(); 
 
 // Initialize the display prototyping library

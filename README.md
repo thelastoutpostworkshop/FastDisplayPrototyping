@@ -132,11 +132,22 @@ By default, the graphical commands corresponding to the serial commands sent are
 ```c
 // #define OUTPUT_CODE_ON_SERIAL  
 ```
-To facilitate the process of copying graphical commands into your code, you can initialize the library using the variable that represents the display in your code. For instance, if you have a variable named "display" for the display in your code, you can initialize the library as follows:
+To facilitate the process of copying graphical commands into your code, you can initialize the library using the variable that represents the display in your code. For instance, if you have a variable named "display" for the display in your code, you can initialize the library as follows:<br>
 ![ESPI]
 ```c
-TFT_eSPI display = TFT_eSPI(); 
-fastSerialDisplay sDisplay(&display,"display");
+// Initialize the display
+TFT_eSPI tft = TFT_eSPI(); 
+
+// Initialize the display prototyping library
+serialDisplay sDisplay(&tft);
+```
+![GFX]
+```c
+// Initialize the display
+Adafruit_TFTLCD display(LCD_CS, LCD_CD, LCD_WR, LCD_RD, LCD_RESET);
+
+// Initialize the display prototyping library
+serialDisplay sDisplay(&tft,"display"); 
 ```
 All the graphical commands will be preceded by the "display" keyword, for example `display.fillSmoothRoundRect(80,100,20,20,5,0xfde0,0x0);`
 
