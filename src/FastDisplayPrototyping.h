@@ -65,7 +65,7 @@ private:
   DISP *display;
   MODE currentMode;
   Capture captureData;
-  int16_t currentColor = 0xFFFF;
+  uint16_t currentColor = 0xFFFF;
   int displayWidth;
   int displayHeight;
   unsigned long lastSerialRead;
