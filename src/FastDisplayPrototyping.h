@@ -577,7 +577,7 @@ void FastSerialDisplay::executeCommand(void)
   uint16_t *colorArg;
   bool *boolArg;
 
-  if (currentColor == UNDEFINED)
+  if (currentMode == UNDEFINED)
   {
     return;
   }
