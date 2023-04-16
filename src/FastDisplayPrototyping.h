@@ -582,7 +582,6 @@ void FastSerialDisplay::executeCommand(void)
   }
 
   closeCapture(&captureData);
-  const char *formatStr = nullptr;
 
   switch (currentMode)
   {
