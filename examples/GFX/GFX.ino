@@ -14,9 +14,6 @@ Documentation : https://github.com/thelastoutpostworkshop/FastDisplayPrototyping
 #define OUTPUT_CODE_ON_SERIAL   // Output graphical functions on the Serial Monitor, comment it to disable
 #include <FastDisplayPrototyping.h>
 
-// The control pins for the LCD can be assigned to any digital or
-// analog pins...but we'll use the analog pins as this allows us to
-// double up the pins with the touch screen (see the TFT paint example).
 #define LCD_CS A3 // Chip Select goes to Analog 3
 #define LCD_CD A2 // Command/Data goes to Analog 2
 #define LCD_WR A1 // LCD Write goes to Analog 1
