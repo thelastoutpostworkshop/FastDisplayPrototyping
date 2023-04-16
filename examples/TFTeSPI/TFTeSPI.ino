@@ -2,6 +2,8 @@
 This example is intended to demonstrate the use of the Fast Display Prototyping Library
 for the TFT_eSPI grahics library.
 
+Upload this code and start sending graphical commands using the Serial Monitor!
+
 Tutorial :
 Documentation : https://github.com/thelastoutpostworkshop/FastDisplayPrototyping
 ***/
