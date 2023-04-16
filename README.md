@@ -124,6 +124,8 @@ void loop(void) {
 | drawTriangle<br>(x1,y1,x2,y2,x3,y3,color)<br>![GFX]![ESPI]  | **gh**10,10,20,20,30,10 | Draw a triangle outline using 3 points `x1,y1,x2,y2,x3,y3` (vertices) using the current color | 
 | fillTriangle<br>(x1,y1,x2,y2,x3,y3,color)<br>![GFX]![ESPI]  | **gf**10,10,20,20,30,10 | Draw a filled triangle using 3 points `x1,y1,x2,y2,x3,y3` (vertices) using the current color| 
 
+### Using Fonts
+
 ### Using the Serial Commands in Code
 
 ### Configuration
