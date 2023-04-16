@@ -4,7 +4,7 @@
 #include "src/FastDisplayPrototyping.h"
 
 TFT_eSPI tft = TFT_eSPI(); // Invoke custom library
-serialDisplay sDisplay(&tft);
+fastSerialDisplay sDisplay(&tft,"display");
 
 //------------------------------------------------------------------------------------------
 
