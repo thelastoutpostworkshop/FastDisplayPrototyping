@@ -128,9 +128,9 @@ void loop(void) {
 The library utilizes the currently defined font in the code. Support for handling multiple preloaded fonts is planned for the upcoming release of the library.
 
 ### Configuration
-By default, the graphical commands corresponding to the serial commands sent are displayed in the Serial Monitor, allowing you to easily copy and paste them into your code. If you wish to disable this feature and reduce the library size, you can comment out the respective definition :
+By default, the graphical commands corresponding to the serial commands sent are displayed in the Serial Monitor, allowing you to easily copy and paste them into your code. If you wish to disable this feature and reduce the library size, you can comment out this definition :
 ```c
-#define OUTPUT_CODE_ON_SERIAL
+#define OUTPUT_CODE_ON_SERIAL  // 
 ```
 
 ### Library Behavior

@@ -1,5 +1,5 @@
 #include <TFT_eSPI.h>                 // Core graphics library
-#define OUTPUT_CODE_ON_SERIAL         // Output graphical functions used for the display
+#define OUTPUT_CODE_ON_SERIAL         // Output graphical functions on the Serial Monitor, comment it to disable
 #include <FastDisplayPrototyping.h>
 
 // Follow your display driver documentation
