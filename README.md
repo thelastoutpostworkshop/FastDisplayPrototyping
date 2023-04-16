@@ -142,7 +142,8 @@ TFT_eSPI tft = TFT_eSPI();
 serialDisplay sDisplay(&tft);
 ```
 
-![GFX]```c
+![GFX]
+```c
 // Initialize the display
 Adafruit_TFTLCD display(LCD_CS, LCD_CD, LCD_WR, LCD_RD, LCD_RESET);
 
