@@ -65,7 +65,7 @@ private:
   DISP *display;
   MODE currentMode;
   Capture captureData;
-  uint32_t currentColor = 0xFFFF;
+  int16_t currentColor = 0xFFFF;
   int displayWidth;
   int displayHeight;
   unsigned long lastSerialRead;
@@ -82,15 +82,15 @@ private:
   void openCapture(Capture *, int);
   void closeCapture(Capture *);
   void nextArgCapture(Capture *);
-  int32_t *getIntFromCapture(Capture *, int);
-  int32_t *getIntFromCapture(Capture *, int, int);
-  int32_t getIntFromCapture(char *);
+  int16_t *getIntFromCapture(Capture *, int);
+  int16_t *getIntFromCapture(Capture *, int, int);
+  int16_t getIntFromCapture(char *);
   float getFloatFromCapture(char *);
   bool getBoolFromCapture(char *);
   bool *getBoolFromCapture(Capture *, int, int);
   int getValueFromKeyword(char);
-  int32_t *getColorFromCapture(Capture *, int, int);
-  uint32_t getColorFromCapture(char *);
+  uint16_t *getColorFromCapture(Capture *, int, int);
+  uint16_t getColorFromCapture(char *);
   void captureCommand(char);
   boolean isCommand(const char *);
   void serialPrintFormatted(const char *formatStr, ...);
@@ -181,13 +181,13 @@ float FastSerialDisplay::getFloatFromCapture(char *capture)
   }
 }
 
-uint32_t FastSerialDisplay::getColorFromCapture(char *capture)
+uint16_t FastSerialDisplay::getColorFromCapture(char *capture)
 {
   return strtoul(capture, NULL, 16);
 }
-int32_t *FastSerialDisplay::getColorFromCapture(Capture *capture, int start, int end)
+uint16_t *FastSerialDisplay::getColorFromCapture(Capture *capture, int start, int end)
 {
-  static int32_t res[MAX_ARG_CAPTURE];
+  static uint16_t res[MAX_ARG_CAPTURE];
   for (int i = start; i <= end && i <= MAX_ARG_CAPTURE; i++)
   {
     res[i] = getColorFromCapture(capture->capture[i]);
@@ -195,14 +195,14 @@ int32_t *FastSerialDisplay::getColorFromCapture(Capture *capture, int start, int
   return res;
 }
 
-int32_t *FastSerialDisplay::getIntFromCapture(Capture *capture, int count)
+int16_t *FastSerialDisplay::getIntFromCapture(Capture *capture, int count)
 {
   return getIntFromCapture(capture, 0, count - 1);
 }
 
-int32_t *FastSerialDisplay::getIntFromCapture(Capture *capture, int start, int end)
+int16_t *FastSerialDisplay::getIntFromCapture(Capture *capture, int start, int end)
 {
-  static int32_t res[MAX_ARG_CAPTURE];
+  static int16_t res[MAX_ARG_CAPTURE];
   for (int i = start; i <= end && i <= MAX_ARG_CAPTURE; i++)
   {
     res[i] = getIntFromCapture(capture->capture[i]);
@@ -210,7 +210,7 @@ int32_t *FastSerialDisplay::getIntFromCapture(Capture *capture, int start, int e
   return res;
 }
 
-int32_t FastSerialDisplay::getIntFromCapture(char *capture)
+int16_t FastSerialDisplay::getIntFromCapture(char *capture)
 {
   if (containsOnlyDigits(capture))
   {
@@ -573,7 +573,8 @@ void FastSerialDisplay::executeCommand(void)
 {
   int16_t x, y, x1, y1;
   uint16_t w, h;
-  int32_t *arg, *colorArg;
+  int16_t *arg; 
+  uint16_t *colorArg;
   bool *boolArg;
 
   if (currentColor == UNDEFINED)
@@ -601,38 +602,38 @@ void FastSerialDisplay::executeCommand(void)
     serialPrintFormattedMacro(this, PSTR("%s.print(\"%s\");"), displayName, captureData.capture[0]);
     break;
   case TEXT_CENTER_HORIZONTAL:
-#if defined(_ADAFRUIT_TFTLCD_H_)
-    y = display->getCursorY();
-    display->getTextBounds(captureData.capture[0], &x, &y, &x1, &y1, &w, &h);
-    x = (displayWidth - w) / 2;
-    display->setCursor(x, y);
-#endif // _ADAFRUIT_TFTLCD_H_
-#if defined(_TFT_eSPIH_)
-    w = display->textWidth(captureData.capture[0]);
-    x = (displayWidth - w) / 2;
-    y = display->getCursorY();
-    display->setCursor(x, y);
-#endif // _TFT_eSPIH_
-    display->print(captureData.capture[0]);
-    serialPrintFormattedMacro(this, PSTR("%s.setCursor(%d,%d);"), displayName, x, y);
-    serialPrintFormattedMacro(this, PSTR("%s.print(\"%s\");"), displayName, captureData.capture[0]);
+// #if defined(_ADAFRUIT_TFTLCD_H_)
+//     y = display->getCursorY();
+//     display->getTextBounds(captureData.capture[0], &x, &y, &x1, &y1, &w, &h);
+//     x = (displayWidth - w) / 2;
+//     display->setCursor(x, y);
+// #endif // _ADAFRUIT_TFTLCD_H_
+// #if defined(_TFT_eSPIH_)
+//     w = display->textWidth(captureData.capture[0]);
+//     x = (displayWidth - w) / 2;
+//     y = display->getCursorY();
+//     display->setCursor(x, y);
+// #endif // _TFT_eSPIH_
+//     display->print(captureData.capture[0]);
+//     serialPrintFormattedMacro(this, PSTR("%s.setCursor(%d,%d);"), displayName, x, y);
+//     serialPrintFormattedMacro(this, PSTR("%s.print(\"%s\");"), displayName, captureData.capture[0]);
     break;
   case TEXT_CENTER_VERTICAL:
-#if defined(_ADAFRUIT_TFTLCD_H_)
-    x = display->getCursorX();
-    display->getTextBounds(captureData.capture[0], &x, &y, &x1, &y1, &w, &h);
-    y = (displayHeight - h) / 2;
-    display->setCursor(x, y);
-#endif // _ADAFRUIT_TFTLCD_H_
-#if defined(_TFT_eSPIH_)
-    h = display->fontHeight();
-    y = (displayHeight - h) / 2;
-    x = display->getCursorX();
-    display->setCursor(x, y);
-#endif // _TFT_eSPIH_
-    display->print(captureData.capture[0]);
-    serialPrintFormattedMacro(this, PSTR("%s.setCursor(%d,%d);"), displayName, x, y);
-    serialPrintFormattedMacro(this, PSTR("%s.print(\"%s\");"), displayName, captureData.capture[0]);
+// #if defined(_ADAFRUIT_TFTLCD_H_)
+//     x = display->getCursorX();
+//     display->getTextBounds(captureData.capture[0], &x, &y, &x1, &y1, &w, &h);
+//     y = (displayHeight - h) / 2;
+//     display->setCursor(x, y);
+// #endif // _ADAFRUIT_TFTLCD_H_
+// #if defined(_TFT_eSPIH_)
+//     h = display->fontHeight();
+//     y = (displayHeight - h) / 2;
+//     x = display->getCursorX();
+//     display->setCursor(x, y);
+// #endif // _TFT_eSPIH_
+//     display->print(captureData.capture[0]);
+//     serialPrintFormattedMacro(this, PSTR("%s.setCursor(%d,%d);"), displayName, x, y);
+//     serialPrintFormattedMacro(this, PSTR("%s.print(\"%s\");"), displayName, captureData.capture[0]);
     break;
   case CLEAR_SCREEN:
     display->fillScreen(COLOR_BLACK);
