@@ -556,22 +556,18 @@ void FastSerialDisplay::decodeInput(char input)
 void FastSerialDisplay::readCommandsFromSerial(void)
 {
   char input;
-  if (Serial.available())
+
+  while (Serial.available())
   {
-    initCapture(&captureData);
-    while (Serial.available())
-    {
-      input = Serial.read();
-      decodeInput(input);
-      lastSerialRead = millis();
-    }
+    input = Serial.read();
+    decodeInput(input);
+    lastSerialRead = millis();
   }
   if (currentMode != UNDEFINED && millis() - lastSerialRead > DEBOUNCE_READ_SERIAL)
   {
     executeCommand();
     lastSerialRead = millis();
   }
-  delay(10);
 }
 
 void FastSerialDisplay::executeCommand(void)
