@@ -49,7 +49,7 @@ void setup() {
 }
 
 void loop(void) {
-  // sDisplay.readCommandsFromSerial(); // This line mandatory for using the display prototyping library
+  sDisplay.readCommandsFromSerial(); // This line mandatory for using the display prototyping library
   // Your specific code here
 }
 

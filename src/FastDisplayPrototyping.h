@@ -80,19 +80,19 @@ private:
 
   void decodeInput(char input);
   void executeCommand(void);
-  void captureInput(Capture *, char);
-  void openCapture(Capture *, int);
-  void initCapture(Capture *);
-  void closeCapture(Capture *);
-  void nextArgCapture(Capture *);
-  int16_t *getIntFromCapture(Capture *, int);
-  int16_t *getIntFromCapture(Capture *, int, int);
+  void captureInput(char);
+  void openCapture(int);
+  void initCapture();
+  void closeCapture();
+  void nextArgCapture();
+  int16_t *getIntFromCapture(int);
+  int16_t *getIntFromCapture(int, int);
   int16_t getIntFromCapture(char *);
   float getFloatFromCapture(char *);
-  bool getBoolFromCapture(char *);
-  bool *getBoolFromCapture(Capture *, int, int);
+  bool getBoolFromCapture(char);
+  bool *getBoolFromCapture(int, int);
   int getValueFromKeyword(char);
-  uint16_t *getColorFromCapture(Capture *, int, int);
+  uint16_t *getColorFromCapture(int, int);
   uint16_t getColorFromCapture(char *);
   void captureCommand(char);
   boolean isCommand(const char *);
@@ -193,27 +193,27 @@ uint16_t FastSerialDisplay::getColorFromCapture(char *capture)
 {
   return strtoul(capture, NULL, 16);
 }
-uint16_t *FastSerialDisplay::getColorFromCapture(Capture *capture, int start, int end)
+uint16_t *FastSerialDisplay::getColorFromCapture(int start, int end)
 {
   static uint16_t res[MAX_ARG_CAPTURE];
   for (int i = start; i <= end && i < MAX_ARG_CAPTURE; i++)
   {
-    res[i] = getColorFromCapture(capture->capture[i]);
+    res[i] = getColorFromCapture(captureData.capture[i]);
   }
   return res;
 }
 
-int16_t *FastSerialDisplay::getIntFromCapture(Capture *capture, int count)
+int16_t *FastSerialDisplay::getIntFromCapture(int count)
 {
-  return getIntFromCapture(capture, 0, count - 1);
+  return getIntFromCapture(0, count - 1);
 }
 
-int16_t *FastSerialDisplay::getIntFromCapture(Capture *capture, int start, int end)
+int16_t *FastSerialDisplay::getIntFromCapture(int start, int end)
 {
   static int16_t res[MAX_ARG_CAPTURE];
   for (int i = start; i <= end && i < MAX_ARG_CAPTURE; i++)
   {
-    res[i] = getIntFromCapture(capture->capture[i]);
+    res[i] = getIntFromCapture(captureData.capture[i]);
   }
   return res;
 }
@@ -230,19 +230,19 @@ int16_t FastSerialDisplay::getIntFromCapture(char *capture)
   }
 }
 
-bool *FastSerialDisplay::getBoolFromCapture(Capture *capture, int start, int end)
+bool *FastSerialDisplay::getBoolFromCapture(int start, int end)
 {
   static bool res[MAX_ARG_CAPTURE];
   for (int i = start; i <= end && i < MAX_ARG_CAPTURE; i++)
   {
-    res[i] = getBoolFromCapture(capture->capture[i]);
+    res[i] = getBoolFromCapture(captureData.capture[i][0]);
   }
   return res;
 }
 
-bool FastSerialDisplay::getBoolFromCapture(char *capture)
+bool FastSerialDisplay::getBoolFromCapture(char b)
 {
-  if (capture[0] == '1')
+  if (b == '1')
   {
     return true;
   }
@@ -269,54 +269,59 @@ int FastSerialDisplay::getValueFromKeyword(char c)
   return 0;
 }
 
-void FastSerialDisplay::captureInput(Capture *capture, char input)
+void FastSerialDisplay::captureInput(char input)
 {
-  capture->capture[capture->argIndex][capture->index[capture->argIndex]] = input;
-  capture->index[capture->argIndex]++;
-  if (capture->index[capture->argIndex] == MAX_DATA_CAPTURE)
+  captureData.capture[captureData.argIndex][captureData.index[captureData.argIndex]] = input;
+  captureData.index[captureData.argIndex]++;
+
+  if (captureData.index[captureData.argIndex] == MAX_DATA_CAPTURE)
   {
     Serial.println(F("Capture Max Reached"));
-    capture->index[capture->argIndex] = 0;
+    captureData.index[captureData.argIndex] = 0;
+  }
+  else
+  {
+    captureData.capture[captureData.argIndex][captureData.index[captureData.argIndex]] = 0;
   }
 }
 
-void FastSerialDisplay::closeCapture(Capture *capture)
+void FastSerialDisplay::closeCapture()
 {
-  capture->argIndex = 0;
-  for (int i = 0; i < capture->maxArg; i++)
-  {
-    capture->capture[i][capture->index[i]] = 0;
-  }
+  captureData.argIndex = 0;
+  // for (int i = 0; i < capture->maxArg; i++)
+  // {
+  //   capture->capture[i][capture->index[i]] = 0;
+  // }
 }
-void FastSerialDisplay::openCapture(Capture *capture, int maxArg)
+void FastSerialDisplay::openCapture(int maxArg)
 {
-  capture->maxArg = maxArg;
-  initCapture(capture);
+  captureData.maxArg = maxArg;
+  initCapture();
 }
-void FastSerialDisplay::initCapture(Capture *capture)
+void FastSerialDisplay::initCapture()
 {
-  capture->argIndex = 0;
+  captureData.argIndex = 0;
   for (int i = 0; i < MAX_ARG_CAPTURE; i++)
   {
-    capture->index[i] = 0;
+    captureData.index[i] = 0;
   }
 }
 
-void FastSerialDisplay::nextArgCapture(Capture *capture)
+void FastSerialDisplay::nextArgCapture()
 {
-  capture->argIndex++;
-  if (capture->argIndex == capture->maxArg)
+  captureData.argIndex++;
+  if (captureData.argIndex == captureData.maxArg)
   {
     Serial.println(F("Capture Max Arg Reached"));
-    capture->argIndex = 0;
+    captureData.argIndex = 0;
   }
-  capture->index[capture->argIndex] = 0;
+  captureData.index[captureData.argIndex] = 0;
 }
 
 void FastSerialDisplay::captureCommand(char input)
 {
-  captureInput(&captureData, input);
-  closeCapture(&captureData);
+  captureInput(input);
+  closeCapture();
 
   for (int i = 0; i < numCommands; i++)
   {
@@ -326,111 +331,111 @@ void FastSerialDisplay::captureCommand(char input)
       {
       case 0:
         currentMode = TEXT;
-        openCapture(&captureData, 1);
+        openCapture(1);
         break;
       case 1:
         currentMode = TEXT_CENTER_VERTICAL;
-        openCapture(&captureData, 1);
+        openCapture(1);
         break;
       case 2:
         currentMode = TEXT_CENTER_HORIZONTAL;
-        openCapture(&captureData, 1);
+        openCapture(1);
         break;
       case 3:
         currentMode = TEXT_SIZE;
-        openCapture(&captureData, 1);
+        openCapture(1);
         break;
       case 4:
         currentMode = CIRCLE_OUTLINE;
-        openCapture(&captureData, 3);
+        openCapture(3);
         break;
       case 5:
         currentMode = CIRCLE_FILL;
-        openCapture(&captureData, 3);
+        openCapture(3);
         break;
       case 6:
         currentMode = TRIANGLE_OUTLINE;
-        openCapture(&captureData, 6);
+        openCapture(6);
         break;
       case 7:
         currentMode = TRIANGLE_FILL;
-        openCapture(&captureData, 6);
+        openCapture(6);
         break;
       case 8:
         currentMode = RECTANGLE_OUTLINE;
-        openCapture(&captureData, 4);
+        openCapture(4);
         break;
       case 9:
         currentMode = RECTANGLE_FILL;
-        openCapture(&captureData, 4);
+        openCapture(4);
         break;
       case 10:
         currentMode = RECTANGLE_ROUND_OUTLINE;
-        openCapture(&captureData, 5);
+        openCapture(5);
         break;
       case 11:
         currentMode = RECTANGLE_ROUND_FILL;
-        openCapture(&captureData, 5);
+        openCapture(5);
         break;
       case 12:
         currentMode = SET_CURSOR;
-        openCapture(&captureData, 2);
+        openCapture(2);
         break;
       case 13:
         currentMode = LINE_FAST_VERTICAL;
-        openCapture(&captureData, 3);
+        openCapture(3);
         break;
       case 14:
         currentMode = LINE_FAST_HORIZONTAL;
-        openCapture(&captureData, 3);
+        openCapture(3);
         break;
       case 15:
         currentMode = LINE;
-        openCapture(&captureData, 4);
+        openCapture(4);
         break;
       case 16:
         currentMode = ROTATE;
-        openCapture(&captureData, 1);
+        openCapture(1);
         break;
       case 17:
         currentMode = PIXEL;
-        openCapture(&captureData, 2);
+        openCapture(2);
         break;
       case 18:
         currentMode = RECTANGLE_FILL_GRADIENT_HORIZONTAL;
-        openCapture(&captureData, 6);
+        openCapture(6);
         break;
       case 19:
         currentMode = ELLIPSE_OUTLINE;
-        openCapture(&captureData, 4);
+        openCapture(4);
         break;
       case 20:
         currentMode = ELLIPSE_FILL;
-        openCapture(&captureData, 4);
+        openCapture(4);
         break;
       case 21:
         currentMode = ARC;
-        openCapture(&captureData, 9);
+        openCapture(9);
         break;
       case 22:
         currentMode = ARC_SMOOTH;
-        openCapture(&captureData, 9);
+        openCapture(9);
         break;
       case 23:
         currentMode = CIRCLE_SMOOTH_OUTLINE;
-        openCapture(&captureData, 5);
+        openCapture(5);
         break;
       case 24:
         currentMode = CIRCLE_SMOOTH_FILL;
-        openCapture(&captureData, 5);
+        openCapture(5);
         break;
       case 25:
         currentMode = RECTANGLE_ROUND_SMOOTH_OUTLINE;
-        openCapture(&captureData, 8);
+        openCapture(8);
         break;
       case 26:
         currentMode = RECTANGLE_ROUND_SMOOTH_FILL;
-        openCapture(&captureData, 7);
+        openCapture(7);
         break;
       default:
         Serial.println(F("Unknown Command"));
@@ -460,7 +465,7 @@ void FastSerialDisplay::decodeInput(char input)
     {
     case '#':
       currentMode = DISPLAY_COLOR;
-      openCapture(&captureData, 1);
+      openCapture(1);
       break;
     case 'x':
       currentMode = CLEAR_SCREEN;
@@ -476,8 +481,8 @@ void FastSerialDisplay::decodeInput(char input)
     case 't':
     case 's':
       currentMode = COMMAND;
-      openCapture(&captureData, 1);
-      captureInput(&captureData, input);
+      openCapture(1);
+      captureInput(input);
       break;
     default:
       Serial.print(F("Unknown input="));
@@ -491,18 +496,18 @@ void FastSerialDisplay::decodeInput(char input)
   case TEXT_CENTER_VERTICAL:
   case TEXT_CENTER_HORIZONTAL:
   case TEXT:
-    captureInput(&captureData, input);
+    captureInput(input);
     break;
   case SET_CURSOR:
     if (input == ',')
     {
-      nextArgCapture(&captureData);
+      nextArgCapture();
     }
     else
     {
       if (isdigit(input))
       {
-        captureInput(&captureData, input);
+        captureInput(input);
       }
     }
     break;
@@ -531,20 +536,20 @@ void FastSerialDisplay::decodeInput(char input)
   case DISPLAY_COLOR:
     if (input == ',')
     {
-      nextArgCapture(&captureData);
+      nextArgCapture();
     }
     else
     {
       if (isdigit(input) || strchr(displaySizeKeywords, input) || (input >= 'a' && input <= 'f') || (input >= 'A' && input <= 'F'))
       {
-        captureInput(&captureData, input);
+        captureInput(input);
       }
     }
     break;
   case TEXT_SIZE:
     if (isdigit(input))
     {
-      captureInput(&captureData, input);
+      captureInput(input);
     }
     break;
   default:
@@ -581,7 +586,7 @@ void FastSerialDisplay::executeCommand(void)
     return;
   }
 
-  closeCapture(&captureData);
+  closeCapture();
   switch (currentMode)
   {
   case DISPLAY_COLOR:
@@ -590,7 +595,7 @@ void FastSerialDisplay::executeCommand(void)
     serialPrintFormattedMacro(PSTR("%s.setTextColor(0x%x);"), displayName, currentColor);
     break;
   case TEXT_SIZE:
-    arg = getIntFromCapture(&captureData, 1);
+    arg = getIntFromCapture(1);
     display->setTextSize(arg[0]);
     serialPrintFormattedMacro(PSTR("%s.setTextSize(%d);"), displayName, arg[0]);
     break;
@@ -641,127 +646,127 @@ void FastSerialDisplay::executeCommand(void)
     serialPrintFormattedMacro(PSTR("%s.fillScreen(0x%x);"), displayName, currentColor);
     break;
   case SET_CURSOR:
-    arg = getIntFromCapture(&captureData, 2);
+    arg = getIntFromCapture(2);
     display->setCursor(arg[0], arg[1]);
     serialPrintFormattedMacro(PSTR("%s.setCursor(%d,%d);"), displayName, arg[0], arg[1]);
     break;
   case CIRCLE_OUTLINE:
-    arg = getIntFromCapture(&captureData, 3);
+    arg = getIntFromCapture(3);
     display->drawCircle(arg[0], arg[1], arg[2], currentColor);
     serialPrintFormattedMacro(PSTR("%s.drawCircle(%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], currentColor);
     break;
   case CIRCLE_FILL:
-    arg = getIntFromCapture(&captureData, 3);
+    arg = getIntFromCapture(3);
     display->fillCircle(arg[0], arg[1], arg[2], currentColor);
     serialPrintFormattedMacro(PSTR("%s.fillCircle(%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], currentColor);
     break;
   case TRIANGLE_OUTLINE:
-    arg = getIntFromCapture(&captureData, 6);
+    arg = getIntFromCapture(6);
     display->drawTriangle(arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], currentColor);
     serialPrintFormattedMacro(PSTR("%s.drawTriangle(%d,%d,%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], currentColor);
     break;
   case TRIANGLE_FILL:
-    arg = getIntFromCapture(&captureData, 6);
+    arg = getIntFromCapture(6);
     display->fillTriangle(arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], currentColor);
     serialPrintFormattedMacro(PSTR("%s.fillTriangle(%d,%d,%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], currentColor);
     break;
   case RECTANGLE_OUTLINE:
-    arg = getIntFromCapture(&captureData, 4);
+    arg = getIntFromCapture(4);
     display->drawRect(arg[0], arg[1], arg[2], arg[3], currentColor);
     serialPrintFormattedMacro(PSTR("%s.drawRect(%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], currentColor);
     break;
   case RECTANGLE_FILL:
-    arg = getIntFromCapture(&captureData, 4);
+    arg = getIntFromCapture(4);
     display->fillRect(arg[0], arg[1], arg[2], arg[3], currentColor);
     serialPrintFormattedMacro(PSTR("%s.fillRect(%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], currentColor);
     break;
   case RECTANGLE_ROUND_OUTLINE:
-    arg = getIntFromCapture(&captureData, 5);
+    arg = getIntFromCapture(5);
     display->drawRoundRect(arg[0], arg[1], arg[2], arg[3], arg[4], currentColor);
     serialPrintFormattedMacro(PSTR("%s.drawRoundRect(%d,%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], currentColor);
     break;
   case RECTANGLE_ROUND_FILL:
-    arg = getIntFromCapture(&captureData, 5);
+    arg = getIntFromCapture(5);
     display->fillRoundRect(arg[0], arg[1], arg[2], arg[3], arg[4], currentColor);
     serialPrintFormattedMacro(PSTR("%s.fillRoundRect(%d,%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], currentColor);
     break;
   case LINE_FAST_VERTICAL:
-    arg = getIntFromCapture(&captureData, 3);
+    arg = getIntFromCapture(3);
     display->drawFastVLine(arg[0], arg[1], arg[2], currentColor);
     serialPrintFormattedMacro(PSTR("%s.drawFastVLine(%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], currentColor);
     break;
   case LINE_FAST_HORIZONTAL:
-    arg = getIntFromCapture(&captureData, 3);
+    arg = getIntFromCapture(3);
     display->drawFastHLine(arg[0], arg[1], arg[2], currentColor);
     serialPrintFormattedMacro(PSTR("%s.drawFastHLine(%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], currentColor);
     break;
   case LINE:
-    arg = getIntFromCapture(&captureData, 4);
+    arg = getIntFromCapture(4);
     display->drawLine(arg[0], arg[1], arg[2], arg[3], currentColor);
     serialPrintFormattedMacro(PSTR("%s.drawLine(%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], currentColor);
     break;
   case ROTATE:
-    arg = getIntFromCapture(&captureData, 1);
+    arg = getIntFromCapture(1);
     display->setRotation(arg[0]);
     serialPrintFormattedMacro(PSTR("%s.setRotation(%d);"), displayName, arg[0]);
     break;
   case PIXEL:
-    arg = getIntFromCapture(&captureData, 2);
+    arg = getIntFromCapture(2);
     display->drawPixel(arg[0], arg[1], currentColor);
     serialPrintFormattedMacro(PSTR("%s.drawPixel(%d,%d,0x%x);"), displayName, arg[0], arg[1], currentColor);
     break;
 #if defined(_TFT_eSPIH_)
   case RECTANGLE_FILL_GRADIENT_HORIZONTAL:
-    arg = getIntFromCapture(&captureData, 0, 3);
-    colorArg = getColorFromCapture(&captureData, 4, 5);
+    arg = getIntFromCapture(0, 3);
+    colorArg = getColorFromCapture(4, 5);
     display->fillRectHGradient(arg[0], arg[1], arg[2], arg[3], colorArg[4], colorArg[5]);
     serialPrintFormattedMacro(PSTR("%s.fillRectVGradient(%d,%d,%d,%d,0x%x,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], colorArg[4], colorArg[5]);
     break;
   case ELLIPSE_OUTLINE:
-    arg = getIntFromCapture(&captureData, 4);
+    arg = getIntFromCapture(4);
     display->drawEllipse(arg[0], arg[1], arg[2], arg[3], currentColor);
     serialPrintFormattedMacro(PSTR("%s.drawEllipse(%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], currentColor);
     break;
   case ELLIPSE_FILL:
-    arg = getIntFromCapture(&captureData, 4);
+    arg = getIntFromCapture(4);
     display->fillEllipse(arg[0], arg[1], arg[2], arg[3], currentColor);
     serialPrintFormattedMacro(PSTR("%s.fillEllipse(%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], currentColor);
     break;
   case ARC:
-    arg = getIntFromCapture(&captureData, 0, 5);
-    colorArg = getColorFromCapture(&captureData, 6, 7);
-    boolArg = getBoolFromCapture(&captureData, 8, 8);
+    arg = getIntFromCapture(0, 5);
+    colorArg = getColorFromCapture(6, 7);
+    boolArg = getBoolFromCapture(8, 8);
     display->drawArc(arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], colorArg[6], colorArg[7], boolArg[8]);
     serialPrintFormattedMacro(PSTR("%s.drawArc(%d,%d,%d,%d,%d,%d,0x%x,0x%x,%s);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], colorArg[6], colorArg[7], boolArg[8] ? trueS : falseS);
     break;
   case ARC_SMOOTH:
-    arg = getIntFromCapture(&captureData, 0, 5);
-    colorArg = getColorFromCapture(&captureData, 6, 7);
-    boolArg = getBoolFromCapture(&captureData, 8, 8);
+    arg = getIntFromCapture(0, 5);
+    colorArg = getColorFromCapture(6, 7);
+    boolArg = getBoolFromCapture(8, 8);
     display->drawSmoothArc(arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], colorArg[6], colorArg[7], boolArg[8]);
     serialPrintFormattedMacro(PSTR("%s.drawSmoothArc(%d,%d,%d,%d,%d,%d,0x%x,0x%x,%s);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], colorArg[6], colorArg[7], boolArg[8] ? trueS : falseS);
     break;
   case CIRCLE_SMOOTH_OUTLINE:
-    arg = getIntFromCapture(&captureData, 0, 2);
-    colorArg = getColorFromCapture(&captureData, 3, 4);
+    arg = getIntFromCapture(0, 2);
+    colorArg = getColorFromCapture(3, 4);
     display->drawSmoothCircle(arg[0], arg[1], arg[2], colorArg[3], colorArg[4]);
     serialPrintFormattedMacro(PSTR("%s.drawSmoothCircle(%d,%d,%d,0x%x,0x%x);"), displayName, arg[0], arg[1], arg[2], colorArg[3], colorArg[4]);
     break;
   case CIRCLE_SMOOTH_FILL:
-    arg = getIntFromCapture(&captureData, 0, 2);
-    colorArg = getColorFromCapture(&captureData, 3, 4);
+    arg = getIntFromCapture(0, 2);
+    colorArg = getColorFromCapture(3, 4);
     display->fillSmoothCircle(arg[0], arg[1], arg[2], colorArg[3], colorArg[4]);
     serialPrintFormattedMacro(PSTR("%s.fillSmoothCircle(%d,%d,%d,0x%x,0x%x);"), displayName, arg[0], arg[1], arg[2], colorArg[3], colorArg[4]);
     break;
   case RECTANGLE_ROUND_SMOOTH_OUTLINE:
-    arg = getIntFromCapture(&captureData, 0, 5);
-    colorArg = getColorFromCapture(&captureData, 6, 7);
+    arg = getIntFromCapture(0, 5);
+    colorArg = getColorFromCapture(6, 7);
     display->drawSmoothRoundRect(arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], colorArg[6], colorArg[7]);
     serialPrintFormattedMacro(PSTR("%s.drawSmoothRoundRect(%d,%d,%d,%d,%d,%d,0x%x,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], colorArg[6], colorArg[7]);
     break;
   case RECTANGLE_ROUND_SMOOTH_FILL:
-    arg = getIntFromCapture(&captureData, 0, 4);
-    colorArg = getColorFromCapture(&captureData, 5, 6);
+    arg = getIntFromCapture(0, 4);
+    colorArg = getColorFromCapture(5, 6);
     display->fillSmoothRoundRect(arg[0], arg[1], arg[2], arg[3], arg[4], colorArg[5], colorArg[6]);
     serialPrintFormattedMacro(PSTR("%s.fillSmoothRoundRect(%d,%d,%d,%d,%d,0x%x,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], colorArg[5], colorArg[6]);
     break;
