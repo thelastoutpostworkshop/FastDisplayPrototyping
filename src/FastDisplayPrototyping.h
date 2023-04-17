@@ -430,7 +430,6 @@ void FastSerialDisplay::captureCommand(char input)
         Serial.println(F("Unknown Command"));
         break;
       }
-      return;
     }
   }
 }
