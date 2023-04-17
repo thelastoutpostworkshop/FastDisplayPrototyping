@@ -283,7 +283,7 @@ void FastSerialDisplay::openCapture(Capture *capture, int maxArg)
 {
   capture->argIndex = 0;
   capture->maxArg = maxArg;
-  for (int i = 0; i < capture->maxArg; i++)
+  for (int i = 0; i < MAX_ARG_CAPTURE; i++)
   {
     capture->index[i] = 0;
   }
