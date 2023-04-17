@@ -298,14 +298,11 @@ void FastSerialDisplay::openCapture(Capture *capture, int maxArg)
 
 void FastSerialDisplay::nextArgCapture(Capture *capture)
 {
-  if (capture->argIndex >= capture->maxArg)
+  capture->argIndex++;
+  if (capture->argIndex == capture->maxArg)
   {
     Serial.println(F("Capture Max Arg Reached"));
     capture->argIndex = 0;
-  }
-  else
-  {
-    capture->argIndex++;
   }
 }
 
