@@ -2,7 +2,7 @@
 
 #include <Adafruit_TFTLCD.h>    // Hardware-specific library
 #include <Adafruit_GFX.h>       // Core graphics library
-// #define OUTPUT_CODE_ON_SERIAL   // Output graphical functions on the Serial Monitor, comment it to disable
+#define OUTPUT_CODE_ON_SERIAL   // Output graphical functions on the Serial Monitor, comment it to disable
 #include "src/FastDisplayPrototyping.h"
 
 #define LCD_CS A3 // Chip Select goes to Analog 3
@@ -24,12 +24,12 @@ void setup() {
   tft.begin();
   tft.setRotation(0);
 
-  // sDisplay.runCommands(F("sc1,1;ttHello;"));
-  // sDisplay.runCommands(F("ts2;ttWorld!;"));
-  // sDisplay.runCommands(F("#ff00;dp100,10;"));
-  // sDisplay.runCommands(F("dl2,20,2,h;"));
-  // sDisplay.runCommands(F("#005f;ch100,10,10;"));
-  // sDisplay.runCommands(F("#f104;cf120,10,10;"));
+  sDisplay.runCommands(F("sc1,1;ttHello;"));
+  sDisplay.runCommands(F("ts2;ttWorld!;"));
+  sDisplay.runCommands(F("#ff00;dp100,10;"));
+  sDisplay.runCommands(F("dl2,20,2,h;"));
+  sDisplay.runCommands(F("#005f;ch100,10,10;"));
+  sDisplay.runCommands(F("#f104;cf120,10,10;"));
   // sDisplay.runCommands(F("#f7c2;ce110,75,10,50;"));
   // sDisplay.runCommands(F("#12df;cg90,75,10,50;"));
   // sDisplay.runCommands(F("ca31,100,20,25,0,90,f8a2,00,0;"));
@@ -49,7 +49,7 @@ void setup() {
 }
 
 void loop(void) {
-  sDisplay.readCommandsFromSerial(); // This line mandatory for using the display prototyping library
+  // sDisplay.readCommandsFromSerial(); // This line mandatory for using the display prototyping library
   // Your specific code here
 }
 
