@@ -82,6 +82,7 @@ private:
   void executeCommand(void);
   void captureInput(Capture *, char);
   void openCapture(Capture *, int);
+  void initCapture(Capture *);
   void closeCapture(Capture *);
   void nextArgCapture(Capture *);
   int16_t *getIntFromCapture(Capture *, int);
@@ -288,8 +289,12 @@ void FastSerialDisplay::closeCapture(Capture *capture)
 }
 void FastSerialDisplay::openCapture(Capture *capture, int maxArg)
 {
-  capture->argIndex = 0;
   capture->maxArg = maxArg;
+  initCapture(capture);
+}
+void FastSerialDisplay::initCapture(Capture *capture)
+{
+  capture->argIndex = 0;
   for (int i = 0; i < MAX_ARG_CAPTURE; i++)
   {
     capture->index[i] = 0;
