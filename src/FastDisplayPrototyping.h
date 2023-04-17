@@ -575,8 +575,6 @@ void FastSerialDisplay::readCommandsFromSerial(void)
 
 void FastSerialDisplay::executeCommand(void)
 {
-  int16_t x, y, x1, y1;
-  uint16_t w, h;
   int16_t *arg;
   uint16_t *colorArg;
   bool *boolArg;
