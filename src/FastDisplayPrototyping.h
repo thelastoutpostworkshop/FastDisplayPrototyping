@@ -269,13 +269,13 @@ int FastSerialDisplay::getValueFromKeyword(char c)
 
 void FastSerialDisplay::captureInput(Capture *capture, char input)
 {
+  capture->capture[capture->argIndex][capture->index[capture->argIndex]] = input;
+  capture->index[capture->argIndex]++;
   if (capture->index[capture->argIndex] == MAX_DATA_CAPTURE)
   {
     Serial.println(F("Capture Max Reached"));
     capture->index[capture->argIndex] = 0;
   }
-  capture->capture[capture->argIndex][capture->index[capture->argIndex]] = input;
-  capture->index[capture->argIndex]++;
 }
 
 void FastSerialDisplay::closeCapture(Capture *capture)
