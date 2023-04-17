@@ -558,7 +558,7 @@ void FastSerialDisplay::readCommandsFromSerial(void)
   char input;
   if (Serial.available())
   {
-    captureData.argIndex = 0;
+    initCapture(&captureData);
     while (Serial.available())
     {
       input = Serial.read();
