@@ -104,9 +104,7 @@ private:
     va_start(args, fmt);
     vsnprintf_P(disp->serialBuffer, sizeof(disp->serialBuffer), fmt, args);
     va_end(args);
-    Serial.flush();
     Serial.println(disp->serialBuffer);
-    Serial.flush();
 #endif
   }
 
