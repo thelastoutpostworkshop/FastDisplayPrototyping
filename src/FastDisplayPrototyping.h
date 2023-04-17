@@ -106,6 +106,7 @@ private:
     va_end(args);
     Serial.flush();
     Serial.println(disp->serialBuffer);
+    Serial.flush();
 #endif
   }
 
