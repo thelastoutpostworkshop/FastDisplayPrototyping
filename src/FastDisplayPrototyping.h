@@ -304,6 +304,7 @@ void FastSerialDisplay::nextArgCapture(Capture *capture)
     Serial.println(F("Capture Max Arg Reached"));
     capture->argIndex = 0;
   }
+  capture->index[capture->argIndex] = 0;
 }
 
 void FastSerialDisplay::captureCommand(char input)
