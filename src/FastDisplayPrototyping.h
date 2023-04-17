@@ -66,8 +66,8 @@ private:
   MODE currentMode;
   Capture captureData;
   uint16_t currentColor = 0xFFFF;
-  int displayWidth;
-  int displayHeight;
+  int16_t displayWidth;
+  int16_t displayHeight;
   unsigned long lastSerialRead;
   char serialBuffer[255];
   const char *displayName;
