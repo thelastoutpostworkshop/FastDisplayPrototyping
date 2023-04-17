@@ -75,6 +75,8 @@ private:
   const char *displaySizeKeywords = "WwHh";
   const char *trueS = "true";
   const char *falseS = "false";
+  static const char *commands[];
+  static const int numCommands;
 
   void decodeInput(char input);
   void executeCommand(void);
@@ -112,6 +114,11 @@ public:
   void runCommands(char *);
   void runCommands(const __FlashStringHelper *ifsh);
 };
+
+const char *FastSerialDisplay::commands[] = {"tt", "tv", "th", "ts", "ch", "cf", "gh", "gf", "rh", "rf", "ri", "rj",
+                                             "sc", "lv", "lh", "dl", "ro", "dp", "rk", "ce", "cg", "ca", "cb", "ci", "cj",
+                                             "rs", "rt"};
+const int FastSerialDisplay::numCommands = sizeof(commands) / sizeof(*commands);
 
 FastSerialDisplay::FastSerialDisplay(DISP *d, const char *dName)
 {
@@ -306,11 +313,6 @@ void FastSerialDisplay::captureCommand(char input)
 {
   captureInput(&captureData, input);
   closeCapture(&captureData);
-
-  const char *commands[] = {"tt", "tv", "th", "ts", "ch", "cf", "gh", "gf", "rh", "rf", "ri", "rj",
-                            "sc", "lv", "lh", "dl", "ro", "dp", "rk", "ce", "cg", "ca","cb","ci","cj",
-                            "rs","rt"};
-  const int numCommands = sizeof(commands) / sizeof(*commands);
 
   for (int i = 0; i < numCommands; i++)
   {
@@ -571,7 +573,7 @@ void FastSerialDisplay::executeCommand(void)
 {
   int16_t x, y, x1, y1;
   uint16_t w, h;
-  int16_t *arg; 
+  int16_t *arg;
   uint16_t *colorArg;
   bool *boolArg;
 
@@ -599,38 +601,38 @@ void FastSerialDisplay::executeCommand(void)
     serialPrintFormattedMacro(this, PSTR("%s.print(\"%s\");"), displayName, captureData.capture[0]);
     break;
   case TEXT_CENTER_HORIZONTAL:
-// #if defined(_ADAFRUIT_TFTLCD_H_)
-//     y = display->getCursorY();
-//     display->getTextBounds(captureData.capture[0], &x, &y, &x1, &y1, &w, &h);
-//     x = (displayWidth - w) / 2;
-//     display->setCursor(x, y);
-// #endif // _ADAFRUIT_TFTLCD_H_
-// #if defined(_TFT_eSPIH_)
-//     w = display->textWidth(captureData.capture[0]);
-//     x = (displayWidth - w) / 2;
-//     y = display->getCursorY();
-//     display->setCursor(x, y);
-// #endif // _TFT_eSPIH_
-//     display->print(captureData.capture[0]);
-//     serialPrintFormattedMacro(this, PSTR("%s.setCursor(%d,%d);"), displayName, x, y);
-//     serialPrintFormattedMacro(this, PSTR("%s.print(\"%s\");"), displayName, captureData.capture[0]);
+    // #if defined(_ADAFRUIT_TFTLCD_H_)
+    //     y = display->getCursorY();
+    //     display->getTextBounds(captureData.capture[0], &x, &y, &x1, &y1, &w, &h);
+    //     x = (displayWidth - w) / 2;
+    //     display->setCursor(x, y);
+    // #endif // _ADAFRUIT_TFTLCD_H_
+    // #if defined(_TFT_eSPIH_)
+    //     w = display->textWidth(captureData.capture[0]);
+    //     x = (displayWidth - w) / 2;
+    //     y = display->getCursorY();
+    //     display->setCursor(x, y);
+    // #endif // _TFT_eSPIH_
+    //     display->print(captureData.capture[0]);
+    //     serialPrintFormattedMacro(this, PSTR("%s.setCursor(%d,%d);"), displayName, x, y);
+    //     serialPrintFormattedMacro(this, PSTR("%s.print(\"%s\");"), displayName, captureData.capture[0]);
     break;
   case TEXT_CENTER_VERTICAL:
-// #if defined(_ADAFRUIT_TFTLCD_H_)
-//     x = display->getCursorX();
-//     display->getTextBounds(captureData.capture[0], &x, &y, &x1, &y1, &w, &h);
-//     y = (displayHeight - h) / 2;
-//     display->setCursor(x, y);
-// #endif // _ADAFRUIT_TFTLCD_H_
-// #if defined(_TFT_eSPIH_)
-//     h = display->fontHeight();
-//     y = (displayHeight - h) / 2;
-//     x = display->getCursorX();
-//     display->setCursor(x, y);
-// #endif // _TFT_eSPIH_
-//     display->print(captureData.capture[0]);
-//     serialPrintFormattedMacro(this, PSTR("%s.setCursor(%d,%d);"), displayName, x, y);
-//     serialPrintFormattedMacro(this, PSTR("%s.print(\"%s\");"), displayName, captureData.capture[0]);
+    // #if defined(_ADAFRUIT_TFTLCD_H_)
+    //     x = display->getCursorX();
+    //     display->getTextBounds(captureData.capture[0], &x, &y, &x1, &y1, &w, &h);
+    //     y = (displayHeight - h) / 2;
+    //     display->setCursor(x, y);
+    // #endif // _ADAFRUIT_TFTLCD_H_
+    // #if defined(_TFT_eSPIH_)
+    //     h = display->fontHeight();
+    //     y = (displayHeight - h) / 2;
+    //     x = display->getCursorX();
+    //     display->setCursor(x, y);
+    // #endif // _TFT_eSPIH_
+    //     display->print(captureData.capture[0]);
+    //     serialPrintFormattedMacro(this, PSTR("%s.setCursor(%d,%d);"), displayName, x, y);
+    //     serialPrintFormattedMacro(this, PSTR("%s.print(\"%s\");"), displayName, captureData.capture[0]);
     break;
   case CLEAR_SCREEN:
     display->fillScreen(COLOR_BLACK);
