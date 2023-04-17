@@ -25,11 +25,11 @@ void setup() {
   tft.setRotation(0);
 
   sDisplay.runCommands(F("sc1,1;ttHello;"));
-  sDisplay.runCommands(F("ts2;ttWorld!;"));
-  sDisplay.runCommands(F("#ff00;dp100,10;"));
-  sDisplay.runCommands(F("dl2,20,2,h;"));
-  sDisplay.runCommands(F("#005f;ch100,10,10;"));
-  sDisplay.runCommands(F("#f104;cf120,10,10;"));
+  // sDisplay.runCommands(F("ts2;ttWorld!;"));
+  // sDisplay.runCommands(F("#ff00;dp100,10;"));
+  // sDisplay.runCommands(F("dl2,20,2,h;"));
+  // sDisplay.runCommands(F("#005f;ch100,10,10;"));
+  // sDisplay.runCommands(F("#f104;cf120,10,10;"));
   // sDisplay.runCommands(F("#f7c2;ce110,75,10,50;"));
   // sDisplay.runCommands(F("#12df;cg90,75,10,50;"));
   // sDisplay.runCommands(F("ca31,100,20,25,0,90,f8a2,00,0;"));
