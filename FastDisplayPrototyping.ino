@@ -1,8 +1,8 @@
-//GFX Test
+// GFX Test
 
-#include <Adafruit_TFTLCD.h>    // Hardware-specific library
-#include <Adafruit_GFX.h>       // Core graphics library
-#define OUTPUT_CODE_ON_SERIAL   // Output graphical functions on the Serial Monitor, comment it to disable
+#include <Adafruit_TFTLCD.h>  // Hardware-specific library
+#include <Adafruit_GFX.h>     // Core graphics library
+#define OUTPUT_CODE_ON_SERIAL // Output graphical functions on the Serial Monitor, comment it to disable
 #include "src/FastDisplayPrototyping.h"
 
 #define LCD_CS A3 // Chip Select goes to Analog 3
@@ -16,18 +16,20 @@
 Adafruit_TFTLCD tft(LCD_CS, LCD_CD, LCD_WR, LCD_RD, LCD_RESET);
 
 // Initialize the display prototyping library
-FastSerialDisplay sDisplay(&tft,"tft"); 
+FastSerialDisplay sDisplay(&tft, "tft");
 
-void setup() {
+void setup()
+{
   Serial.begin(9600); // This line mandatory for using the display prototyping library, change the baud rate if needed
 
   tft.begin();
   tft.setRotation(0);
 
-  sDisplay.runCommands("ttHello;");
-  sDisplay.runCommands(F("ts2;ttWorld!;"));
+  sDisplay.runCommands(F("x;#6f5e;sc77,10;ttDisplay Prototyping;"));
+  sDisplay.runCommands(F("dl10,10,h,w;lh70,30,235;lv70,8,23;"));
   sDisplay.runCommands(F("#ff00;dp100,10;"));
-  sDisplay.runCommands(F("dl2,20,2,h;"));
+  sDisplay.runCommands(F("#0f83;ch280,60,20"));
+  
   sDisplay.runCommands(F("#005f;ch100,10,10;"));
   sDisplay.runCommands(F("#f104;cf120,10,10;"));
   sDisplay.runCommands(F("#f7c2;ce110,75,10,50;"));
@@ -47,19 +49,19 @@ void setup() {
   // Your specific code here
 }
 
-void loop(void) {
+void loop(void)
+{
   sDisplay.readCommandsFromSerial(); // This line mandatory for using the display prototyping library
   // Your specific code here
 }
 
-
-// TFT eSPI test 
+// TFT eSPI test
 
 // #include <TFT_eSPI.h>
 // #define OUTPUT_CODE_ON_SERIAL
 // #include "src/FastDisplayPrototyping.h"
 
-// TFT_eSPI display = TFT_eSPI(); 
+// TFT_eSPI display = TFT_eSPI();
 // FastSerialDisplay sDisplay(&display,"display");
 
 // //------------------------------------------------------------------------------------------

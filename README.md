@@ -20,6 +20,7 @@ All display supported by Adafruit GFX and TFT_eSPI libraries
 6. [Using Fonts](#using-fonts)
 7. [Library Configuration](#library-configuration)
 8. [Library Size](#library-size)
+9. [Serial Buffer Limitation](#serial-buffer-limitation-on-arduino-uno-and-nano)
 
 ### Installation
 To get started, download the source code (zip) [the latest release](https://github.com/thelastoutpostworkshop/DisplayPrototyping/releases/latest). Then install the library in the Arduino IDE with the menu `Sketch > Include Library > Add ZIP Library`.
@@ -169,3 +170,8 @@ The library utilizes a wide range of graphical functions, which can pose a chall
 
 [GFX]: https://img.shields.io/badge/GFX-green
 [ESPI]: https://img.shields.io/badge/eSPI-blue
+
+### Serial Buffer Limitation on Arduino Uno and Nano
+Arduino Uno and Nano, both equipped with the ATmega328P microcontroller, have a default serial buffer size of 64 bytes. This buffer size determines the maximum number of bytes that can be received and stored in a single instance by the Serial object.
+
+When sending data through the Serial Monitor or any other serial communication interface, it is crucial to be aware of this limitation, as attempting to send a message larger than 64 bytes can lead to data loss or unexpected behavior.
