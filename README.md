@@ -100,7 +100,7 @@ void loop(void) {
 |x;#077f;ri10,10,40,40,10 | Clear screen & Blue rounded rectangle outline at position 10,10, width 40, height 40, corner radius 10 |
 
 ### Serial Commands Reference
->ℹ️ You can replace any numeric value with **w** or **h** and it will be replaced by the width or the height of the display, for example `lh10,10,w`<br>
+>ℹ️ You can replace any numeric value with **w**, **h**, **c** or **m** and it will be replaced by the width, the height, half of the height or half of the width of the display respectively.  For example `lhc,10,w`<br>
 >ℹ️ For most serial commands, you don't need to specify a color, as they will use the current color set by the `#` serial command. This reduces the amount of typing needed<br>
 >ℹ️ Color format is **RGB565**, you can use this [Color Name Defintions Reference](https://github.com/newdigate/rgb565_colors) or  [RGB565 Color Picker](http://www.barth-dev.de/online/rgb565-color-picker/#) (There are many others on the web)<br>
 >ℹ️ A graphical function supported by Adafruit GFX is indicated with ![GFX] and supported by TFT_eSPI is indicated with ![ESPI]
