@@ -25,27 +25,13 @@ void setup()
   tft.begin();
   tft.setRotation(0);
 
-  sDisplay.runCommands(F("x;#6f5e;sc77,10;ttDisplay Prototyping;"));
+  sDisplay.runCommands(F("x;ro3;#6f5e;sc77,10;ts2;ttDisplay Prototyping;"));
   sDisplay.runCommands(F("dl10,10,h,w;lh70,30,235;lv70,8,23;"));
   sDisplay.runCommands(F("#ff00;dp100,10;"));
-  sDisplay.runCommands(F("#0f83;ch280,60,20"));
-  
-  sDisplay.runCommands(F("#005f;ch100,10,10;"));
-  sDisplay.runCommands(F("#f104;cf120,10,10;"));
-  sDisplay.runCommands(F("#f7c2;ce110,75,10,50;"));
-  sDisplay.runCommands(F("#12df;cg90,75,10,50;"));
-  sDisplay.runCommands(F("ca31,100,20,25,0,90,f8a2,00,0;"));
-  sDisplay.runCommands(F("#f8b9;rh5,20,20,30;"));
-  sDisplay.runCommands(F("#17de;rf5,60,20,30;"));
-  sDisplay.runCommands(F("#17cb;ri30,20,20,30,4;"));
-  sDisplay.runCommands(F("#18bf;rj30,60,20,30,4;"));
-  sDisplay.runCommands(F("#17d4;gh15,120,5,110,25,110;"));
-  sDisplay.runCommands(F("#fe42;gf35,120,25,110,55,120;"));
-  sDisplay.runCommands(F("cb50,25,80,70,300,360,00f5,00,1;"));
-  sDisplay.runCommands(F("ci65,35,13,77e0,0;"));
-  sDisplay.runCommands(F("cj65,75,13,07e5,0;"));
-  sDisplay.runCommands(F("rs70,60,5,8,20,30,f820,0;"));
-  sDisplay.runCommands(F("rt80,100,20,20,5,fde0,0;"));
+  sDisplay.runCommands(F("#0f83;ch280,60,20;#daad;cf280,60,15;"));
+  sDisplay.runCommands(F("#ffe0;rh200,45,40,30;#f6cb;rf205,50,30,20;"));
+  sDisplay.runCommands(F("#f81f;ri200,90,40,30,8;#f014;rj205,95,30,20,5;"));
+  sDisplay.runCommands(F("#fbe0;gh250,100,300,100,277,140;#dd24;gf260,105,290,105,277,130;"));
   // Your specific code here
 }
 
