@@ -17,7 +17,7 @@ Documentation : https://github.com/thelastoutpostworkshop/FastDisplayPrototyping
 TFT_eSPI tft = TFT_eSPI(); 
 
 // Initialize the display prototyping library
-FastSerialDisplay tft(&tft,"tft");
+FastSerialDisplay sDisplay(&tft,"tft");
 
 void setup() {
   Serial.begin(115200);  // This line mandatory for using the display prototyping library, change the baud rate if needed
