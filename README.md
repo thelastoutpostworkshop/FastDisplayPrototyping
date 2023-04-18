@@ -165,6 +165,7 @@ serialDisplay sDisplay(&tft,"display");
 All the graphical commands will be preceded by the "display" keyword, for example `display.fillSmoothRoundRect(80,100,20,20,5,0xfde0,0x0);`
 
 ### Library Size
+The library utilizes a wide range of graphical functions, which can pose a challenge for microcontrollers with limited memory, such as the Arduino Uno or Nano. In such cases, you can use the library within an empty sketch to prototype your designs and then copy the code output from the Serial Monitor into your main sketch. This approach helps you avoid potential memory issues while still benefiting from the library's functionality.
 
 [GFX]: https://img.shields.io/badge/GFX-green
 [ESPI]: https://img.shields.io/badge/eSPI-blue
