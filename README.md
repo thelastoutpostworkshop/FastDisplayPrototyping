@@ -28,7 +28,7 @@ To get started, download the source code (zip) [the latest release](https://gith
 >ℹ️ You can also use get this setup code with the examples provided with the library in the Arduino IDE through the menu `File > Examples > FastDisplayPrototyping`
 
 ```c
-#include <Adafruit_TFTLCD.h>    // Hardware-specific library
+#include <Adafruit_TFTLCD.h>    // Include the hardware-specific library for your type of display
 #include <Adafruit_GFX.h>       // Core graphics library
 #define OUTPUT_CODE_ON_SERIAL   // Output graphical functions on the Serial Monitor, comment it to disable
 #include <FastDisplayPrototyping.h>
