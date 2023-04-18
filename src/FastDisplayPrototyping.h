@@ -72,7 +72,7 @@ private:
   char serialBuffer[255];
   const char *displayName;
 
-  const char *displaySizeKeywords = "WwHh";
+  const char *displaySizeKeywords = "WwHhMmCc";
   const char *trueS = "true";
   const char *falseS = "false";
   static const char *commands[];
@@ -263,6 +263,14 @@ int FastSerialDisplay::getValueFromKeyword(char c)
     case 'H':
     case 'h':
       return (displayHeight);
+      break;
+    case 'M':
+    case 'm':
+      return (displayWidth/2);
+      break;
+    case 'C':
+    case 'c':
+      return (displayHeight/2);
       break;
     }
   }
