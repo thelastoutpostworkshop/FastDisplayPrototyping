@@ -25,13 +25,46 @@ void setup()
   tft.begin();
   tft.setRotation(0);
 
-  sDisplay.runCommands(F("x;ro3;#6f5e;sc77,10;ts2;ttDisplay Prototyping;"));
-  sDisplay.runCommands(F("dl10,10,h,w;lh70,30,235;lv70,8,23;"));
-  sDisplay.runCommands(F("#ff00;dp100,10;"));
-  sDisplay.runCommands(F("#0f83;ch280,60,20;#daad;cf280,60,15;"));
-  sDisplay.runCommands(F("#ffe0;rh200,45,40,30;#f6cb;rf205,50,30,20;"));
-  sDisplay.runCommands(F("#f81f;ri200,90,40,30,8;#f014;rj205,95,30,20,5;"));
-  sDisplay.runCommands(F("#fbe0;gh250,100,300,100,277,140;#dd24;gf260,105,290,105,277,130;"));
+  // Test 1
+  // sDisplay.runCommands(F("x;ro3;#6f5e;sc77,10;ts2;ttDisplay Prototyping;"));
+  // sDisplay.runCommands(F("dl10,10,h,w;lh70,30,235;lv70,8,23;"));
+  // sDisplay.runCommands(F("#ff00;dp100,10;"));
+  // sDisplay.runCommands(F("#0f83;ch280,60,20;#daad;cf280,60,15;"));
+  // sDisplay.runCommands(F("#ffe0;rh200,45,40,30;#f6cb;rf205,50,30,20;"));
+  // sDisplay.runCommands(F("#f81f;ri200,90,40,30,8;#f014;rj205,95,30,20,5;"));
+  // sDisplay.runCommands(F("#fbe0;gh250,100,300,100,277,140;#dd24;gf260,105,290,105,277,130;"));
+
+  // Test 2
+  sDisplay.runCommands(F("x;ro3;#3666;lv12,0,h;lv70,0,h;lv118,0,h;lv176,0,h;lv244,0,h;lv300,0,h;"));
+  sDisplay.runCommands(F("#07e0;ch70,m,70;ch70,m,50;ch70,m,15;ch70,m,6;"));
+  sDisplay.runCommands(F("#ffff;ri2,200,10,20,3;ri15,200,10,20,3;;ri28,200,10,20,3;"));
+  sDisplay.runCommands(F("ri80,200,30,20,3;ri180,200,10,20,3;"));
+  sDisplay.runCommands(F("ri265,200,10,20,3;ri280,200,10,20,3;"));
+
+  // Draw commands
+  // tft.fillScreen(0x0);
+  // tft.setRotation(3);
+  // tft.setTextColor(0x3666);
+  // tft.drawFastVLine(12, 0, 320, 0x3666);
+  // tft.drawFastVLine(70, 0, 320, 0x3666);
+  // tft.drawFastVLine(118, 0, 320, 0x3666);
+  // tft.drawFastVLine(176, 0, 320, 0x3666);
+  // tft.drawFastVLine(244, 0, 320, 0x3666);
+  // tft.drawFastVLine(300, 0, 320, 0x3666);
+  // tft.setTextColor(0x7e0);
+  // tft.drawCircle(70, 120, 70, 0x7e0);
+  // tft.drawCircle(70, 120, 50, 0x7e0);
+  // tft.drawCircle(70, 120, 15, 0x7e0);
+  // tft.drawCircle(70, 120, 6, 0x7e0);
+  // tft.setTextColor(0xffff);
+  // tft.drawRoundRect(2, 200, 10, 20, 3, 0xffff);
+  // tft.drawRoundRect(15, 200, 10, 20, 3, 0xffff);
+  // tft.drawRoundRect(28, 200, 10, 20, 3, 0xffff);
+  // tft.drawRoundRect(80, 200, 30, 20, 3, 0xffff);
+  // tft.drawRoundRect(180, 200, 10, 20, 3, 0xffff);
+  // tft.drawRoundRect(265, 200, 10, 20, 3, 0xffff);
+  // tft.drawRoundRect(280, 200, 10, 20, 3, 0xffff);
+
   // Your specific code here
 }
 
