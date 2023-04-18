@@ -457,10 +457,9 @@ void FastSerialDisplay::decodeInput(char input)
     executeCommand();
     return;
   }
-  // Serial.println(currentMode);
-  switch (currentMode)
+
+  if (currentMode == UNDEFINED)
   {
-  case UNDEFINED:
     switch (input)
     {
     case '#':
@@ -489,72 +488,77 @@ void FastSerialDisplay::decodeInput(char input)
       Serial.println(input);
       break;
     }
-    break;
-  case COMMAND:
-    captureCommand(input);
-    break;
-  case TEXT_CENTER_VERTICAL:
-  case TEXT_CENTER_HORIZONTAL:
-  case TEXT:
-    captureInput(input);
-    break;
-  case SET_CURSOR:
-    if (input == ',')
+  }
+  else
+  {
+    switch (currentMode)
     {
-      nextArgCapture();
-    }
-    else
-    {
+    case COMMAND:
+      captureCommand(input);
+      break;
+    case TEXT_CENTER_VERTICAL:
+    case TEXT_CENTER_HORIZONTAL:
+    case TEXT:
+      captureInput(input);
+      break;
+    case SET_CURSOR:
+      if (input == ',')
+      {
+        nextArgCapture();
+      }
+      else
+      {
+        if (isdigit(input))
+        {
+          captureInput(input);
+        }
+      }
+      break;
+    case LINE:
+    case LINE_FAST_HORIZONTAL:
+    case LINE_FAST_VERTICAL:
+    case RECTANGLE_ROUND_FILL:
+    case RECTANGLE_ROUND_OUTLINE:
+    case RECTANGLE_FILL:
+    case RECTANGLE_FILL_GRADIENT_HORIZONTAL:
+    case RECTANGLE_OUTLINE:
+    case RECTANGLE_ROUND_SMOOTH_OUTLINE:
+    case RECTANGLE_ROUND_SMOOTH_FILL:
+    case TRIANGLE_FILL:
+    case TRIANGLE_OUTLINE:
+    case CIRCLE_FILL:
+    case CIRCLE_OUTLINE:
+    case CIRCLE_SMOOTH_OUTLINE:
+    case CIRCLE_SMOOTH_FILL:
+    case ARC:
+    case ARC_SMOOTH:
+    case ELLIPSE_OUTLINE:
+    case ELLIPSE_FILL:
+    case ROTATE:
+    case PIXEL:
+    case DISPLAY_COLOR:
+      if (input == ',')
+      {
+        nextArgCapture();
+      }
+      else
+      {
+        if (isdigit(input) || strchr(displaySizeKeywords, input) || (input >= 'a' && input <= 'f') || (input >= 'A' && input <= 'F'))
+        {
+          captureInput(input);
+        }
+      }
+      break;
+    case TEXT_SIZE:
       if (isdigit(input))
       {
         captureInput(input);
       }
+      break;
+    default:
+      Serial.println(F("Unknown current mode"));
+      break;
     }
-    break;
-  case LINE:
-  case LINE_FAST_HORIZONTAL:
-  case LINE_FAST_VERTICAL:
-  case RECTANGLE_ROUND_FILL:
-  case RECTANGLE_ROUND_OUTLINE:
-  case RECTANGLE_FILL:
-  case RECTANGLE_FILL_GRADIENT_HORIZONTAL:
-  case RECTANGLE_OUTLINE:
-  case RECTANGLE_ROUND_SMOOTH_OUTLINE:
-  case RECTANGLE_ROUND_SMOOTH_FILL:
-  case TRIANGLE_FILL:
-  case TRIANGLE_OUTLINE:
-  case CIRCLE_FILL:
-  case CIRCLE_OUTLINE:
-  case CIRCLE_SMOOTH_OUTLINE:
-  case CIRCLE_SMOOTH_FILL:
-  case ARC:
-  case ARC_SMOOTH:
-  case ELLIPSE_OUTLINE:
-  case ELLIPSE_FILL:
-  case ROTATE:
-  case PIXEL:
-  case DISPLAY_COLOR:
-    if (input == ',')
-    {
-      nextArgCapture();
-    }
-    else
-    {
-      if (isdigit(input) || strchr(displaySizeKeywords, input) || (input >= 'a' && input <= 'f') || (input >= 'A' && input <= 'F'))
-      {
-        captureInput(input);
-      }
-    }
-    break;
-  case TEXT_SIZE:
-    if (isdigit(input))
-    {
-      captureInput(input);
-    }
-    break;
-  default:
-    Serial.println(F("Unknown current mode"));
-    break;
   }
 }
 
