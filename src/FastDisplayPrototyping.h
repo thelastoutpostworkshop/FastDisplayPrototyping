@@ -296,10 +296,6 @@ void FastSerialDisplay::captureInput(char input)
 void FastSerialDisplay::closeCapture()
 {
   captureData.argIndex = 0;
-  // for (int i = 0; i < capture->maxArg; i++)
-  // {
-  //   capture->capture[i][capture->index[i]] = 0;
-  // }
 }
 void FastSerialDisplay::openCapture(int maxArg)
 {
