@@ -68,8 +68,9 @@ void setup()
   tft.drawRoundRect(265, 200, 10, 20, 3, 0xffff);
   tft.drawRoundRect(280, 200, 10, 20, 3, 0xffff);
   tft.drawCircle(250, 35, 25, 0xf7be);
+  tft.drawCircle(30,87,10,0xf7be);
   tft.setCursor(240, 43);
-  tft.print("1.01");
+  tft.print("x1c");
   // Your specific code here
 }
 
