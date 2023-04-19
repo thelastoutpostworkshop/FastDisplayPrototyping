@@ -65,7 +65,7 @@ private:
   DISP *display;
   MODE currentMode;
   Capture captureData;
-  uint16_t currentColor = 0xFFFF;
+  uint16_t fgColor = 0xFFFF;
   int16_t displayWidth;
   int16_t displayHeight;
   unsigned long lastSerialRead;
@@ -598,9 +598,9 @@ void FastSerialDisplay::executeCommand(void)
   switch (currentMode)
   {
   case DISPLAY_COLOR:
-    currentColor = getColorFromCapture(captureData.capture[0]);
-    display->setTextColor(currentColor);
-    serialPrintFormattedMacro(PSTR("%s.setTextColor(0x%x);"), displayName, currentColor);
+    fgColor = getColorFromCapture(captureData.capture[0]);
+    display->setTextColor(fgColor);
+    serialPrintFormattedMacro(PSTR("%s.setTextColor(0x%x);"), displayName, fgColor);
     break;
   case TEXT_SIZE:
     arg = getIntFromCapture(1);
@@ -650,8 +650,8 @@ void FastSerialDisplay::executeCommand(void)
     serialPrintFormattedMacro(PSTR("%s.fillScreen(0x%x);"), displayName, COLOR_BLACK);
     break;
   case FILL_SCREEN:
-    display->fillScreen(currentColor);
-    serialPrintFormattedMacro(PSTR("%s.fillScreen(0x%x);"), displayName, currentColor);
+    display->fillScreen(fgColor);
+    serialPrintFormattedMacro(PSTR("%s.fillScreen(0x%x);"), displayName, fgColor);
     break;
   case SET_CURSOR:
     arg = getIntFromCapture(2);
@@ -660,58 +660,58 @@ void FastSerialDisplay::executeCommand(void)
     break;
   case CIRCLE_OUTLINE:
     arg = getIntFromCapture(3);
-    display->drawCircle(arg[0], arg[1], arg[2], currentColor);
-    serialPrintFormattedMacro(PSTR("%s.drawCircle(%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], currentColor);
+    display->drawCircle(arg[0], arg[1], arg[2], fgColor);
+    serialPrintFormattedMacro(PSTR("%s.drawCircle(%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], fgColor);
     break;
   case CIRCLE_FILL:
     arg = getIntFromCapture(3);
-    display->fillCircle(arg[0], arg[1], arg[2], currentColor);
-    serialPrintFormattedMacro(PSTR("%s.fillCircle(%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], currentColor);
+    display->fillCircle(arg[0], arg[1], arg[2], fgColor);
+    serialPrintFormattedMacro(PSTR("%s.fillCircle(%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], fgColor);
     break;
   case TRIANGLE_OUTLINE:
     arg = getIntFromCapture(6);
-    display->drawTriangle(arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], currentColor);
-    serialPrintFormattedMacro(PSTR("%s.drawTriangle(%d,%d,%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], currentColor);
+    display->drawTriangle(arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], fgColor);
+    serialPrintFormattedMacro(PSTR("%s.drawTriangle(%d,%d,%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], fgColor);
     break;
   case TRIANGLE_FILL:
     arg = getIntFromCapture(6);
-    display->fillTriangle(arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], currentColor);
-    serialPrintFormattedMacro(PSTR("%s.fillTriangle(%d,%d,%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], currentColor);
+    display->fillTriangle(arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], fgColor);
+    serialPrintFormattedMacro(PSTR("%s.fillTriangle(%d,%d,%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], fgColor);
     break;
   case RECTANGLE_OUTLINE:
     arg = getIntFromCapture(4);
-    display->drawRect(arg[0], arg[1], arg[2], arg[3], currentColor);
-    serialPrintFormattedMacro(PSTR("%s.drawRect(%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], currentColor);
+    display->drawRect(arg[0], arg[1], arg[2], arg[3], fgColor);
+    serialPrintFormattedMacro(PSTR("%s.drawRect(%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], fgColor);
     break;
   case RECTANGLE_FILL:
     arg = getIntFromCapture(4);
-    display->fillRect(arg[0], arg[1], arg[2], arg[3], currentColor);
-    serialPrintFormattedMacro(PSTR("%s.fillRect(%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], currentColor);
+    display->fillRect(arg[0], arg[1], arg[2], arg[3], fgColor);
+    serialPrintFormattedMacro(PSTR("%s.fillRect(%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], fgColor);
     break;
   case RECTANGLE_ROUND_OUTLINE:
     arg = getIntFromCapture(5);
-    display->drawRoundRect(arg[0], arg[1], arg[2], arg[3], arg[4], currentColor);
-    serialPrintFormattedMacro(PSTR("%s.drawRoundRect(%d,%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], currentColor);
+    display->drawRoundRect(arg[0], arg[1], arg[2], arg[3], arg[4], fgColor);
+    serialPrintFormattedMacro(PSTR("%s.drawRoundRect(%d,%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], fgColor);
     break;
   case RECTANGLE_ROUND_FILL:
     arg = getIntFromCapture(5);
-    display->fillRoundRect(arg[0], arg[1], arg[2], arg[3], arg[4], currentColor);
-    serialPrintFormattedMacro(PSTR("%s.fillRoundRect(%d,%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], currentColor);
+    display->fillRoundRect(arg[0], arg[1], arg[2], arg[3], arg[4], fgColor);
+    serialPrintFormattedMacro(PSTR("%s.fillRoundRect(%d,%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], fgColor);
     break;
   case LINE_FAST_VERTICAL:
     arg = getIntFromCapture(3);
-    display->drawFastVLine(arg[0], arg[1], arg[2], currentColor);
-    serialPrintFormattedMacro(PSTR("%s.drawFastVLine(%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], currentColor);
+    display->drawFastVLine(arg[0], arg[1], arg[2], fgColor);
+    serialPrintFormattedMacro(PSTR("%s.drawFastVLine(%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], fgColor);
     break;
   case LINE_FAST_HORIZONTAL:
     arg = getIntFromCapture(3);
-    display->drawFastHLine(arg[0], arg[1], arg[2], currentColor);
-    serialPrintFormattedMacro(PSTR("%s.drawFastHLine(%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], currentColor);
+    display->drawFastHLine(arg[0], arg[1], arg[2], fgColor);
+    serialPrintFormattedMacro(PSTR("%s.drawFastHLine(%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], fgColor);
     break;
   case LINE:
     arg = getIntFromCapture(4);
-    display->drawLine(arg[0], arg[1], arg[2], arg[3], currentColor);
-    serialPrintFormattedMacro(PSTR("%s.drawLine(%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], currentColor);
+    display->drawLine(arg[0], arg[1], arg[2], arg[3], fgColor);
+    serialPrintFormattedMacro(PSTR("%s.drawLine(%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], fgColor);
     break;
   case ROTATE:
     arg = getIntFromCapture(1);
@@ -720,8 +720,8 @@ void FastSerialDisplay::executeCommand(void)
     break;
   case PIXEL:
     arg = getIntFromCapture(2);
-    display->drawPixel(arg[0], arg[1], currentColor);
-    serialPrintFormattedMacro(PSTR("%s.drawPixel(%d,%d,0x%x);"), displayName, arg[0], arg[1], currentColor);
+    display->drawPixel(arg[0], arg[1], fgColor);
+    serialPrintFormattedMacro(PSTR("%s.drawPixel(%d,%d,0x%x);"), displayName, arg[0], arg[1], fgColor);
     break;
 #if defined(_TFT_eSPIH_)
   case RECTANGLE_FILL_GRADIENT_HORIZONTAL:
@@ -732,13 +732,13 @@ void FastSerialDisplay::executeCommand(void)
     break;
   case ELLIPSE_OUTLINE:
     arg = getIntFromCapture(4);
-    display->drawEllipse(arg[0], arg[1], arg[2], arg[3], currentColor);
-    serialPrintFormattedMacro(PSTR("%s.drawEllipse(%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], currentColor);
+    display->drawEllipse(arg[0], arg[1], arg[2], arg[3], fgColor);
+    serialPrintFormattedMacro(PSTR("%s.drawEllipse(%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], fgColor);
     break;
   case ELLIPSE_FILL:
     arg = getIntFromCapture(4);
-    display->fillEllipse(arg[0], arg[1], arg[2], arg[3], currentColor);
-    serialPrintFormattedMacro(PSTR("%s.fillEllipse(%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], currentColor);
+    display->fillEllipse(arg[0], arg[1], arg[2], arg[3], fgColor);
+    serialPrintFormattedMacro(PSTR("%s.fillEllipse(%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], fgColor);
     break;
   case ARC:
     arg = getIntFromCapture(0, 5);
