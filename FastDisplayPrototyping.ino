@@ -51,9 +51,9 @@ void setup()
   tft.drawFastVLine(176, 0, 320, 0x3666);
   tft.drawFastVLine(244, 0, 320, 0x3666);
   tft.drawFastVLine(300, 0, 320, 0x3666);
-  tft.drawLine(25,0,142,320,0x3666);
-  tft.drawLine(111,0,0,320,0x3666);
-  tft.drawLine(70,0,70,320,0x3666);
+  tft.drawLine(25, 0, 142, 320, 0x3666);
+  tft.drawLine(111, 0, 0, 320, 0x3666);
+  tft.drawLine(70, 0, 70, 320, 0x3666);
   tft.setTextColor(0x7e0);
   tft.drawCircle(70, 120, 70, 0x7e0);
   tft.drawCircle(70, 120, 50, 0x7e0);
@@ -67,7 +67,9 @@ void setup()
   tft.drawRoundRect(180, 200, 10, 20, 3, 0xffff);
   tft.drawRoundRect(265, 200, 10, 20, 3, 0xffff);
   tft.drawRoundRect(280, 200, 10, 20, 3, 0xffff);
-
+  tft.drawCircle(250, 35, 25, 0xf7be);
+  tft.setCursor(240, 43);
+  tft.print("1.01");
   // Your specific code here
 }
 
