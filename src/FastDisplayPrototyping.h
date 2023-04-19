@@ -66,6 +66,7 @@ private:
   MODE currentMode;
   Capture captureData;
   uint16_t fgColor = 0xFFFF;
+  uint16_t bgColor = 0x0000;
   int16_t displayWidth;
   int16_t displayHeight;
   unsigned long lastSerialRead;
@@ -651,6 +652,7 @@ void FastSerialDisplay::executeCommand(void)
     break;
   case FILL_SCREEN:
     display->fillScreen(fgColor);
+    bgColor = fgColor;
     serialPrintFormattedMacro(PSTR("%s.fillScreen(0x%x);"), displayName, fgColor);
     break;
   case SET_CURSOR:
