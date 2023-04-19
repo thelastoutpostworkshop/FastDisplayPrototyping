@@ -52,6 +52,8 @@ void setup()
   tft.drawFastVLine(244, 0, 320, 0x3666);
   tft.drawFastVLine(300, 0, 320, 0x3666);
   tft.drawLine(25,0,142,320,0x3666);
+  tft.drawLine(111,0,0,320,0x3666);
+  tft.drawLine(70,0,70,320,0x3666);
   tft.setTextColor(0x7e0);
   tft.drawCircle(70, 120, 70, 0x7e0);
   tft.drawCircle(70, 120, 50, 0x7e0);
