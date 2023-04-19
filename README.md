@@ -171,5 +171,7 @@ The library utilizes a wide range of graphical functions, which can pose a chall
 [GFX]: https://img.shields.io/badge/GFX-green
 [ESPI]: https://img.shields.io/badge/eSPI-blue
 
-### Serial Buffer Limitation on Arduino Uno and Nano
+### Serial Buffer Limitation
 Arduino Uno and Nano, both equipped with the ATmega328P microcontroller, have a default serial buffer size of 64 bytes.  When sending data through the Serial Monitor it is crucial to be aware of this limitation, as attempting to send a message larger than 64 bytes can lead to data loss or unexpected behavior.
+
+On the ESP32, the default serial buffer size is typically set to 256 bytes.
