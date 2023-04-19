@@ -42,6 +42,8 @@ void setup()
   sDisplay.runCommands(F("ri80,200,30,20,3;ri180,200,10,20,3;"));
   sDisplay.runCommands(F("ri265,200,10,20,3;ri280,200,10,20,3;"));
   sDisplay.runCommands(F("#F7be;ch250,35,25;sc240,43;ttx1c;"));
+  sDisplay.runCommands(F("#ffff;gf60,65,60,75,50,70;gf100,95,100,105,90,100;"));
+  sDisplay.runCommands(F("gh30,120,40,125,30,130;gf40,180,40,190,30,185;"));
 
   // Draw commands
   // tft.fillScreen(0x0);
@@ -73,6 +75,10 @@ void setup()
   // tft.drawCircle(30,87,10,0xf7be);
   // tft.setCursor(240, 43);
   // tft.print("x1c");
+  // tft.fillTriangle(60, 65, 60, 75, 50, 70, 0xffff);
+  // tft.fillTriangle(100, 95, 100, 105, 90, 100, 0xffff);
+  // tft.drawTriangle(30,120,40,125,30,130,0xffff);
+  // tft.fillTriangle(40,180,40,190,30,185,0xffff);
 }
 
 void loop(void)
