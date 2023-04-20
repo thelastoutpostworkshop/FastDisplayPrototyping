@@ -22,6 +22,8 @@
   #define DISP Adafruit_PCD8544
 #elif defined(SSD1331_COLORORDER_RGB)
   #define DISP Adafruit_SSD1331
+#elif defined(ADAFRUIT_SSD1327_H)
+  #define DISP Adafruit_SSD1327
 #elif defined(_TFT_eSPIH_)
   #define DISP TFT_eSPI
 #endif
