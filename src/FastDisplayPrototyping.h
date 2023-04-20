@@ -6,6 +6,8 @@
   #define DISP Adafruit_ILI9341
 #elif defined(_ADAFRUIT_ST7789H_)
   #define DISP Adafruit_ST7789
+#elif defined(_WAVESHARE_ILI9486_h)
+  #define DISP Waveshare_ILI9486
 #elif defined(_TFT_eSPIH_)
   #define DISP TFT_eSPI
 #endif
