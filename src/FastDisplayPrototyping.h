@@ -10,6 +10,8 @@
   #define DISP Waveshare_ILI9486
 #elif defined(_Adafruit_SSD1306_H_)
   #define DISP Adafruit_SSD1306
+#elif defined(_ADAFRUIT_HX8357_H)
+  #define DISP Adafruit_HX8357
 #elif defined(_TFT_eSPIH_)
   #define DISP TFT_eSPI
 #endif
