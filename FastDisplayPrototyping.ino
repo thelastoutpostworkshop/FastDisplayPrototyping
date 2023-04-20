@@ -81,14 +81,44 @@ void setup()
   // tft.fillTriangle(40,180,40,190,30,185,0xffff);
 
   // Test 3
-  sDisplay.runCommands(F("x;#ffff;y;ro3;#03d6;rf23,23,60,60;#07ff;rf20,20,60,60;"));
-  sDisplay.runCommands(F("#ded8;cf133,53,30;#07f9;cf130,50,30;"));
-  sDisplay.runCommands(F("#ded8;gf183,23,263,23,223,83;#f840;gf180,20,260,20,220,80;"));
-  sDisplay.runCommands(F("sc15,90;ts2;#fb39;ttSquare;"));
-  sDisplay.runCommands(F("sc100,90;ts2;#53e5;ttCircle;"));
-  sDisplay.runCommands(F("#981f;lh0,m,h;"));
+  // sDisplay.runCommands(F("x;#ffff;y;ro3;#03d6;rf23,23,60,60;#07ff;rf20,20,60,60;"));
+  // sDisplay.runCommands(F("#ded8;cf133,53,30;#07f9;cf130,50,30;"));
+  // sDisplay.runCommands(F("#ded8;gf183,23,263,23,223,83;#f840;gf180,20,260,20,220,80;"));
+  // sDisplay.runCommands(F("sc15,90;ts2;#fb39;ttSquare;"));
+  // sDisplay.runCommands(F("sc100,90;ts2;#53e5;ttCircle;"));
+  // sDisplay.runCommands(F("#981f;lh0,m,h;"));
 
   // Draw Commands
+  tft.fillScreen(0x0);
+  tft.setTextColor(0xffff);
+  tft.fillScreen(0xffff);
+  tft.setRotation(3);
+  tft.setTextColor(0x3d6);
+  tft.fillRect(23, 23, 60, 60, 0x3d6);
+  tft.setTextColor(0x7ff);
+  tft.fillRect(20, 20, 60, 60, 0x7ff);
+  tft.setTextColor(0xded8);
+  tft.fillCircle(133, 53, 30, 0xded8);
+  tft.setTextColor(0x7f9);
+  tft.fillCircle(130, 50, 30, 0x7f9);
+  tft.setTextColor(0xded8);
+  tft.fillTriangle(183, 23, 263, 23, 223, 83, 0xded8);
+  tft.setTextColor(0xf840);
+  tft.fillTriangle(180, 20, 260, 20, 220, 80, 0xf840);
+  tft.setCursor(15, 90);
+  tft.setTextSize(2);
+  tft.setTextColor(0xfb39);
+  tft.print("Square");
+  tft.setCursor(100, 90);
+  tft.setTextSize(2);
+  tft.setTextColor(0x53e5);
+  tft.print("Circle");
+  tft.setTextColor(0x981f);
+  tft.drawFastHLine(0, 120, 320, 0x981f);
+  tft.setCursor(180, 90);
+  tft.setTextSize(2);
+  tft.setTextColor(0x401f);
+  tft.print("Triangle");
 }
 
 void loop(void)
