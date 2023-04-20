@@ -12,6 +12,8 @@
   #define DISP Adafruit_SSD1306
 #elif defined(_ADAFRUIT_STMPE610H_)
   #define DISP Adafruit_RA8875
+#elif defined(_Adafruit_SSD1351_H_)
+  #define DISP Adafruit_SSD1351
 #elif defined(_TFT_eSPIH_)
   #define DISP TFT_eSPI
 #endif
