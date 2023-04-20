@@ -35,15 +35,20 @@ void setup()
   // sDisplay.runCommands(F("#fbe0;gh250,100,300,100,277,140;#dd24;gf260,105,290,105,277,130;"));
 
   // Test 2
-  sDisplay.runCommands(F("x;ro3;#3666;lv12,0,h;lv70,0,h;lv118,0,h;lv176,0,h;lv244,0,h;lv300,0,h;"));
-  sDisplay.runCommands(F("#07e0;ch70,m,70;ch70,m,50;ch70,m,15;ch70,m,6;"));
-  sDisplay.runCommands(F("#3666;dl25,0,142,h;#3666;dl111,0,0,h;#3666;dl70,0,70,h;"));
-  sDisplay.runCommands(F("#ffff;ri2,200,10,20,3;ri15,200,10,20,3;;ri28,200,10,20,3;"));
-  sDisplay.runCommands(F("ri80,200,30,20,3;ri180,200,10,20,3;"));
-  sDisplay.runCommands(F("ri265,200,10,20,3;ri280,200,10,20,3;"));
-  sDisplay.runCommands(F("#F7be;ch250,35,25;sc240,43;ttx1c;"));
-  sDisplay.runCommands(F("#ffff;gf60,65,60,75,50,70;gf100,95,100,105,90,100;"));
-  sDisplay.runCommands(F("gh30,120,40,125,30,130;gf40,180,40,190,30,185;"));
+  // sDisplay.runCommands(F("x;ro3;#3666;lv12,0,h;lv70,0,h;lv118,0,h;lv176,0,h;lv244,0,h;lv300,0,h;"));
+  // sDisplay.runCommands(F("#07e0;ch70,m,70;ch70,m,50;ch70,m,15;ch70,m,6;"));
+  // sDisplay.runCommands(F("#3666;dl25,0,142,h;#3666;dl111,0,0,h;#3666;dl70,0,70,h;"));
+  // sDisplay.runCommands(F("#ffff;ri2,200,10,20,3;ri15,200,10,20,3;;ri28,200,10,20,3;"));
+  // sDisplay.runCommands(F("ri80,200,30,20,3;ri180,200,10,20,3;"));
+  // sDisplay.runCommands(F("ri265,200,10,20,3;ri280,200,10,20,3;"));
+  // sDisplay.runCommands(F("#F7be;ch250,35,25;sc240,43;ttx1c;"));
+  // sDisplay.runCommands(F("#ffff;gf60,65,60,75,50,70;gf100,95,100,105,90,100;"));
+  // sDisplay.runCommands(F("gh30,120,40,125,30,130;gf40,180,40,190,30,185;"));
+
+  // Test 3
+  sDisplay.runCommands(F("x;#ffff;y;ro3;#03d6;rf22,22,60,60;#07ff;rf20,20,60,60;"));
+  sDisplay.runCommands(F("#ded8;cf133,53,30;#07f9;cf130,50,30;"));
+  sDisplay.runCommands(F("#ded8;gf183,23,263,23,223;#f840;gf180,20,260,20,220,80;"));
 
   // Draw commands
   // tft.fillScreen(0x0);
