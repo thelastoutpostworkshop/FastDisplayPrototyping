@@ -16,6 +16,8 @@
   #define DISP Adafruit_SSD1351
 #elif defined(_Adafruit_SH110X_H_)
   #define DISP Adafruit_SH1106G
+#elif defined(GC9A01A)
+  #define DISP Adafruit_GC9A01A
 #elif defined(_TFT_eSPIH_)
   #define DISP TFT_eSPI
 #endif
