@@ -46,9 +46,9 @@ void setup()
   // sDisplay.runCommands(F("gh30,120,40,125,30,130;gf40,180,40,190,30,185;"));
 
   // Test 3
-  sDisplay.runCommands(F("x;#ffff;y;ro3;#03d6;rf22,22,60,60;#07ff;rf20,20,60,60;"));
+  sDisplay.runCommands(F("x;#ffff;y;ro3;#03d6;rf23,23,60,60;#07ff;rf20,20,60,60;"));
   sDisplay.runCommands(F("#ded8;cf133,53,30;#07f9;cf130,50,30;"));
-  sDisplay.runCommands(F("#ded8;gf183,23,263,23,223;#f840;gf180,20,260,20,220,80;"));
+  sDisplay.runCommands(F("#ded8;gf183,23,263,23,223,83;#f840;gf180,20,260,20,220,80;"));
 
   // Draw commands
   // tft.fillScreen(0x0);
