@@ -4,6 +4,8 @@
   #define DISP Adafruit_TFTLCD
 #elif defined(_ADAFRUIT_ILI9341H_)
   #define DISP Adafruit_ILI9341
+#elif defined(_ADAFRUIT_ST7789H_)
+  #define DISP Adafruit_ST7789
 #elif defined(_TFT_eSPIH_)
   #define DISP TFT_eSPI
 #endif
