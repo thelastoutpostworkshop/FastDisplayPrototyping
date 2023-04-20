@@ -9,12 +9,18 @@ Tutorial :
 Documentation : https://github.com/thelastoutpostworkshop/FastDisplayPrototyping
 ***/
 
-#include <TFT_eSPI.h>                 // Core graphics library
-#define OUTPUT_CODE_ON_SERIAL         // Output graphical functions on the Serial Monitor, comment it to disable
-#include <FastDisplayPrototyping.h>
+// Core graphics library
+// Don't forget to select the driver of your display in the User_Setup.h file by uncommenting or commenting out the corresponding line
+#include <TFT_eSPI.h>
 
 // Initialize the display
 TFT_eSPI tft = TFT_eSPI(); 
+
+// Fast Display Prototyping library
+#define OUTPUT_CODE_ON_SERIAL         // Output graphical functions on the Serial Monitor, comment it to disable
+#include <FastDisplayPrototyping.h>
+
+
 
 // Initialize the display prototyping library
 FastSerialDisplay sDisplay(&tft,"tft");
