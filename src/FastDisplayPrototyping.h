@@ -2,13 +2,17 @@
 
 #define DISP Adafruit_TFTLCD
 
-#endif // _ADAFRUIT_TFTLCD_H_
+#endif 
+#if defined(_ADAFRUIT_ILI9341H_)
 
+#define DISP Adafruit_ILI9341
+
+#endif 
 #if defined(_TFT_eSPIH_)
 
 #define DISP TFT_eSPI
 
-#endif // _TFT_eSPIH_
+#endif 
 
 #define MAX_DATA_CAPTURE 60
 #define MAX_ARG_CAPTURE 9
