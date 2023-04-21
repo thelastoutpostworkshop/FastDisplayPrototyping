@@ -10,7 +10,8 @@ Documentation : https://github.com/thelastoutpostworkshop/FastDisplayPrototyping
 ***/
 
 // Core graphics library
-// Don't forget to select the driver of your display in the User_Setup.h file by uncommenting or commenting out the corresponding line
+// Don't forget to select the driver of your display in the User_Setup.h file 
+// by uncommenting or commenting out the corresponding line
 #include <TFT_eSPI.h>
 
 // Initialize the display

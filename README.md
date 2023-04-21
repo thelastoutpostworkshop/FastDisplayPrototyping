@@ -70,15 +70,22 @@ void loop(void) {
 >ℹ️ You can also use get this setup code with the examples provided with the library in the Arduino IDE through the menu `File > Examples > FastDisplayPrototyping`
 
 ```c
-#include <TFT_eSPI.h>                 // Core graphics library
-#define OUTPUT_CODE_ON_SERIAL         // Output graphical functions on the Serial Monitor, comment it to disable
-#include <FastDisplayPrototyping.h>
+// Core graphics library
+// Don't forget to select the driver of your display in the User_Setup.h file 
+// by uncommenting or commenting out the corresponding line
+#include <TFT_eSPI.h>
 
 // Initialize the display
 TFT_eSPI tft = TFT_eSPI(); 
 
+// Fast Display Prototyping library
+#define OUTPUT_CODE_ON_SERIAL         // Output graphical functions on the Serial Monitor, comment it to disable
+#include <FastDisplayPrototyping.h>
+
+
+
 // Initialize the display prototyping library
-FastSerialDisplay tft(&tft,"tft");
+FastSerialDisplay sDisplay(&tft,"tft");
 
 void setup() {
   Serial.begin(115200);  // This line mandatory for using the display prototyping library, change the baud rate if needed
