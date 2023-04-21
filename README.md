@@ -114,7 +114,7 @@ void loop(void) {
 >ℹ️ Color format is **RGB565**, you can use this [Color Name Defintions Reference](https://github.com/newdigate/rgb565_colors) or  [RGB565 Color Picker](http://www.barth-dev.de/online/rgb565-color-picker/#) (There are many others on the web)<br>
 >ℹ️ A graphical function supported by Adafruit GFX is indicated with ![GFX] and supported by TFT_eSPI is indicated with ![ESPI]
 
-| Graphic functions | Corresponding Serial Command Example | Description | 
+| Graphics functions | Corresponding Serial Command Example | Description | 
 |--------------------|---------------------------------------|-------------|
 | **Text Functions** |                                       |             |  
 | setTextColor(color)<br>![GFX]![ESPI] | #00FF | Set Text and Graphic `color` | ✓ | ✓ |
