@@ -12,7 +12,7 @@ Documentation : https://github.com/thelastoutpostworkshop/FastDisplayPrototyping
 // Core graphics library
 #include <Adafruit_GFX.h>     
 
-// Hardware-specific library & Definitions
+// Hardware-specific library & Definitions Section
 #include <Adafruit_TFTLCD.h>  
 
 #define LCD_CS A3 // Chip Select goes to Analog 3
@@ -22,6 +22,7 @@ Documentation : https://github.com/thelastoutpostworkshop/FastDisplayPrototyping
 #define LCD_RESET A4 // Can alternately just connect to Arduino's reset pin
 
 Adafruit_TFTLCD tft(LCD_CS, LCD_CD, LCD_WR, LCD_RD, LCD_RESET); // Initialize the display
+// -- End of the Hardware-specific Section
 
 // Fast Display Prototyping library
 #define OUTPUT_CODE_ON_SERIAL // Output graphical functions on the Serial Monitor, comment it to disable
