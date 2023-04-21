@@ -32,7 +32,7 @@ To get started, download the source code (zip) [the latest release](https://gith
 // Core graphics library
 #include <Adafruit_GFX.h>     
 
-// Hardware-specific library & Definitions Section
+// -- Hardware-specific library & Definitions Section
 #include <Adafruit_TFTLCD.h>  
 
 #define LCD_CS A3 // Chip Select goes to Analog 3
