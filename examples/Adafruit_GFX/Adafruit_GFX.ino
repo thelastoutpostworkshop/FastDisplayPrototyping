@@ -13,6 +13,7 @@ Documentation : https://github.com/thelastoutpostworkshop/FastDisplayPrototyping
 #include <Adafruit_GFX.h>     
 
 // -- Hardware-specific library & Definitions Section
+// -- Change this section according to your type of display
 #include <Adafruit_TFTLCD.h>  
 
 #define LCD_CS A3 // Chip Select goes to Analog 3

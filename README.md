@@ -33,6 +33,7 @@ To get started, download the source code (zip) [the latest release](https://gith
 #include <Adafruit_GFX.h>     
 
 // -- Hardware-specific library & Definitions Section
+// -- Change this section according to your type of display
 #include <Adafruit_TFTLCD.h>  
 
 #define LCD_CS A3 // Chip Select goes to Analog 3
@@ -72,7 +73,6 @@ void loop(void) {
 ```c
 // Core graphics library
 // Don't forget to select the driver of your display in the User_Setup.h file 
-// by uncommenting or commenting out the corresponding line
 #include <TFT_eSPI.h>
 
 // Initialize the display
