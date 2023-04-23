@@ -72,7 +72,7 @@ void loop(void) {
 
 ```c
 // Core graphics library
-// Don't forget to select the driver of your display in the User_Setup.h file 
+// Don't forget to select the driver of your display in the User_Setup_Select.h file 
 #include <TFT_eSPI.h>
 
 // Initialize the display
