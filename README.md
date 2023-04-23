@@ -123,6 +123,7 @@ void loop(void) {
 | setTextSize(size)<br>![GFX]![ESPI] | **ts**3 | Set character `size` multiplier (increases pixel size) |
 | **Basic Drawing Functions** |                                 |             |              
 | fillScreen(0x0000)<br>![GFX]![ESPI] | **x** | Clear the screen to black |
+| fillScreen(color)<br>![GFX]![ESPI] | **y** | Fill the screen with the current color |
 | drawPixel(x,y,color)<br>![GFX]![ESPI] | **dp**10,10 | Draw a pixel at position `x`,`y` using the current color |
 | drawLine(x1,y1,x2,y2)<br>![GFX]![ESPI] | **dl**10,10,50,50 | Draw a line between 2 points `(x1,y1,x2,y2)` using the current color | 
 | drawFastHLine(x,y,l,color)<br>![GFX]![ESPI] | **lh**20,30,100 | Draw a horizontal line from position `x`,`y` of length `l` using the current color | 
