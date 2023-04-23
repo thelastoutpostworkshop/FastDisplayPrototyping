@@ -100,7 +100,7 @@ void loop(void) {
 }
 ```
 ### Examples
->ℹ️ You can send multiple graphical commands through the Serial Monitor by seperating them with a semi-colon `;` <br>
+>ℹ️ You can send multiple graphical commands through the Serial Monitor by seperating them with a semicolon `;` <br>
 
 | Type this in the Serial Monitor | Result on the display |
 |---------|-------------|
