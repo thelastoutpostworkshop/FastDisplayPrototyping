@@ -525,18 +525,6 @@ void FastSerialDisplay::decodeInput(char input)
       captureInput(input);
       break;
     case SET_CURSOR:
-      if (input == ',')
-      {
-        nextArgCapture();
-      }
-      else
-      {
-        if (isdigit(input))
-        {
-          captureInput(input);
-        }
-      }
-      break;
     case LINE:
     case LINE_FAST_HORIZONTAL:
     case LINE_FAST_VERTICAL:
