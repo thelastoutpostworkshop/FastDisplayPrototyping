@@ -607,7 +607,7 @@ void FastSerialDisplay::executeCommand(void)
   case DISPLAY_COLOR:
     fgColor = getColorFromCapture(captureData.capture[0]);
     display->setTextColor(fgColor);
-    serialPrintFormattedMacro(PSTR("%s.setTextColor(0x%x);"), displayName, fgColor);
+    serialPrintFormattedMacro(PSTR("%s.setTextColor(0x%04x);"), displayName, fgColor);
     break;
   case TEXT_SIZE:
     arg = getIntFromCapture(1);
@@ -654,12 +654,12 @@ void FastSerialDisplay::executeCommand(void)
     break;
   case CLEAR_SCREEN:
     display->fillScreen(COLOR_BLACK);
-    serialPrintFormattedMacro(PSTR("%s.fillScreen(0x%x);"), displayName, COLOR_BLACK);
+    serialPrintFormattedMacro(PSTR("%s.fillScreen(0x%04x);"), displayName, COLOR_BLACK);
     break;
   case FILL_SCREEN:
     display->fillScreen(fgColor);
     bgColor = fgColor;
-    serialPrintFormattedMacro(PSTR("%s.fillScreen(0x%x);"), displayName, fgColor);
+    serialPrintFormattedMacro(PSTR("%s.fillScreen(0x%04x);"), displayName, fgColor);
     break;
   case SET_CURSOR:
     arg = getIntFromCapture(2);
@@ -669,57 +669,57 @@ void FastSerialDisplay::executeCommand(void)
   case CIRCLE_OUTLINE:
     arg = getIntFromCapture(3);
     display->drawCircle(arg[0], arg[1], arg[2], fgColor);
-    serialPrintFormattedMacro(PSTR("%s.drawCircle(%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], fgColor);
+    serialPrintFormattedMacro(PSTR("%s.drawCircle(%d,%d,%d,0x%04x);"), displayName, arg[0], arg[1], arg[2], fgColor);
     break;
   case CIRCLE_FILL:
     arg = getIntFromCapture(3);
     display->fillCircle(arg[0], arg[1], arg[2], fgColor);
-    serialPrintFormattedMacro(PSTR("%s.fillCircle(%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], fgColor);
+    serialPrintFormattedMacro(PSTR("%s.fillCircle(%d,%d,%d,0x%04x);"), displayName, arg[0], arg[1], arg[2], fgColor);
     break;
   case TRIANGLE_OUTLINE:
     arg = getIntFromCapture(6);
     display->drawTriangle(arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], fgColor);
-    serialPrintFormattedMacro(PSTR("%s.drawTriangle(%d,%d,%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], fgColor);
+    serialPrintFormattedMacro(PSTR("%s.drawTriangle(%d,%d,%d,%d,%d,%d,0x%04x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], fgColor);
     break;
   case TRIANGLE_FILL:
     arg = getIntFromCapture(6);
     display->fillTriangle(arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], fgColor);
-    serialPrintFormattedMacro(PSTR("%s.fillTriangle(%d,%d,%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], fgColor);
+    serialPrintFormattedMacro(PSTR("%s.fillTriangle(%d,%d,%d,%d,%d,%d,0x%04x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], fgColor);
     break;
   case RECTANGLE_OUTLINE:
     arg = getIntFromCapture(4);
     display->drawRect(arg[0], arg[1], arg[2], arg[3], fgColor);
-    serialPrintFormattedMacro(PSTR("%s.drawRect(%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], fgColor);
+    serialPrintFormattedMacro(PSTR("%s.drawRect(%d,%d,%d,%d,0x%04x);"), displayName, arg[0], arg[1], arg[2], arg[3], fgColor);
     break;
   case RECTANGLE_FILL:
     arg = getIntFromCapture(4);
     display->fillRect(arg[0], arg[1], arg[2], arg[3], fgColor);
-    serialPrintFormattedMacro(PSTR("%s.fillRect(%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], fgColor);
+    serialPrintFormattedMacro(PSTR("%s.fillRect(%d,%d,%d,%d,0x%04x);"), displayName, arg[0], arg[1], arg[2], arg[3], fgColor);
     break;
   case RECTANGLE_ROUND_OUTLINE:
     arg = getIntFromCapture(5);
     display->drawRoundRect(arg[0], arg[1], arg[2], arg[3], arg[4], fgColor);
-    serialPrintFormattedMacro(PSTR("%s.drawRoundRect(%d,%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], fgColor);
+    serialPrintFormattedMacro(PSTR("%s.drawRoundRect(%d,%d,%d,%d,%d,0x%04x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], fgColor);
     break;
   case RECTANGLE_ROUND_FILL:
     arg = getIntFromCapture(5);
     display->fillRoundRect(arg[0], arg[1], arg[2], arg[3], arg[4], fgColor);
-    serialPrintFormattedMacro(PSTR("%s.fillRoundRect(%d,%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], fgColor);
+    serialPrintFormattedMacro(PSTR("%s.fillRoundRect(%d,%d,%d,%d,%d,0x%04x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], fgColor);
     break;
   case LINE_FAST_VERTICAL:
     arg = getIntFromCapture(3);
     display->drawFastVLine(arg[0], arg[1], arg[2], fgColor);
-    serialPrintFormattedMacro(PSTR("%s.drawFastVLine(%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], fgColor);
+    serialPrintFormattedMacro(PSTR("%s.drawFastVLine(%d,%d,%d,0x%04x);"), displayName, arg[0], arg[1], arg[2], fgColor);
     break;
   case LINE_FAST_HORIZONTAL:
     arg = getIntFromCapture(3);
     display->drawFastHLine(arg[0], arg[1], arg[2], fgColor);
-    serialPrintFormattedMacro(PSTR("%s.drawFastHLine(%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], fgColor);
+    serialPrintFormattedMacro(PSTR("%s.drawFastHLine(%d,%d,%d,0x%04x);"), displayName, arg[0], arg[1], arg[2], fgColor);
     break;
   case LINE:
     arg = getIntFromCapture(4);
     display->drawLine(arg[0], arg[1], arg[2], arg[3], fgColor);
-    serialPrintFormattedMacro(PSTR("%s.drawLine(%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], fgColor);
+    serialPrintFormattedMacro(PSTR("%s.drawLine(%d,%d,%d,%d,0x%04x);"), displayName, arg[0], arg[1], arg[2], arg[3], fgColor);
     break;
   case ROTATE:
     arg = getIntFromCapture(1);
@@ -729,62 +729,62 @@ void FastSerialDisplay::executeCommand(void)
   case PIXEL:
     arg = getIntFromCapture(2);
     display->drawPixel(arg[0], arg[1], fgColor);
-    serialPrintFormattedMacro(PSTR("%s.drawPixel(%d,%d,0x%x);"), displayName, arg[0], arg[1], fgColor);
+    serialPrintFormattedMacro(PSTR("%s.drawPixel(%d,%d,0x%04x);"), displayName, arg[0], arg[1], fgColor);
     break;
 #if defined(_TFT_eSPIH_)
   case RECTANGLE_FILL_GRADIENT_HORIZONTAL:
     arg = getIntFromCapture(0, 3);
     colorArg = getColorFromCapture(4, 5);
     display->fillRectHGradient(arg[0], arg[1], arg[2], arg[3], colorArg[4], colorArg[5]);
-    serialPrintFormattedMacro(PSTR("%s.fillRectVGradient(%d,%d,%d,%d,0x%x,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], colorArg[4], colorArg[5]);
+    serialPrintFormattedMacro(PSTR("%s.fillRectVGradient(%d,%d,%d,%d,0x%04x,0x%04x);"), displayName, arg[0], arg[1], arg[2], arg[3], colorArg[4], colorArg[5]);
     break;
   case ELLIPSE_OUTLINE:
     arg = getIntFromCapture(4);
     display->drawEllipse(arg[0], arg[1], arg[2], arg[3], fgColor);
-    serialPrintFormattedMacro(PSTR("%s.drawEllipse(%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], fgColor);
+    serialPrintFormattedMacro(PSTR("%s.drawEllipse(%d,%d,%d,%d,0x%04x);"), displayName, arg[0], arg[1], arg[2], arg[3], fgColor);
     break;
   case ELLIPSE_FILL:
     arg = getIntFromCapture(4);
     display->fillEllipse(arg[0], arg[1], arg[2], arg[3], fgColor);
-    serialPrintFormattedMacro(PSTR("%s.fillEllipse(%d,%d,%d,%d,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], fgColor);
+    serialPrintFormattedMacro(PSTR("%s.fillEllipse(%d,%d,%d,%d,0x%04x);"), displayName, arg[0], arg[1], arg[2], arg[3], fgColor);
     break;
   case ARC:
     arg = getIntFromCapture(0, 5);
     colorArg = getColorFromCapture(6, 7);
     boolArg = getBoolFromCapture(8, 8);
     display->drawArc(arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], colorArg[6], colorArg[7], boolArg[8]);
-    serialPrintFormattedMacro(PSTR("%s.drawArc(%d,%d,%d,%d,%d,%d,0x%x,0x%x,%s);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], colorArg[6], colorArg[7], boolArg[8] ? trueS : falseS);
+    serialPrintFormattedMacro(PSTR("%s.drawArc(%d,%d,%d,%d,%d,%d,0x%04x,0x%04x,%s);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], colorArg[6], colorArg[7], boolArg[8] ? trueS : falseS);
     break;
   case ARC_SMOOTH:
     arg = getIntFromCapture(0, 5);
     colorArg = getColorFromCapture(6, 7);
     boolArg = getBoolFromCapture(8, 8);
     display->drawSmoothArc(arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], colorArg[6], colorArg[7], boolArg[8]);
-    serialPrintFormattedMacro(PSTR("%s.drawSmoothArc(%d,%d,%d,%d,%d,%d,0x%x,0x%x,%s);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], colorArg[6], colorArg[7], boolArg[8] ? trueS : falseS);
+    serialPrintFormattedMacro(PSTR("%s.drawSmoothArc(%d,%d,%d,%d,%d,%d,0x%04x,0x%04x,%s);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], colorArg[6], colorArg[7], boolArg[8] ? trueS : falseS);
     break;
   case CIRCLE_SMOOTH_OUTLINE:
     arg = getIntFromCapture(0, 2);
     colorArg = getColorFromCapture(3, 4);
     display->drawSmoothCircle(arg[0], arg[1], arg[2], colorArg[3], colorArg[4]);
-    serialPrintFormattedMacro(PSTR("%s.drawSmoothCircle(%d,%d,%d,0x%x,0x%x);"), displayName, arg[0], arg[1], arg[2], colorArg[3], colorArg[4]);
+    serialPrintFormattedMacro(PSTR("%s.drawSmoothCircle(%d,%d,%d,0x%04x,0x%04x);"), displayName, arg[0], arg[1], arg[2], colorArg[3], colorArg[4]);
     break;
   case CIRCLE_SMOOTH_FILL:
     arg = getIntFromCapture(0, 2);
     colorArg = getColorFromCapture(3, 4);
     display->fillSmoothCircle(arg[0], arg[1], arg[2], colorArg[3], colorArg[4]);
-    serialPrintFormattedMacro(PSTR("%s.fillSmoothCircle(%d,%d,%d,0x%x,0x%x);"), displayName, arg[0], arg[1], arg[2], colorArg[3], colorArg[4]);
+    serialPrintFormattedMacro(PSTR("%s.fillSmoothCircle(%d,%d,%d,0x%04x,0x%04x);"), displayName, arg[0], arg[1], arg[2], colorArg[3], colorArg[4]);
     break;
   case RECTANGLE_ROUND_SMOOTH_OUTLINE:
     arg = getIntFromCapture(0, 5);
     colorArg = getColorFromCapture(6, 7);
     display->drawSmoothRoundRect(arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], colorArg[6], colorArg[7]);
-    serialPrintFormattedMacro(PSTR("%s.drawSmoothRoundRect(%d,%d,%d,%d,%d,%d,0x%x,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], colorArg[6], colorArg[7]);
+    serialPrintFormattedMacro(PSTR("%s.drawSmoothRoundRect(%d,%d,%d,%d,%d,%d,0x%04x,0x%04x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], colorArg[6], colorArg[7]);
     break;
   case RECTANGLE_ROUND_SMOOTH_FILL:
     arg = getIntFromCapture(0, 4);
     colorArg = getColorFromCapture(5, 6);
     display->fillSmoothRoundRect(arg[0], arg[1], arg[2], arg[3], arg[4], colorArg[5], colorArg[6]);
-    serialPrintFormattedMacro(PSTR("%s.fillSmoothRoundRect(%d,%d,%d,%d,%d,0x%x,0x%x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], colorArg[5], colorArg[6]);
+    serialPrintFormattedMacro(PSTR("%s.fillSmoothRoundRect(%d,%d,%d,%d,%d,0x%04x,0x%04x);"), displayName, arg[0], arg[1], arg[2], arg[3], arg[4], colorArg[5], colorArg[6]);
     break;
 #endif
   default:
