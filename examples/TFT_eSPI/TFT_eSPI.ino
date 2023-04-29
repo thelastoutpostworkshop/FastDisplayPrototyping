@@ -5,7 +5,7 @@ for the TFT_eSPI grahics library.
 Upload this code and start sending graphical commands using the Serial Monitor!
 Try sending this with the Serial Monitor : x;sc1,1;ttHello World!
 
-Tutorial :
+Tutorial : https://youtu.be/09negq9Zk_c
 Documentation : https://github.com/thelastoutpostworkshop/FastDisplayPrototyping
 ***/
 
