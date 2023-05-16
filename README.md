@@ -14,8 +14,8 @@ All display supported by Adafruit GFX and TFT_eSPI libraries
 
 ## Contents
 1. [Installation](#installation)
-2. [Code Setup Adafruit GFX](#code-setup-adafruit-gfx) ![GFX]
-3. [Code Setup TFT_eSPI](#code-setup-tft_espi) ![ESPI]
+2. [Code Setup Adafruit GFX](#code-setup-adafruit-gfx-gfx) ![GFX]
+3. [Code Setup TFT_eSPI](#code-setup-tft_espi-espi) ![ESPI]
 4. [Examples](#examples)
 5. [Serial Commands Reference](#serial-commands-reference)
 6. [Using Fonts](#using-fonts)
