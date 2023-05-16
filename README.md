@@ -24,7 +24,8 @@ All display supported by Adafruit GFX and TFT_eSPI libraries
 9. [Serial Buffer Limitation](#serial-buffer-limitation-on-arduino-uno-and-nano)
 
 ### Installation
-To get started, download the source code (zip) [the latest release](https://github.com/thelastoutpostworkshop/DisplayPrototyping/releases/latest). Then install the library in the Arduino IDE with the menu `Sketch > Include Library > Add ZIP Library`.
+You can easily install the library in the Arduino IDE using the Library Manager, just search for "fastdisplay" and locate the FastDisplayPrototyping library and click the "Install" button.
+![Installation](https://github.com/thelastoutpostworkshop/DisplayPrototyping/blob/main/images/LibraryManager.png)
 
 ### Code Setup Adafruit GFX ![GFX]
 >ℹ️ You can also use get this setup code with the examples provided with the library in the Arduino IDE through the menu `File > Examples > FastDisplayPrototyping`
