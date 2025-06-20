@@ -151,8 +151,8 @@ void loop(void) {
 | drawSmoothRoundRect(x,y,r,ir,w,h,<br>fgColor,bgColor)<br>![ESPI]  | **rs**70,60,5,8,20,30,f820,0 | Draw an anti-aliased rounded corner rectangle outline at position `x`,`y` radius outer corner of `r`, radius inner corner `ir`, of width `w`, height `h`using a foreground color `fgColor` background color `bgColor`. The rectangle that has a line thickness of r-ir+1 | 
 | fillSmoothRoundRect(x,y,w,h,r,<br>fgColor,bgColor)<br>![ESPI]  | **rt**80,100,20,20,5,fde0,0 | Draw an anti-aliased filled rounded corner rectangle at position `x`,`y`, width `w`, height `h`, corner radius of `r` using a foreground color `fgColor` background color `bgColor`. | 
 | **Triangle Functions** |                                     |             |              
-| drawTriangle<br>(x1,y1,x2,y2,x3,y3,color)<br>![GFX]![ESPI]  | **gh**10,10,20,20,30,10 | Draw a triangle outline using 3 points `x1,y1,x2,y2,x3,y3` (vertices) using the current color | 
-| fillTriangle<br>(x1,y1,x2,y2,x3,y3,color)<br>![GFX]![ESPI]  | **gf**10,10,20,20,30,10 | Draw a filled triangle using 3 points `x1,y1,x2,y2,x3,y3` (vertices) using the current color| 
+| drawTriangle<br>(x1,y1,x2,y2,x3,y3)<br>![GFX]![ESPI]  | **gh**10,10,20,20,30,10 | Draw a triangle outline using 3 points `x1,y1,x2,y2,x3,y3` (vertices) using the current color | 
+| fillTriangle<br>(x1,y1,x2,y2,x3,y3)<br>![GFX]![ESPI]  | **gf**10,10,20,20,30,10 | Draw a filled triangle using 3 points `x1,y1,x2,y2,x3,y3` (vertices) using the current color| 
 
 ### Using Fonts
 The library utilizes the currently defined font in the code. Support for handling multiple preloaded fonts is planned for the upcoming release of the library.
